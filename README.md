@@ -63,6 +63,7 @@ git clone https://github.com/lpvmak/DrugsICS/
   2) Ветка разработки (develop)
   
 И три вспомогательных (временных) ветки:
+
   3) Ветка функциональности (features)
   4) Ветка релизов (release)
   5) Ветка исправлений (hotfix)
