@@ -1,4 +1,4 @@
-![Logo of the project](https://raw.githubusercontent.com/jehna/readme-best-practices/master/logo.png)
+![Logo of the project](https://github.com/lpvmak/med_sched/blob/master/logo.png)
 
 # MedSced
 
