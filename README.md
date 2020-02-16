@@ -71,8 +71,14 @@ git clone https://github.com/lpvmak/DrugsICS/
 ## Команда разработчиков
 
 Teamlead: [Лапотников Павел](https://github.com/lpvmak)
+
 Techlead: [Козлов Дмитрий](https://github.com/KoDim97)
+
 Куратор проекта: [Вердина Мария](https://github.com/mashaverdina)
+
 [Румянцева Евгения](https://github.com/unjamini)
+
 [Пестряков Данил](https://github.com/DanilPestryakov)
+
 [Татьяна Алпатова](https://github.com/atani20)
+
