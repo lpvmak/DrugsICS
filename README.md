@@ -1,6 +1,6 @@
 ![Logo of the project](https://github.com/lpvmak/med_sched/blob/master/logo.png)
 
-# MedSced
+# MedShced
 
 Сервис, позволяющий создавать планы приема лекарств и добавлять их в Ваш календарь.
 
