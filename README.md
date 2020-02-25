@@ -1,6 +1,6 @@
-![Logo of the project](https://raw.githubusercontent.com/jehna/readme-best-practices/master/logo.png)
+![Logo of the project](https://github.com/lpvmak/med_sched/blob/master/logo.png)
 
-# MedSced
+# MedShced
 
 A service that allows you to create medication plans and add them to your calendar.
 
@@ -81,7 +81,9 @@ A service that allows you to create medication plans and add them to your calend
 Используются две постоянных ветки:
   1) Главная ветка (master)
   2) Ветка разработки (develop)
+  
 И три вспомогательных (временных) ветки:
+
   3) Ветка функциональности (features)
   4) Ветка релизов (release)
   5) Ветка исправлений (hotfix)
@@ -89,8 +91,12 @@ A service that allows you to create medication plans and add them to your calend
 ## Команда разработчиков
 
 Teamlead: [Лапотников Павел](https://github.com/lpvmak)
+
 Techlead: [Козлов Дмитрий](https://github.com/KoDim97)
 Куратор проекта: [Богдан Александра](https://github.com/AleksandraBogdan)
 [Румянцева Евгения](https://github.com/unjamini)
+
 [Пестряков Данил](https://github.com/DanilPestryakov)
+
 [Татьяна Алпатова](https://github.com/atani20)
+
