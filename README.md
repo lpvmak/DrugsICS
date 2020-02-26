@@ -36,7 +36,7 @@ A service that allows you to create medication plans and add them to your calend
 
 ### Среда разработки
 
-Проект ведется в [Web Shtorm](https://www.jetbrains.com/webstorm/download/download-thanks.html). 
+Проект ведется в [Web Storm](https://www.jetbrains.com/webstorm/download/download-thanks.html). 
 Можно воспользоваться получением студенческой подписки.
 
 Используются дополнительные модули и библиотеки:
@@ -58,8 +58,11 @@ A service that allows you to create medication plans and add them to your calend
 * Коммит обязан содержать изменения, доведенные до логического конца
 
 Пример правильно оформленного однострочнего коммита:
+
     git commit -m "Added CONTRIBUTING.md"
+    
 Пример правильно оформленного коммита с описанием:
+
     git commit
     *откроется окно с выбранным редактором*
     Updated README.md
@@ -70,10 +73,9 @@ A service that allows you to create medication plans and add them to your calend
 
 ### Модель рабочего процесса
 
-Каждый разработчик клонирует репозиторий, настраивает _remote add origin_ 
-и фиксируеи изменения при помощи _push_ прямо в ветки данного репозитория.
+Разработчик клонирует репозиторий и добавляет изменения при помощи _push_ прямо в ветки данного репозитория.
 
-    git remote add origin https://github.com/lpvmak/med_sched
+    git clone https://github.com/lpvmak/DrugsICS/   
     git push -u origin develop
 
 Принята [модель Дриссона](https://habr.com/ru/post/106912/).
@@ -93,7 +95,9 @@ A service that allows you to create medication plans and add them to your calend
 Teamlead: [Лапотников Павел](https://github.com/lpvmak)
 
 Techlead: [Козлов Дмитрий](https://github.com/KoDim97)
+
 Куратор проекта: [Богдан Александра](https://github.com/AleksandraBogdan)
+
 [Румянцева Евгения](https://github.com/unjamini)
 
 [Пестряков Данил](https://github.com/DanilPestryakov)

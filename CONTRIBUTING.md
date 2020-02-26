@@ -45,4 +45,4 @@ git clone https://github.com/lpvmak/DrugsICS/
 
 ## Стиль кодирования
 
-В разработке мы используем язык JavaScript + JSX (React) и придерживаемся [Google JavaScript Style](https://google.github.io/styleguide/javascriptguide.xml) стиля кодирования.
+В разработке мы используем язык JavaScript + JSX (React) и придерживаемся [Google JavaScript Style](https://google.github.io/styleguide/jsguide.html) стиля кодирования.
