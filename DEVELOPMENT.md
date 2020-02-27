@@ -12,8 +12,6 @@
 * [reactstrap](https://reactstrap.github.io/)
 * [ics](https://www.npmjs.com/package/ics)
 
-Стиль кодирования вынесен в [CONTRIBUTING.md](https://github.com/lpvmak/med_sched/blob/master/CONTRIBUTING.md).
-
 ## Правила оформления commit-ов
 
 * Коммит должен содержать строку, отражающую тему и номер соответвующего issues-a. 
