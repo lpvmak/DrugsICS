@@ -13,6 +13,29 @@
 ```shell
 git clone https://github.com/lpvmak/DrugsICS/
 ```
+## Правила оформления commit-ов
+
+* Коммит должен содержать строку, отражающую тему и номер соответвующего issues-a. 
+* Эта строка должна начинаться с заглавной буквы, использовать повелительное наклонение и не содержать точки в конце
+* Если темы строки недостаточно, добавьте тело коммита, отделив его от темы пустой строкой
+* Каждая новая строка тела должна начинаться с "-" и отражать _какие_ изменения были внесены в проект
+* Тема и содержание коммита в _Past Simple_
+* Коммит обязан содержать изменения, доведенные до логического конца
+
+Пример правильно оформленного однострочнего коммита:
+
+    git commit -m "Added CONTRIBUTING.md #0"
+    
+Пример правильно оформленного коммита с описанием:
+
+    git commit
+    *откроется окно с выбранным редактором*
+    Updated README.md #0
+
+    - Added link to CONTRIBUTING.md
+    - Updated creating commit rules
+    - Updated technology stack
+
 
 ## Процесс создания Pull-Request-ов
 
@@ -45,4 +68,4 @@ git clone https://github.com/lpvmak/DrugsICS/
 
 ## Стиль кодирования
 
-В разработке мы используем язык JavaScript + JSX (React) и придерживаемся [Google JavaScript Style](https://google.github.io/styleguide/jsguide.html) стиля кодирования.
+В разработке мы используем язык JavaScript + JSX (React) и придерживаемся [Google JavaScript Style](https://google.github.io/styleguide/jsguide.html).
