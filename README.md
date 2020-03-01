@@ -1,40 +1,50 @@
 ![Logo of the project](https://github.com/lpvmak/med_sched/blob/master/logo.png)
 
-# MedShced
+# MedSched
 
-A service that allows you to create medication plans and add them to your calendar.
+Service that allows you to create medication plans and add them to your calendar.
+
+In the near future, our service will be able to:
+
+* Set the period of taking the drug
+* Set the frequency of taking and customize the plan
+* Generate schemes that consist of multiple medications
 
 Сервис, позволяющий создавать планы приема лекарств и добавлять их в Ваш календарь.
 
+В ближайшее время наш сервис будет уметь:
+
+* Устанавливать сроки приема препарата
+* Устанавливать частоту приема и адаптировать план под себя 
+* Создавать планы приема, состоящие из нескольких препаратов
+
+## Достоинства нашего приложения по сравнению с аналогами:
+
+* Это веб-сервис, что позволяет избежать расходов памяти для установки и сделать его доступным на любом устройстве, подключенном к интернету
+* История принимаемых препаратов хранится на сервере, что вновь позволяет избежать расходов памяти устройства
+* Интеграция с вашим календарем путем формирования файла .ics
+* Возможность создания расписания приёма препаратов без регистрации 
+
 ## Для использования
-
-Чтобы воспользоваться сервисом достаточно перейти на [наш сайт](http://index.html).
-Убедитесь, что используемые Вами календарь поддерживает формат событий .ics
-
-### Системные требования
-
-Для использования нашего приложения необходим веб-обозреватель соответвующей версии:
-
-<Тут будет таблца>
 
 Расширение .ics – это универсальный формат календаря, который используется во многих приложениях, таких как: Microsoft Outlook, Apple iCal и Google Calendar.
 
-## Функциональность
+### Системные требования
 
-В ближайшее время наш сервис будет уметь:
+Для использования нашего приложения необходим веб-обозреватель соответствующей версии:
 
-* Устанавливать сроки приема препората
-* Устанавливать частоту приема (каждые 2/4/6/8/12 часов)
-* Создавать планы приема, состоящие из нескольких препаратов
+<Тут будет таблица>
+
+Расширение .ics – это универсальный формат календаря, который используется во многих приложениях, таких как: Microsoft Outlook, Apple iCal, Mozilla Sunbird и Google Calendar.
 
 ## Для независимых разработчиков
 
-Пожалуйста, ознакомтись с [CONTRIBUTING.md](https://github.com/lpvmak/med_sched/blob/master/CONTRIBUTING.md).
+Пожалуйста, ознакомьтесь с [CONTRIBUTING.md](https://github.com/lpvmak/med_sched/blob/master/CONTRIBUTING.md).
 
 
 ## Для команды разработки
 
-Пожалуйста, ознакомтись с [DEVELOPMENT.md](https://github.com/lpvmak/med_sched/blob/master/DEVELOPMENT.md).
+Пожалуйста, ознакомьтесь с [DEVELOPMENT.md](https://github.com/lpvmak/med_sched/blob/master/DEVELOPMENT.md).
 
 ## Команда разработчиков
 
