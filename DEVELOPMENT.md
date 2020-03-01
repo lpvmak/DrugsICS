@@ -51,7 +51,15 @@
 
 Ветка живет так долго, как продолжается разработка, а далее вливается в ветвь *develop* командой *git merge—no-ff* или удаляется в
 случае неудачи. Флаг *git merge—no-ff*  группирует вместе все внесённые изменения, которые можно отменить все сразу, т.е., удалить
-введенную функциональность полностью.
+введенную функциональность полностью. Пример:
+
+    git checkout -b features#0
+    (do your work on "features#0")
+    git commit -m  "Implemented ... #0"
+    git checkout develop
+    git merge --no-ff features#0
+    git branch -d features#0
+    git push origin develop
 
 ## Стиль кодирования
 
