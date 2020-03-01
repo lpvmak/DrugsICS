@@ -1,6 +1,6 @@
 ![Logo of the project](https://github.com/lpvmak/med_sched/blob/master/logo.png)
 
-# MedSched
+# MedShced
 
 Service that allows you to create medication plans and add them to your calendar.
 
