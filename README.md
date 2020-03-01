@@ -27,7 +27,7 @@ In the near future, our service will be able to:
 
 ## Для использования
 
-Расширение .ics – это универсальный формат календаря, который используется во многих приложениях, таких как: Microsoft Outlook, Apple iCal и Google Calendar.
+Расширение .ics – это универсальный формат календаря, который используется во многих приложениях, таких как: Microsoft Outlook, Apple iCal, Mozilla Sunbird, и Google Calendar.
 
 ### Системные требования
 
