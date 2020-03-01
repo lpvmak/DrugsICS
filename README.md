@@ -4,12 +4,18 @@
 
 Service that allows you to create medication plans and add them to your calendar.
 
+In the near future, our service will be able to:
+
+* Set the period of taking the drug
+* Set the frequency of taking and customize the plan
+* Generate schemes that consist of multiple medications
+
 Сервис, позволяющий создавать планы приема лекарств и добавлять их в Ваш календарь.
 
 В ближайшее время наш сервис будет уметь:
 
 * Устанавливать сроки приема препарата
-* Устанавливать частоту приема (каждые 2/4/6/8/12 часов)
+* Устанавливать частоту приема и адаптировать план под себя 
 * Создавать планы приема, состоящие из нескольких препаратов
 
 ## Достоинства нашего приложения по сравнению с аналогами:
