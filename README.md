@@ -17,7 +17,7 @@ A service that allows you to create medication plans and add them to your calend
 
 <Тут будет таблца>
 
-Расширение .ics – это универсальный формат календаря, который используется во многих приложениях, таких как: Microsoft Outlook, Apple iCal, Mozilla Sunbird, и Google Calendar.
+Расширение .ics – это универсальный формат календаря, который используется во многих приложениях, таких как: Microsoft Outlook, Apple iCal и Google Calendar.
 
 ## Функциональность
 
