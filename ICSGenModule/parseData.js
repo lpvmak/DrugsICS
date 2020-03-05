@@ -5,8 +5,11 @@ const DATE_FROM = 'dateFrom';
 const DATE_TO = 'dateTo';
 
 const TIME_LIST = 'timeList';
+const ADDITIONAL_DATA = 'description';
 
 const EVENT_LEN_MINS = 30;
+
+
 
 
 /**
@@ -31,7 +34,8 @@ function parseDrug(drugJson) {
             let event = {
                 title: drugName,
                 start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
-                duration: { minutes: EVENT_LEN_MINS }
+                duration: { minutes: EVENT_LEN_MINS },
+                description: drugJson[ADDITIONAL_DATA]
             };
             eventList.push(event);
         }

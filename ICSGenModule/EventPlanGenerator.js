@@ -8,6 +8,11 @@ let EventPlanGenerator  = {
     eventList: []
 };
 
+
+/**
+ * Creates an .ics formatted string and saves it
+ * @param jsonFilename name of JSON file of required format
+ */
 EventPlanGenerator.createNewPlan = function(jsonFilename) {
     try {
         /* Parsing JSON file */
@@ -21,6 +26,10 @@ EventPlanGenerator.createNewPlan = function(jsonFilename) {
 };
 
 
+/**
+ * Saves generated data to file
+ * @param icsFilename name of file to save .ics formatted data
+ */
 EventPlanGenerator.savePlanToFile = function(icsFilename) {
     try {
         fs.writeFile(icsFilename, this.eventList, (err) => {
