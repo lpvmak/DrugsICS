@@ -64,7 +64,6 @@ function parsePlan(data) {
     for (let dr of drugsArr) {
         fullEventList.push.apply(fullEventList, parseDrug(dr));
     }
-    console.log(fullEventList);
     /* Creating ics-formatted string:  */
     const { error, value } = ics.createEvents(fullEventList);
 
