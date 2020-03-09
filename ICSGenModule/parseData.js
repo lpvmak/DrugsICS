@@ -7,9 +7,12 @@ const DATE_TO = 'dateTo';
 const TIME_LIST = 'timeList';
 const ADDITIONAL_DATA = 'description';
 
+const NOTIFY_B = 'notifications';
+const REMIND_BEFORE = 'remindTime';
+
 const EVENT_LEN_MINS = 30;
 
-
+let notifyBefore = 0;
 
 
 /**
@@ -17,7 +20,7 @@ const EVENT_LEN_MINS = 30;
  * @param drugJson drug intake info
  * @returns {[]} list of .ics-formatted events for this drug
  */
-function parseDrug(drugJson) {
+function parseDrug(drugJson, notificationNeeded=false) {
     let drugName = drugJson[DRUG_TITLE];
     let dateFrom = new Date(drugJson[DATE_FROM]);
     let dateTo = new Date(drugJson[DATE_TO]);
@@ -30,13 +33,34 @@ function parseDrug(drugJson) {
         // Iterating through take timestamps:
         for (let takeT of takeTimeList) {
             let takeTime = takeT.split('-');
-            // Creating an event
-            let event = {
-                title: drugName,
-                start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
-                duration: { minutes: EVENT_LEN_MINS },
-                description: drugJson[ADDITIONAL_DATA]
-            };
+            let event;
+            if (notificationNeeded) {
+                //Creating an event with notifications
+                let alarms = [];
+                alarms.push({
+                    action: 'audio',
+                    trigger: {minutes: notifyBefore, before:true},
+                    repeat: 2,
+                    attachType:'VALUE=URI',
+                    attach: 'Glass'
+                });
+                event = {
+                    title: drugName,
+                    start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
+                    duration: { minutes: EVENT_LEN_MINS },
+                    description: drugJson[ADDITIONAL_DATA],
+                    alarms: alarms
+                };
+            }
+            else {
+                // Creating an event without notifications
+                event = {
+                    title: drugName,
+                    start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
+                    duration: { minutes: EVENT_LEN_MINS },
+                    description: drugJson[ADDITIONAL_DATA]
+                };
+            }
             eventList.push(event);
         }
         let newDate = loop.setDate(loop.getDate() + 1);
@@ -53,8 +77,9 @@ function parseDrug(drugJson) {
  */
 function parsePlan(data) {
     /* Whether the notifications are needed: */
-    const notify = data['notifications'];
-
+    const notify = data[NOTIFY_B];
+    if (notify)
+        notifyBefore = data[REMIND_BEFORE];
     /* All the drugs data array */
     const drugsArr = data['drugs'];
     /* List of events */
@@ -62,7 +87,7 @@ function parsePlan(data) {
 
     /* Iterating the list of events: */
     for (let dr of drugsArr) {
-        fullEventList.push.apply(fullEventList, parseDrug(dr));
+        fullEventList.push.apply(fullEventList, parseDrug(dr, notify));
     }
     /* Creating ics-formatted string:  */
     const { error, value } = ics.createEvents(fullEventList);
