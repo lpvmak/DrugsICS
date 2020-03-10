@@ -5,15 +5,21 @@ import {AddButton} from "./AddButton.component";
 
 export function App() {
     const [formValues, setFormValues] = React.useState({
-        forms: [{}],
+        drugs: [{}],
         numOfForms: 1
     });
     
     function handleFormChange(index, values) {
-        let forms = formValues.forms.slice();
-        forms[index] = values;
+        let drugs = formValues.drugs.slice();
+        if (values.dosage !== "" && values.dosage !== formValues.drugs[index].dosage){
+            values.timeList = []
+            for (let i = 0; i < values.dosage; ++i){
+                values.timeList.push("");
+            }
+        }
+        drugs[index] = values;
         setFormValues({
-            forms: forms,
+            drugs: drugs,
             numOfForms: formValues.numOfForms
         })
     }
@@ -24,7 +30,7 @@ export function App() {
 
     function handleAddMore(){
         setFormValues(formValues => ({
-            forms: [...formValues.forms, {}],
+            drugs: [...formValues.drugs, {}],
             numOfForms: (formValues.numOfForms += 1)
         }))
     }
@@ -38,12 +44,11 @@ export function App() {
     return (
         <div className="App">
 
-            <h1>Multiple Form in one submition</h1>
+            <h1>Create your own plan of taking pills</h1>
             {forms}
 
-            <pre>{JSON.stringify(formValues, null, 2)}</pre>
+            {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
 
-            {/*<button onClick={handleAddMore}>Add more</button>*/}
             <AddButton onClick = {handleAddMore}/>
             <GenerateButton onClick = {handleSubmit}/>
 
