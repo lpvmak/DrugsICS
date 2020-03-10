@@ -12,7 +12,6 @@ const REMIND_BEFORE = 'remindTime';
 
 const EVENT_LEN_MINS = 30;
 
-let notifyBefore = 0;
 
 
 /**
@@ -20,11 +19,17 @@ let notifyBefore = 0;
  * @param drugJson drug intake info
  * @returns {[]} list of .ics-formatted events for this drug
  */
-function parseDrug(drugJson, notificationNeeded=false) {
+function parseDrug(drugJson) {
     let drugName = drugJson[DRUG_TITLE];
     let dateFrom = new Date(drugJson[DATE_FROM]);
     let dateTo = new Date(drugJson[DATE_TO]);
     let takeTimeList = drugJson[TIME_LIST];
+    let notificationNeeded = drugJson[NOTIFY_B];
+    let notifyBefore = 0;
+    /* Whether the notifications are needed: */
+    if (notificationNeeded) {
+        notifyBefore = drugJson[REMIND_BEFORE];
+    }
 
     let eventList = [];
     let loop = new Date(dateFrom);
@@ -76,10 +81,6 @@ function parseDrug(drugJson, notificationNeeded=false) {
  * @returns {string} Created .ics string for this plan
  */
 function parsePlan(data) {
-    /* Whether the notifications are needed: */
-    const notify = data[NOTIFY_B];
-    if (notify)
-        notifyBefore = data[REMIND_BEFORE];
     /* All the drugs data array */
     const drugsArr = data['drugs'];
     /* List of events */
@@ -87,7 +88,7 @@ function parsePlan(data) {
 
     /* Iterating the list of events: */
     for (let dr of drugsArr) {
-        fullEventList.push.apply(fullEventList, parseDrug(dr, notify));
+        fullEventList.push.apply(fullEventList, parseDrug(dr));
     }
     /* Creating ics-formatted string:  */
     const { error, value } = ics.createEvents(fullEventList);
