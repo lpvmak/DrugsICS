@@ -11,6 +11,7 @@
 * [React](https://reactjs.org/)
 * [reactstrap](https://reactstrap.github.io/)
 * [ics](https://www.npmjs.com/package/ics)
+* [formik](https://jaredpalmer.com/formik/docs/overview)
 
 ## Правила оформления commit-ов
 
