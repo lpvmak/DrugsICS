@@ -11,10 +11,44 @@ export function App() {
     
     function handleFormChange(index, values) {
         let drugs = formValues.drugs.slice();
-        if (values.dosage !== "" && values.dosage !== formValues.drugs[index].dosage){
+        let newDosage = values.dosage;
+        if (newDosage !== formValues.drugs[index].dosage){
             values.timeList = []
-            for (let i = 0; i < values.dosage; ++i){
-                values.timeList.push("");
+            switch (newDosage) {
+                case "1":
+                    values.timeList.push("08:00");
+                    break;
+                case "2":
+                    values.timeList.push("08:00");
+                    values.timeList.push("20:00");
+                    break;
+                case "3":
+                    values.timeList.push("07:00");
+                    values.timeList.push("15:00");
+                    values.timeList.push("23:00");
+                    break;
+                case "4":
+                    values.timeList.push("06:00");
+                    values.timeList.push("12:00");
+                    values.timeList.push("18:00");
+                    values.timeList.push("00:00");
+                    break;
+                case "5":
+                    values.timeList.push("07:00");
+                    values.timeList.push("12:00");
+                    values.timeList.push("17:00");
+                    values.timeList.push("22:00");
+                    values.timeList.push("02:00");
+                    break;
+                case "6":
+                    values.timeList.push("06:00");
+                    values.timeList.push("10:00");
+                    values.timeList.push("14:00");
+                    values.timeList.push("18:00");
+                    values.timeList.push("22:00");
+                    values.timeList.push("02:00");
+                    break;
+                default:
             }
         }
         drugs[index] = values;
@@ -47,7 +81,7 @@ export function App() {
             <h1>Create your own plan of taking pills</h1>
             {forms}
 
-            {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
+            <pre>{JSON.stringify(formValues, null, 2)}</pre>
 
             <AddButton onClick = {handleAddMore}/>
             <GenerateButton onClick = {handleSubmit}/>

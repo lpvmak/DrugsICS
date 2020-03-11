@@ -175,7 +175,7 @@ export default withFormik({
             dosage: "3",
             timeList: [],
             notifications: false,
-            remindTime: "",
+            remindTime: "0",
             description: ""
         };
     }
