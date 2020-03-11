@@ -16,37 +16,22 @@ export function App() {
             values.timeList = []
             switch (newDosage) {
                 case "1":
-                    values.timeList.push("08:00");
+                    values.timeList = ["08:00"];
                     break;
                 case "2":
-                    values.timeList.push("08:00");
-                    values.timeList.push("20:00");
+                    values.timeList = ["08:00", "20:00"];
                     break;
                 case "3":
-                    values.timeList.push("07:00");
-                    values.timeList.push("15:00");
-                    values.timeList.push("23:00");
+                    values.timeList = ["07:00", "15:00", "23:00"];
                     break;
                 case "4":
-                    values.timeList.push("06:00");
-                    values.timeList.push("12:00");
-                    values.timeList.push("18:00");
-                    values.timeList.push("00:00");
+                    values.timeList = ["06:00", "12:00", "18:00", "00:00"];
                     break;
                 case "5":
-                    values.timeList.push("07:00");
-                    values.timeList.push("12:00");
-                    values.timeList.push("17:00");
-                    values.timeList.push("22:00");
-                    values.timeList.push("02:00");
+                    values.timeList = ["07:00", "12:00", "17:00", "22:00", "02:00"];
                     break;
                 case "6":
-                    values.timeList.push("06:00");
-                    values.timeList.push("10:00");
-                    values.timeList.push("14:00");
-                    values.timeList.push("18:00");
-                    values.timeList.push("22:00");
-                    values.timeList.push("02:00");
+                    values.timeList = ["06:00", "10:00", "14:00", "18:00", "22:00", "02:00"];
                     break;
                 default:
             }
