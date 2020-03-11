@@ -50,7 +50,6 @@ export function Form(props) {
             />
             <label>Dosage </label>
             <select name="dosage" onChange={handleChange} value={values.dosage}>
-                <option></option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
