@@ -1,7 +1,8 @@
 import React from "react";
 import Form from "./Form.component";
-import  {GenerateButton} from "./GenerateButton.component";
+import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
+
 
 const { EventPlanGenerator } = require('..//generate_script/EventPlanGenerator');
 
@@ -45,23 +46,11 @@ export function App() {
         })
     }
 
-    function download(filename, text) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/ics;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
-
-        element.style.display = 'none';
-        document.body.appendChild(element);
-
-        element.click();
-
-        document.body.removeChild(element);
-    }
-
     function handleSubmit() {
         EventPlanGenerator.createNewPlan(formValues);
-        console.log(EventPlanGenerator.eventList);
-        download('MedSched.ics', EventPlanGenerator.eventList);
+        let FileSaver = require('file-saver');
+        const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
+        FileSaver.saveAs(file);
         //EventPlanGenerator.savePlanToFile('newPlan.ics');
     }
 

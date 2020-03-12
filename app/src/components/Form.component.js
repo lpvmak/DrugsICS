@@ -156,7 +156,6 @@ export function Form(props) {
                                 </select>
                             )
                         default:
-                            console.log("def");
                             return;
                     }
                 }.call(this, values.notifications, true, false)
