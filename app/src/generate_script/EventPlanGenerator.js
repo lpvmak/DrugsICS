@@ -11,16 +11,12 @@ let EventPlanGenerator  = {
 
 /**
  * Creates an .ics formatted string and saves it
- * @param jsonFilename name of JSON file of required format
+ * @param jsonData name of JSON file of required format
  */
-EventPlanGenerator.createNewPlan = function(jsonFilename) {
+EventPlanGenerator.createNewPlan = function(jsonData) {
     try {
-        /* Parsing JSON file */
-        // let jsonString = fs.readFileSync(jsonFilename);
-        // let data = JSON.parse(jsonString);
         /* Get ics-formatted string */
-        this.eventList = parsePlan(jsonFilename);
-        console.log(this.eventList);
+        this.eventList = parsePlan(jsonData);
     } catch (e) {
         (console.error || console.log).call(console, e.stack || e);
     }
