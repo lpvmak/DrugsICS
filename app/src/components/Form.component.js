@@ -52,13 +52,14 @@ export function Form(props) {
             <select name="dosage" onChange={handleChange} value={values.dosage}>
                 <option>1</option>
                 <option>2</option>
-                <option defaultChecked={1}>3</option>
+                <option>3</option>
                 <option>4</option>
                 <option>5</option>
                 <option>6</option>
             </select>
             <br/>
-            {function (num, case1, case2, case3, case4, case5, case6) {
+            {
+                function (num, case1, case2, case3, case4, case5, case6) {
                     switch (num) {
                         case case1:
                             return  (
@@ -123,9 +124,10 @@ export function Form(props) {
                         default:
                             return <div> </div>;
                     }
-                }.call(this, values.dosage, "1", "2", "3", "4", "5", "6")}
+                }.call(this, values.dosage, "1", "2", "3", "4", "5", "6")
+            }
             <input name = "notifications" onChange={handleChange} value={values.notification} type="checkbox"/>
-            <label>Remind me</label>
+            <label>Remind me in</label>
             {
                 function (active, case1, case2) {
                     switch (active) {
@@ -140,7 +142,7 @@ export function Form(props) {
                                     <option value={60}>1 hour</option>
                                     <option value={120}>2 hour</option>
                                 </select>
-                            );
+                            )
                         case case2:
                             return (
                                 <select name="remindTime" onChange={handleChange} value={values.remindTime} disabled>
@@ -152,9 +154,8 @@ export function Form(props) {
                                     <option value={60}>1 hour</option>
                                     <option value={120}>2 hour</option>
                                 </select>
-                            );
+                            )
                         default:
-                            console.log("def");
                             return;
                     }
                 }.call(this, values.notifications, true, false)
@@ -169,15 +170,25 @@ export function Form(props) {
 export default withFormik({
     mapPropsToValues: () => {
         return {
-            drugName: "",
-            dateFrom: "",
-            dateTo: "",
+            drugName: "hey",
+            dateFrom: "2020-03-11",
+            dateTo: "2020-03-12",
             dosage: "3",
-            timeList: [],
-            notifications: false,
+            timeList: [""],
+            notifications: true,
             remindTime: "0",
-            description: ""
+            description: "lol"
+
         };
+        // return {
+        //     drugName: "",
+        //     dateFrom: "",
+        //     dateTo: "",
+        //     dosage: "3",
+        //     timeList: [],
+        //     notifications: false,
+        //     remindTime: "0"
+        // };
     }
 })(Form);
 
