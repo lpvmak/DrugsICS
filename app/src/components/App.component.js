@@ -1,14 +1,17 @@
 import React from "react";
 import Form from "./Form.component";
-import  {GenerateButton} from "./GenerateButton.component";
+import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
+
+
+const { EventPlanGenerator } = require('..//generate_script/EventPlanGenerator');
 
 export function App() {
     const [formValues, setFormValues] = React.useState({
         drugs: [{}],
         numOfForms: 1
     });
-    
+
     function handleFormChange(index, values) {
         let drugs = formValues.drugs.slice();
         let newDosage = values.dosage;
@@ -44,7 +47,11 @@ export function App() {
     }
 
     function handleSubmit() {
-        alert(JSON.stringify(formValues, null, 2));
+        EventPlanGenerator.createNewPlan(formValues);
+        let FileSaver = require('file-saver');
+        const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
+        FileSaver.saveAs(file);
+        //EventPlanGenerator.savePlanToFile('newPlan.ics');
     }
 
     function handleAddMore(){
@@ -66,7 +73,7 @@ export function App() {
             <h1>Create your own plan of taking pills</h1>
             {forms}
 
-            <pre>{JSON.stringify(formValues, null, 2)}</pre>
+            {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
 
             <AddButton onClick = {handleAddMore}/>
             <GenerateButton onClick = {handleSubmit}/>
