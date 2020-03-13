@@ -38,22 +38,27 @@ function parseDrug(drugJson) {
         // Iterating through take timestamps:
         for (let takeT of takeTimeList) {
             let takeTime = takeT.split(':');
+
+            let intakeFullDate = new Date(loop);
+            intakeFullDate.setHours(parseInt(takeTime[0]));
+            intakeFullDate.setMinutes(parseInt(takeTime[1]));
+            let endFullDate = new Date(intakeFullDate);
+            endFullDate.setMinutes(parseInt(takeTime[1]) + EVENT_LEN_MINS);
+            
             let event;
             if (notificationNeeded) {
                 //Creating an event with notifications
                 let alarms = [];
                 alarms.push({
                     action: 'audio',
-                    trigger: {minutes: notifyBefore, before:true},
-                    repeat: 2,
-                    attachType:'VALUE=URI',
-                    attach: 'Glass'
+                    trigger: {minutes: notifyBefore, before:true}
                 });
                 event = {
                     title: drugName,
                     start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
-                    duration: { minutes: EVENT_LEN_MINS },
+                    end: [endFullDate.getFullYear(), endFullDate.getMonth() + 1, endFullDate.getDate(), endFullDate.getHours(), endFullDate.getMinutes()],
                     description: drugJson[ADDITIONAL_DATA],
+                    status: 'CONFIRMED',
                     alarms: alarms
                 };
             }
@@ -62,8 +67,9 @@ function parseDrug(drugJson) {
                 event = {
                     title: drugName,
                     start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
-                    duration: { minutes: EVENT_LEN_MINS },
-                    description: drugJson[ADDITIONAL_DATA]
+                    end: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1]) + EVENT_LEN_MINS],
+                    description: drugJson[ADDITIONAL_DATA],
+                    status: 'CONFIRMED'
                 };
             }
             eventList.push(event);
@@ -82,24 +88,19 @@ function parseDrug(drugJson) {
  */
 function parsePlan(data) {
     /* All the drugs data array */
-    console.log("here");
-    console.log(data);
     const drugsArr = data['drugs'];
     /* List of events */
     let fullEventList = [];
 
     /* Iterating the list of events: */
     for (let dr of drugsArr) {
-        console.log(dr);
         fullEventList.push.apply(fullEventList, parseDrug(dr));
     }
     /* Creating ics-formatted string:  */
-    console.log(fullEventList);
     const { error, value } = ics.createEvents(fullEventList);
     console.log(error);
-    //if (error)
-        //(console.error || console.log).call(console, e.stack || e);
-    console.log(value);
+    if (error)
+        (console.error || console.log).call(console, error.stack || error);
     return value;
 }
 
