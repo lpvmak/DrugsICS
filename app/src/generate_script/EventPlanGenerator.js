@@ -1,5 +1,4 @@
 const fs = require('fs');
-const ics = require('ics');
 
 const { parsePlan } = require('./parseData');
 

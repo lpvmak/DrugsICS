@@ -169,26 +169,21 @@ export function Form(props) {
 
 export default withFormik({
     mapPropsToValues: () => {
+        let startDate = new Date().toISOString().substring(0,10);
+        let endDate = new Date();
+        endDate.setDate(endDate.getDate() + 5);
+        endDate = endDate.toISOString().substring(0,10);
         return {
-            drugName: "hey",
-            dateFrom: "2020-03-11",
-            dateTo: "2020-03-12",
+            drugName: "",
+            dateFrom: startDate,
+            dateTo: endDate,
             dosage: "3",
             timeList: [""],
             notifications: true,
             remindTime: "0",
-            description: "lol"
+            description: ""
 
         };
-        // return {
-        //     drugName: "",
-        //     dateFrom: "",
-        //     dateTo: "",
-        //     dosage: "3",
-        //     timeList: [],
-        //     notifications: false,
-        //     remindTime: "0"
-        // };
     }
 })(Form);
 

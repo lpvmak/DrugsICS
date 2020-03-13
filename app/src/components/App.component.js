@@ -77,7 +77,6 @@ export function App() {
 
             <AddButton onClick = {handleAddMore}/>
             <GenerateButton onClick = {handleSubmit}/>
-
         </div>
     );
 }
