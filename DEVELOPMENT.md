@@ -11,6 +11,8 @@
 * [React](https://reactjs.org/)
 * [reactstrap](https://reactstrap.github.io/)
 * [ics](https://www.npmjs.com/package/ics)
+* [formik](https://jaredpalmer.com/formik/docs/overview)
+* [FileSaver](https://www.npmjs.com/file-saver)
 
 ## Правила оформления commit-ов
 
