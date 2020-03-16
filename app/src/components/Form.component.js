@@ -1,6 +1,10 @@
 import {withFormik} from "formik";
 import React from "react";
 
+/**
+ * React form component
+ * @param props - React properties for component
+ */
 export function Form(props) {
     // const validate = values => {
     //     const errors = {};
@@ -142,7 +146,7 @@ export function Form(props) {
                                     <option value={60}>1 hour</option>
                                     <option value={120}>2 hour</option>
                                 </select>
-                            )
+                            );
                         case case2:
                             return (
                                 <select name="remindTime" onChange={handleChange} value={values.remindTime} disabled>
@@ -154,7 +158,7 @@ export function Form(props) {
                                     <option value={60}>1 hour</option>
                                     <option value={120}>2 hour</option>
                                 </select>
-                            )
+                            );
                         default:
                             return;
                     }

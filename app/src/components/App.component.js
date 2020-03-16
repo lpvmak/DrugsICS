@@ -6,6 +6,9 @@ import {AddButton} from "./AddButton.component";
 
 const { EventPlanGenerator } = require('..//generate_script/EventPlanGenerator');
 
+/**
+ * Initialisation of main component of React application
+ */
 export function App() {
     const [formValues, setFormValues] = React.useState({
         drugs: [{}],
@@ -16,7 +19,7 @@ export function App() {
         let drugs = formValues.drugs.slice();
         let newDosage = values.dosage;
         if (newDosage !== formValues.drugs[index].dosage){
-            values.timeList = []
+            values.timeList = [];
             switch (newDosage) {
                 case "1":
                     values.timeList = ["08:00"];
@@ -45,7 +48,9 @@ export function App() {
             numOfForms: formValues.numOfForms
         })
     }
-
+    /**
+     * Handler for the submit button
+     */
     function handleSubmit() {
         EventPlanGenerator.createNewPlan(formValues);
         let FileSaver = require('file-saver');
@@ -53,7 +58,9 @@ export function App() {
         FileSaver.saveAs(file);
         //EventPlanGenerator.savePlanToFile('newPlan.ics');
     }
-
+    /**
+     * Handler for the addition button
+     */
     function handleAddMore(){
         setFormValues(formValues => ({
             drugs: [...formValues.drugs, {}],
