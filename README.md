@@ -26,7 +26,8 @@ In the near future, our service will be able to:
 * Возможность создания расписания приёма препаратов без регистрации 
 
 ## Для использования
-Перейти по [ссылке](http://medsched.online)
+Перейти по [ссылке](http://medsched.online).
+
 Расширение .ics – это универсальный формат календаря, который используется во многих приложениях, таких как: Microsoft Outlook, Apple iCal, Mozilla Sunbird, и Google Calendar.
 
 ### Системные требования
