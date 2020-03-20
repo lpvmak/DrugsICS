@@ -2,9 +2,7 @@ import React from "react";
 import Form from "./Form.component";
 import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
-
-
-const { EventPlanGenerator } = require('..//generate_script/EventPlanGenerator');
+import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
 
 /**
  * Initialisation of main component of React application
@@ -15,31 +13,21 @@ export function App() {
         numOfForms: 1
     });
 
+    /**
+     * Handler for the form onChange
+     */
     function handleFormChange(index, values) {
         let drugs = formValues.drugs.slice();
+
+        /* Prediction time set: */
         let newDosage = values.dosage;
         if (newDosage !== formValues.drugs[index].dosage){
             values.timeList = [];
-            switch (newDosage) {
-                case "1":
-                    values.timeList = ["08:00"];
-                    break;
-                case "2":
-                    values.timeList = ["08:00", "20:00"];
-                    break;
-                case "3":
-                    values.timeList = ["07:00", "15:00", "23:00"];
-                    break;
-                case "4":
-                    values.timeList = ["06:00", "12:00", "18:00", "00:00"];
-                    break;
-                case "5":
-                    values.timeList = ["07:00", "12:00", "17:00", "22:00", "02:00"];
-                    break;
-                case "6":
-                    values.timeList = ["06:00", "10:00", "14:00", "18:00", "22:00", "02:00"];
-                    break;
-                default:
+            let startHour = 8;
+            let interval = Math.ceil(24 / newDosage);
+            for (let i = 0; i < newDosage; i++, startHour+=interval) {
+                let curHour = startHour % 24;
+                values.timeList.push((curHour < 10 ? "0" + curHour : curHour) + ":" + "00");
             }
         }
         drugs[index] = values;
@@ -48,6 +36,7 @@ export function App() {
             numOfForms: formValues.numOfForms
         })
     }
+
     /**
      * Handler for the submit button
      */
@@ -58,6 +47,7 @@ export function App() {
         FileSaver.saveAs(file);
         //EventPlanGenerator.savePlanToFile('newPlan.ics');
     }
+
     /**
      * Handler for the addition button
      */
@@ -68,8 +58,8 @@ export function App() {
         }))
     }
 
+    /* Render current number of forms: */
     let forms = [];
-
     for (let i = 0; i < formValues.numOfForms; i++) {
         forms.push(<Form onChange={handleFormChange} key={i} index={i} />);
     }
@@ -79,9 +69,7 @@ export function App() {
 
             <h1>Create your own plan of taking pills</h1>
             {forms}
-
             {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
-
             <AddButton onClick = {handleAddMore}/>
             <GenerateButton onClick = {handleSubmit}/>
         </div>
