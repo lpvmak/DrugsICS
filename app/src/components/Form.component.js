@@ -27,13 +27,29 @@ export function Form(props) {
     // };
 
     const { values, handleChange, onChange } = props;
-
-
     React.useEffect(() => {
         if (onChange) {
             onChange(props.index, values);
         }
     }, [values]);
+
+
+    /* Time-input tags: */
+    const curTimeList = [];
+    for (let i = 0; i < values.dosage; i++) {
+        curTimeList.push("timeList[" + i + "]");
+    }
+    const curTimeListTag = curTimeList.map((item, index) => {
+        return  <input key={index} name={item} type="time" value={values.timeList[index]} onChange={handleChange} />;
+    });
+
+    /* Enable/disable select reminder time: */
+    let statusSelect = {};
+    if (!values.notifications){
+        statusSelect["disabled"] = "disabled";
+    }else{
+        statusSelect = {}
+    }
 
     return (
         <div className={"form"}>
@@ -42,9 +58,9 @@ export function Form(props) {
             <br/>
             <label>From </label>
             <input name="dateFrom"
-                type="date"
-                onChange={handleChange}
-                value={values.dateFrom}
+                   type="date"
+                   onChange={handleChange}
+                   value={values.dateFrom}
             />
             <label>To </label>
             <input name="dateTo"
@@ -53,7 +69,9 @@ export function Form(props) {
                    value={values.dateTo}
             />
             <label>Dosage </label>
-            <select name="dosage" onChange={handleChange} value={values.dosage}>
+            <select name="dosage"
+                    onChange={handleChange}
+                    value={values.dosage}>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -62,128 +80,53 @@ export function Form(props) {
                 <option>6</option>
             </select>
             <br/>
-            {
-                function (num, case1, case2, case3, case4, case5, case6) {
-                    switch (num) {
-                        case case1:
-                            return  (
-                                <div className = {"time"}>
-                                    <label>Time </label>
-                                    <input name="timeList[0]" type="time" value={values.timeList[0]} onChange={handleChange} />
-                                </div>
-                            );
-                        case case2:
-                            return  (
-                                <div className = {"time"}>
-                                    <label>Time </label>
-                                    <input name="timeList[0]" type="time" value={values.timeList[0]} onChange={handleChange} />
-                                    <input name="timeList[1]" type="time" value={values.timeList[1]} onChange={handleChange} />
-                                </div>
-                            );
-                        case case3:
-                            return  (
-                                <div className = {"time"}>
-                                    <label>Time </label>
-                                    <input name="timeList[0]" type="time" value={values.timeList[0]} onChange={handleChange} />
-                                    <input name="timeList[1]" type="time" value={values.timeList[1]} onChange={handleChange} />
-                                    <input name="timeList[2]" type="time" value={values.timeList[2]} onChange={handleChange} />
-                                </div>
-                            );
-                        case case4:
-                            return  (
-                                <div className = {"time"}>
-                                    <label>Time </label>
-                                    <input name="timeList[0]" type="time" value={values.timeList[0]} onChange={handleChange} />
-                                    <input name="timeList[1]" type="time" value={values.timeList[1]} onChange={handleChange} />
-                                    <input name="timeList[2]" type="time" value={values.timeList[2]} onChange={handleChange} />
-                                    <br/>
-                                    <input name="timeList[3]" type="time" value={values.timeList[3]} onChange={handleChange} />
-                                </div>
-                            );
-                        case case5:
-                            return  (
-                                <div className = {"time"}>
-                                    <label>Time </label>
-                                    <input name="timeList[0]" type="time" value={values.timeList[0]} onChange={handleChange} />
-                                    <input name="timeList[1]" type="time" value={values.timeList[1]} onChange={handleChange} />
-                                    <input name="timeList[2]" type="time" value={values.timeList[2]} onChange={handleChange} />
-                                    <br/>
-                                    <input name="timeList[3]" type="time" value={values.timeList[3]} onChange={handleChange} />
-                                    <input name="timeList[4]" type="time" value={values.timeList[4]} onChange={handleChange} />
-                                </div>
-                            );
-                        case case6:
-                            return  (
-                                <div className = {"time"}>
-                                    <label>Time </label>
-                                    <input name="timeList[0]" type="time" value={values.timeList[0]} onChange={handleChange} />
-                                    <input name="timeList[1]" type="time" value={values.timeList[1]} onChange={handleChange} />
-                                    <input name="timeList[2]" type="time" value={values.timeList[2]} onChange={handleChange} />
-                                    <br/>
-                                    <input name="timeList[3]" type="time" value={values.timeList[3]} onChange={handleChange} />
-                                    <input name="timeList[4]" type="time" value={values.timeList[4]} onChange={handleChange} />
-                                    <input name="timeList[5]" type="time" value={values.timeList[5]} onChange={handleChange} />
-                                </div>
-                            );
-                        default:
-                            return <div> </div>;
-                    }
-                }.call(this, values.dosage, "1", "2", "3", "4", "5", "6")
-            }
-            <input name = "notifications" onChange={handleChange} value={values.notification} type="checkbox"/>
+            {curTimeListTag}
+            <br/>
+            <input name = "notifications"
+                   type="checkbox"
+                   onChange={handleChange}
+                   value={values.notifications}/>
             <label>Remind me in</label>
-            {
-                function (active, case1, case2) {
-                    switch (active) {
-                        case case1:
-                            return (
-                                <select name="remindTime" onChange={handleChange} value={values.remindTime}>
-                                    <option value={0}>Immediately</option>
-                                    <option value={5}>5 minutes</option>
-                                    <option value={10}>10 minutes</option>
-                                    <option value={15}>15 minutes</option>
-                                    <option value={30}>half-hour</option>
-                                    <option value={60}>1 hour</option>
-                                    <option value={120}>2 hour</option>
-                                </select>
-                            );
-                        case case2:
-                            return (
-                                <select name="remindTime" onChange={handleChange} value={values.remindTime} disabled>
-                                    <option value={0}>Immediately</option>
-                                    <option value={5}>5 minutes</option>
-                                    <option value={10}>10 minutes</option>
-                                    <option value={15}>15 minutes</option>
-                                    <option value={30}>half-hour</option>
-                                    <option value={60}>1 hour</option>
-                                    <option value={120}>2 hour</option>
-                                </select>
-                            );
-                        default:
-                            return;
-                    }
-                }.call(this, values.notifications, true, false)
-            }
+            <select name="remindTime"
+                    onChange={handleChange}
+                    value={values.remindTime}
+                    {...statusSelect}>
+                <option value={0}>Immediately</option>
+                <option value={5}>5 minutes</option>
+                <option value={10}>10 minutes</option>
+                <option value={15}>15 minutes</option>
+                <option value={30}>half-hour</option>
+                <option value={60}>1 hour</option>
+                <option value={120}>2 hour</option>
+            </select>
             <br/>
             <label>Comment</label>
-            <textarea name="description" onChange={handleChange} rows={4} cols={48}></textarea>
+            <textarea name="description"
+                      onChange={handleChange}
+                      rows={4} cols={48}>
+            </textarea>
         </div>
     );
 }
 
+/**
+ * Formik form state initialization
+ */
 export default withFormik({
     mapPropsToValues: () => {
+        /* Setting initial date: */
         let startDate = new Date().toISOString().substring(0,10);
         let endDate = new Date();
         endDate.setDate(endDate.getDate() + 5);
         endDate = endDate.toISOString().substring(0,10);
+
         return {
             drugName: "",
             dateFrom: startDate,
             dateTo: endDate,
             dosage: "3",
             timeList: [""],
-            notifications: true,
+            notifications: false,
             remindTime: "0",
             description: ""
 
