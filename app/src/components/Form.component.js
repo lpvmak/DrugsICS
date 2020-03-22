@@ -1,11 +1,13 @@
 import {withFormik} from "formik";
 import React from "react";
+import PropTypes from 'prop-types';
+import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 
 /**
  * React form component
  * @param props - React properties for component
  */
-export function Form(props) {
+export function FormikForms(props) {
     // const validate = values => {
     //     const errors = {};
     //     if (!values.drugName) {
@@ -39,9 +41,27 @@ export function Form(props) {
     for (let i = 0; i < values.dosage; i++) {
         curTimeList.push("timeList[" + i + "]");
     }
-    const curTimeListTag = curTimeList.map((item, index) => {
-        return  <input key={index} name={item} type="time" value={values.timeList[index]} onChange={handleChange} />;
+
+    /* Create layout of time list tag: */
+    const timeListTag = curTimeList.map((item, index) => {
+        return (
+            <Col md={4}>
+                <Input key={index} name={item} type="time" value={values.timeList[index]} onChange={handleChange} />
+            </Col>
+        )
     });
+    let layoutTimeListTag = null;
+    if (values.dosage <= 3){
+        layoutTimeListTag = <Row>{timeListTag.slice(0,3)}</Row>;
+    }
+    else{
+        layoutTimeListTag = (
+            <div>
+                <Row>{timeListTag.slice(0,3)}</Row>
+                <Row>{timeListTag.slice(3,6)}</Row>
+            </div>
+         );
+    }
 
     /* Enable/disable select reminder time: */
     let statusSelect = {};
@@ -52,60 +72,97 @@ export function Form(props) {
     }
 
     return (
-        <div className={"form"}>
-            <label>Name </label>
-            <input name="drugName" value={values.drugName} onChange={handleChange} />
-            <br/>
-            <label>From </label>
-            <input name="dateFrom"
-                   type="date"
-                   onChange={handleChange}
-                   value={values.dateFrom}
-            />
-            <label>To </label>
-            <input name="dateTo"
-                   type="date"
-                   onChange={handleChange}
-                   value={values.dateTo}
-            />
-            <label>Dosage </label>
-            <select name="dosage"
-                    onChange={handleChange}
-                    value={values.dosage}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-            </select>
-            <br/>
-            {curTimeListTag}
-            <br/>
-            <input name = "notifications"
-                   type="checkbox"
-                   onChange={handleChange}
-                   value={values.notifications}/>
-            <label>Remind me in</label>
-            <select name="remindTime"
-                    onChange={handleChange}
-                    value={values.remindTime}
-                    {...statusSelect}>
-                <option value={0}>Immediately</option>
-                <option value={5}>5 minutes</option>
-                <option value={10}>10 minutes</option>
-                <option value={15}>15 minutes</option>
-                <option value={30}>half-hour</option>
-                <option value={60}>1 hour</option>
-                <option value={120}>2 hour</option>
-            </select>
-            <br/>
-            <label>Comment</label>
-            <textarea name="description"
-                      onChange={handleChange}
-                      rows={4} cols={48}>
-            </textarea>
-        </div>
+        <Form>
+            <Row form>
+                <Col md={12}>
+                    <FormGroup>
+                        <Label>Name </Label>
+                        <Input name="drugName"
+                               value={values.drugName}
+                               onChange={handleChange} />
+                    </FormGroup>
+                </Col>
+            </Row>
+            <Row form>
+                <Col md={5}>
+                    <FormGroup>
+                        <Label>From </Label>
+                        <Input name="dateFrom"
+                               type="date"
+                               onChange={handleChange}
+                               value={values.dateFrom}
+                        />
+
+                    </FormGroup>
+                </Col>
+                <Col md={5}>
+                     <FormGroup>
+                        <Label>To </Label>
+                        <Input name="dateTo"
+                               type="date"
+                               onChange={handleChange}
+                               value={values.dateTo}
+                        />
+                    </FormGroup>
+                </Col>
+                <Col md={5}>
+                    <FormGroup>
+                        <Label>Dosage </Label>
+                        <Input type="select"
+                               name="dosage"
+                               onChange={handleChange}
+                               value={values.dosage}>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                        </Input>
+                    </FormGroup>
+                </Col>
+            </Row>
+            {layoutTimeListTag}
+            <Row form>
+                <Col md={6}>
+                    <FormGroup check>
+                        <Input name = "notifications"
+                               type="checkbox"
+                               onChange={handleChange}
+                               value={values.notification}
+                               />
+                        <Label>Remind me in</Label>
+                    </FormGroup>
+                </Col>
+                <Col md={6}>
+                    <Input type="select"
+                           name="remindTime"
+                           onChange={handleChange}
+                           value={values.remindTime}
+                           {...statusSelect}>
+                        <option value={0}>Immediately</option>
+                        <option value={5}>5 minutes</option>
+                        <option value={10}>10 minutes</option>
+                        <option value={15}>15 minutes</option>
+                        <option value={30}>half-hour</option>
+                        <option value={60}>1 hour</option>
+                        <option value={120}>2 hour</option>
+                    </Input>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={12}>
+                    <FormGroup>
+                        <Label>Comment</Label>
+                        <Input type="textarea"
+                               name="description"
+                               onChange={handleChange}
+                               rows={4} cols={48}>
+                        </Input>
+                    </FormGroup>
+                </Col>
+            </Row>
+        </Form>
     );
 }
 
@@ -132,7 +189,7 @@ export default withFormik({
 
         };
     }
-})(Form);
+})(FormikForms);
 
 // const formik = useFormik({
 //     initialValues: {
@@ -205,4 +262,29 @@ export default withFormik({
 //         <GenerateButton/>
 //     </form>
 // );
-//}
+
+
+Form.propTypes = {
+    children: PropTypes.node,
+    inline: PropTypes.bool,
+    // Pass in a Component to override default element
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]), // default: 'form'
+    innerRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]),
+    className: PropTypes.string,
+    cssModule: PropTypes.object,
+};
+
+FormGroup.propTypes = {
+    children: PropTypes.node,
+    // Applied the row class when true, does nothing when false
+    row: PropTypes.bool,
+    // Applied the form-check class when true, form-group when false
+    check: PropTypes.bool,
+    inline: PropTypes.bool,
+    // Applied the disabled class when the check and disabled props are true, does nothing when false
+    disabled: PropTypes.bool,
+    // Pass in a Component to override default element
+    tag: PropTypes.string, // default: 'div'
+    className: PropTypes.string,
+    cssModule: PropTypes.object,
+};
