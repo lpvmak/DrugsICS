@@ -67,7 +67,7 @@ export function App() {
     return (
         <div className="App">
 
-            <h1>Create your own plan of taking pills</h1>
+            <h1>Create your  own plan of taking pills</h1>
             {forms}
             {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
             <AddButton onClick = {handleAddMore}/>
