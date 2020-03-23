@@ -9,6 +9,7 @@
     "file-saver": "^2.0.2",
     "formik": "^2.1.4",
     "ics": "^2.19.0",
+    "ngrok": "^3.2.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
