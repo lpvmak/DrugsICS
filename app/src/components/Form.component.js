@@ -1,7 +1,7 @@
 import {withFormik} from "formik";
 import React from "react";
 import PropTypes from 'prop-types';
-import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Row, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 
 /**
  * React form component
@@ -46,19 +46,21 @@ export function FormikForms(props) {
     const timeListTag = curTimeList.map((item, index) => {
         return (
             <Col md={4}>
-                <Input key={index} name={item} type="time" value={values.timeList[index]} onChange={handleChange} />
+                <FormGroup>
+                    <Input key={index} name={item} type="time" value={values.timeList[index]} onChange={handleChange} />
+                </FormGroup>
             </Col>
         )
     });
     let layoutTimeListTag = null;
     if (values.dosage <= 3){
-        layoutTimeListTag = <Row>{timeListTag.slice(0,3)}</Row>;
+        layoutTimeListTag = <Row form>{timeListTag.slice(0,3)}</Row>;
     }
     else{
         layoutTimeListTag = (
             <div>
-                <Row>{timeListTag.slice(0,3)}</Row>
-                <Row>{timeListTag.slice(3,6)}</Row>
+                <Row form>{timeListTag.slice(0,3)}</Row>
+                <Row form>{timeListTag.slice(3,6)}</Row>
             </div>
          );
     }
@@ -72,7 +74,9 @@ export function FormikForms(props) {
     }
 
     return (
-        <Form>
+        <Form id="forms">
+            <div id = "formHead">
+            </div>
             <Row form>
                 <Col md={12}>
                     <FormGroup>
@@ -84,7 +88,7 @@ export function FormikForms(props) {
                 </Col>
             </Row>
             <Row form>
-                <Col md={5}>
+                <Col md={4}>
                     <FormGroup>
                         <Label>From </Label>
                         <Input name="dateFrom"
@@ -95,7 +99,7 @@ export function FormikForms(props) {
 
                     </FormGroup>
                 </Col>
-                <Col md={5}>
+                <Col md={4}>
                      <FormGroup>
                         <Label>To </Label>
                         <Input name="dateTo"
@@ -105,7 +109,7 @@ export function FormikForms(props) {
                         />
                     </FormGroup>
                 </Col>
-                <Col md={5}>
+                <Col md={4}>
                     <FormGroup>
                         <Label>Dosage </Label>
                         <Input type="select"
@@ -122,19 +126,26 @@ export function FormikForms(props) {
                     </FormGroup>
                 </Col>
             </Row>
+            <Row form>
+                <Col md={12}>
+                    <Label>Time</Label>
+                </Col>
+            </Row>
             {layoutTimeListTag}
             <Row form>
-                <Col md={6}>
+                <Col md={4}>
                     <FormGroup check>
                         <Input name = "notifications"
                                type="checkbox"
+                               id = {(props.index + 1) + "form-checkbox"}
                                onChange={handleChange}
                                value={values.notification}
                                />
-                        <Label>Remind me in</Label>
+                        <label class="notification_checkbox" for = {(props.index + 1) + "form-checkbox"}> </label>
+                        <Label >Remind me in</Label>
                     </FormGroup>
                 </Col>
-                <Col md={6}>
+                <Col md={4}>
                     <Input type="select"
                            name="remindTime"
                            onChange={handleChange}
@@ -149,15 +160,17 @@ export function FormikForms(props) {
                         <option value={120}>2 hour</option>
                     </Input>
                 </Col>
+                <Col md={4}>
+                </Col>
             </Row>
-            <Row>
+            <Row form>
                 <Col md={12}>
                     <FormGroup>
                         <Label>Comment</Label>
                         <Input type="textarea"
                                name="description"
                                onChange={handleChange}
-                               rows={4} cols={48}>
+                               rows={2} cols={48}>
                         </Input>
                     </FormGroup>
                 </Col>

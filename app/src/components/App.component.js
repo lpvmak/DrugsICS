@@ -3,15 +3,22 @@ import Form from "./Form.component";
 import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
 import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
+import { Container, Row, Col } from 'reactstrap';
 
 /**
  * Initialisation of main component of React application
  */
+
+
+
 export function App() {
     const [formValues, setFormValues] = React.useState({
         drugs: [{}],
         numOfForms: 1
     });
+
+    document.title = "MedSched online";
+
 
     /**
      * Handler for the form onChange
@@ -61,17 +68,36 @@ export function App() {
     /* Render current number of forms: */
     let forms = [];
     for (let i = 0; i < formValues.numOfForms; i++) {
-        forms.push(<Form onChange={handleFormChange} key={i} index={i} />);
+        forms.push(<Row><Col><Form onChange={handleFormChange} key={i} index={i} /></Col></Row>);
     }
 
     return (
-        <div className="App">
+        <div>
 
-            <h1>Create your  own plan of taking pills</h1>
-            {forms}
-            {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
-            <AddButton onClick = {handleAddMore}/>
-            <GenerateButton onClick = {handleSubmit}/>
+            <div id="header">
+                <h1 id="headerH1">MedSched</h1>
+            </div>
+
+            <Container >
+                <Row>
+                    <Col md={12}>
+                        <h1>Create your  own plan of taking pills</h1>
+                    </Col>
+                </Row>
+
+                {forms}
+
+                {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
+                <Row buttons>
+                    <Col>
+                        <AddButton onClick = {handleAddMore}/>
+                    </Col>
+                    <Col>
+                        <GenerateButton onClick = {handleSubmit}/>
+                    </Col>
+                </Row>
+
+            </Container>
         </div>
     );
 }
