@@ -1,34 +1,15 @@
 import {withFormik} from "formik";
 import React from "react";
 import PropTypes from 'prop-types';
-import { Col, Row, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
 
 /**
  * React form component
  * @param props - React properties for component
  */
 export function FormikForms(props) {
-    // const validate = values => {
-    //     const errors = {};
-    //     if (!values.drugName) {
-    //         errors.drugName = 'Required';
-    //     }
-    //     if (!values.startDate) {
-    //         errors.startDate = 'Required';
-    //     }
-    //     if (!values.endDate) {
-    //         errors.endDate = 'Required';
-    //     }
-    //     if (values.endDate < values.startDate) {
-    //         errors.endDate = 'Ending date must be later than starting';
-    //     }
-    //     if (!values.freq) {
-    //         errors.freq = 'Required';
-    //     }
-    //     return errors;
-    // };
 
-    const { values, handleChange, onChange } = props;
+    const { values, handleChange, onChange, touched, errors, handleSubmit} = props;
     React.useEffect(() => {
         if (onChange) {
             onChange(props.index, values);
@@ -45,9 +26,9 @@ export function FormikForms(props) {
     /* Create layout of time list tag: */
     const timeListTag = curTimeList.map((item, index) => {
         return (
-            <Col md={4}>
+            <Col key={index} md={4}>
                 <FormGroup>
-                    <Input key={index} name={item} type="time" value={values.timeList[index]} onChange={handleChange} />
+                    <Input name={item} type="time" value={values.timeList[index]} onChange={handleChange} />
                 </FormGroup>
             </Col>
         )
@@ -74,8 +55,10 @@ export function FormikForms(props) {
     }
 
     return (
-        <Form id="forms">
-            <div id = "formHead">
+        <Form id={"form"+(props.index + 1)}
+              className="forms"
+              onSubmit={handleSubmit}>
+            <div className = "formHead">
             </div>
             <Row form>
                 <Col md={12}>
@@ -84,6 +67,8 @@ export function FormikForms(props) {
                         <Input name="drugName"
                                value={values.drugName}
                                onChange={handleChange} />
+                        {touched.drugName && errors.drugName ?
+                            (<div>{errors.drugName}</div>) : null}
                     </FormGroup>
                 </Col>
             </Row>
@@ -141,7 +126,7 @@ export function FormikForms(props) {
                                onChange={handleChange}
                                value={values.notification}
                                />
-                        <label class="notification_checkbox" for = {(props.index + 1) + "form-checkbox"}> </label>
+                        <label className = "notification_checkbox" htmlFor = {(props.index + 1) + "form-checkbox"}> </label>
                         <Label >Remind me in</Label>
                     </FormGroup>
                 </Col>
@@ -161,6 +146,7 @@ export function FormikForms(props) {
                     </Input>
                 </Col>
                 <Col md={4}>
+                    <button className="formSubmit" type="submit"></button>
                 </Col>
             </Row>
             <Row form>
@@ -201,7 +187,29 @@ export default withFormik({
             description: ""
 
         };
-    }
+    },
+    validate: values => {
+        const errors = {};
+        if (!values.drugName) {
+            errors.drugName = 'Required';
+        }
+        if (!values.dateFrom) {
+            errors.dateFrom = 'Required';
+        }
+        if (!values.dateTo) {
+            errors.dateTo = 'Required';
+        }
+        if (values.dateTo < values.dateFrom) {
+            errors.endDate = 'Ending date must be later than starting';
+        }
+        return errors;
+    },
+    handleSubmit: (values, { setSubmitting }) => {
+        setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+        }, 1000);
+    },
 })(FormikForms);
 
 // const formik = useFormik({

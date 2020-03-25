@@ -48,6 +48,10 @@ export function App() {
      * Handler for the submit button
      */
     function handleSubmit() {
+        let formButtons = document.getElementsByClassName('formSubmit');
+        for (let button of formButtons){
+            button.click();
+        }
         EventPlanGenerator.createNewPlan(formValues);
         let FileSaver = require('file-saver');
         const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
@@ -68,7 +72,7 @@ export function App() {
     /* Render current number of forms: */
     let forms = [];
     for (let i = 0; i < formValues.numOfForms; i++) {
-        forms.push(<Row><Col><Form onChange={handleFormChange} key={i} index={i} /></Col></Row>);
+        forms.push(<Row key={i}><Col><Form onChange={handleFormChange} index={i} /></Col></Row>);
     }
 
     return (
@@ -88,7 +92,7 @@ export function App() {
                 {forms}
 
                 {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
-                <Row buttons>
+                <Row>
                     <Col>
                         <AddButton onClick = {handleAddMore}/>
                     </Col>
