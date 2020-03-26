@@ -8,7 +8,9 @@ import { Button } from 'reactstrap';
 export function GenerateButton(props) {
     return (
         <Button id="genButton"
-                onClick={props.onClick}>
+                type="submit"
+                onClick={props.onClick}
+        >
             Generate
         </Button>
     );

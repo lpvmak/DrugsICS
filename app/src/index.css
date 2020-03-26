@@ -30,7 +30,7 @@
     margin-bottom: 10%;
 }
 
-#forms{
+.forms{
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 7px;
@@ -39,7 +39,7 @@
     padding-bottom: 5%;
 }
 
-#formHead{
+.formHead{
     height: 40px;
     background: #31CA9E;
     border-top-left-radius: 7px;
@@ -73,6 +73,11 @@ input[type="checkbox"]{
     left: -9999px;
 }
 
+.formSubmit{
+    position: absolute;
+    left: -9999px;
+}
+
 .notification_checkbox:before {
     content: " ";
     display: inline-block;
@@ -98,4 +103,9 @@ input[type=checkbox]:checked + .notification_checkbox:before {
     background-color: transparent;
     border: solid #31CA9E 1px;
     border-radius: 7px;
+}
+
+#longMessage {
+    margin-top: -12px;
+    margin-bottom: 7px;
 }

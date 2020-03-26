@@ -98,7 +98,6 @@ function parsePlan(data) {
     }
     /* Creating ics-formatted string:  */
     const { error, value } = ics.createEvents(fullEventList);
-    console.log(error);
     if (error)
         (console.error || console.log).call(console, error.stack || error);
     return value;

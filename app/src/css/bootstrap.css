@@ -571,7 +571,7 @@ pre code {
     max-width: 750px;
   }
   h1, .h1 {
-    font-size: 2.9rem;
+    font-size: 2.38rem;
   }
 }
 
@@ -579,8 +579,8 @@ pre code {
   .container {
     max-width: 750px;
   }
-  h1, .h1 {
-    font-size: 2.55rem;
+  h1 {
+    font-size: 2.38rem;
   }
 }
 
@@ -588,8 +588,8 @@ pre code {
   .container {
     max-width: 850px;
   }
-  h1, .h1 {
-    font-size: 2.9rem;
+  h1 {
+    font-size: 2.72rem;
   }
 }
 
@@ -2129,6 +2129,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 .form-text {
   display: block;
   margin-top: 0.25rem;
+  margin-bottom: -0.8rem;
 }
 
 .form-row {
@@ -8901,6 +8902,10 @@ a.text-dark:hover, a.text-dark:focus {
 
 .text-muted {
   color: #6c757d !important;
+}
+
+.text-red {
+  color: red !important;
 }
 
 .text-hide {

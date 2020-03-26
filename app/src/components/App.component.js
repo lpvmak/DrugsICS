@@ -19,13 +19,11 @@ export function App() {
 
     document.title = "MedSched online";
 
-
     /**
      * Handler for the form onChange
      */
     function handleFormChange(index, values) {
         let drugs = formValues.drugs.slice();
-
         /* Prediction time set: */
         let newDosage = values.dosage;
         if (newDosage !== formValues.drugs[index].dosage){
@@ -44,15 +42,38 @@ export function App() {
         })
     }
 
+    function validForm(form) {
+        if (!form.drugName || !form.dateFrom || !form.dateTo || form.dateTo < form.dateFrom) {
+            return false;
+        }else {
+            for (let ind in form.timeList){
+                if (form.timeList[ind] === ""){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     /**
      * Handler for the submit button
      */
     function handleSubmit() {
-        EventPlanGenerator.createNewPlan(formValues);
-        let FileSaver = require('file-saver');
-        const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
-        FileSaver.saveAs(file);
-        //EventPlanGenerator.savePlanToFile('newPlan.ics');
+        let formButtons = document.getElementsByClassName('formSubmit');
+        for (let button of formButtons){
+            button.click();
+        }
+        let readyToGenerate = true;
+        for (let form of formValues.drugs){
+            readyToGenerate = validForm(form);
+        }
+        if (readyToGenerate) {
+            EventPlanGenerator.createNewPlan(formValues);
+            let FileSaver = require('file-saver');
+            const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
+            FileSaver.saveAs(file);
+            //EventPlanGenerator.savePlanToFile('newPlan.ics');
+        }
     }
 
     /**
@@ -68,7 +89,7 @@ export function App() {
     /* Render current number of forms: */
     let forms = [];
     for (let i = 0; i < formValues.numOfForms; i++) {
-        forms.push(<Row><Col><Form onChange={handleFormChange} key={i} index={i} /></Col></Row>);
+        forms.push(<Row key={i}><Col><Form onChange={handleFormChange} index={i} /></Col></Row>);
     }
 
     return (
@@ -81,14 +102,14 @@ export function App() {
             <Container >
                 <Row>
                     <Col md={12}>
-                        <h1>Create your  own plan of taking pills</h1>
+                        <h1>Create your own medication regimen</h1>
                     </Col>
                 </Row>
 
                 {forms}
 
                 {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
-                <Row buttons>
+                <Row>
                     <Col>
                         <AddButton onClick = {handleAddMore}/>
                     </Col>
