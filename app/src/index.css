@@ -104,3 +104,8 @@ input[type=checkbox]:checked + .notification_checkbox:before {
     border: solid #31CA9E 1px;
     border-radius: 7px;
 }
+
+#longMessage {
+    margin-top: -12px;
+    margin-bottom: 7px;
+}

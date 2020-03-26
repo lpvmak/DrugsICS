@@ -19,13 +19,11 @@ export function App() {
 
     document.title = "MedSched online";
 
-
     /**
      * Handler for the form onChange
      */
     function handleFormChange(index, values) {
         let drugs = formValues.drugs.slice();
-
         /* Prediction time set: */
         let newDosage = values.dosage;
         if (newDosage !== formValues.drugs[index].dosage){
@@ -44,6 +42,19 @@ export function App() {
         })
     }
 
+    function validForm(form) {
+        if (!form.drugName || !form.dateFrom || !form.dateTo || form.dateTo < form.dateFrom) {
+            return false;
+        }else {
+            for (let ind in form.timeList){
+                if (form.timeList[ind] === ""){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     /**
      * Handler for the submit button
      */
@@ -52,11 +63,17 @@ export function App() {
         for (let button of formButtons){
             button.click();
         }
-        EventPlanGenerator.createNewPlan(formValues);
-        let FileSaver = require('file-saver');
-        const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
-        FileSaver.saveAs(file);
-        //EventPlanGenerator.savePlanToFile('newPlan.ics');
+        let readyToGenerate = true;
+        for (let form of formValues.drugs){
+            readyToGenerate = validForm(form);
+        }
+        if (readyToGenerate) {
+            EventPlanGenerator.createNewPlan(formValues);
+            let FileSaver = require('file-saver');
+            const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
+            FileSaver.saveAs(file);
+            //EventPlanGenerator.savePlanToFile('newPlan.ics');
+        }
     }
 
     /**
@@ -85,7 +102,7 @@ export function App() {
             <Container >
                 <Row>
                     <Col md={12}>
-                        <h1>Create your  own plan of taking pills</h1>
+                        <h1>Create your own medication regimen</h1>
                     </Col>
                 </Row>
 

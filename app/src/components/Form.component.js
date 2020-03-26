@@ -1,12 +1,10 @@
 import {withFormik} from "formik";
 import React from "react";
 import PropTypes from 'prop-types';
-import { Col, Row, Form, FormGroup, Label, Input } from 'reactstrap';
+import {Form, Col, Row, FormGroup, Label, Input, FormText} from 'reactstrap';
 
-/**
- * React form component
- * @param props - React properties for component
- */
+
+
 export function FormikForms(props) {
 
     const { values, handleChange, onChange, touched, errors, handleSubmit} = props;
@@ -16,6 +14,10 @@ export function FormikForms(props) {
         }
     }, [values]);
 
+    /* Initialize touching values: */
+    for (let i = 0; !!touched.timeList && i < values.timeList.length; i++){
+        touched.timeList[i] = true;
+    }
 
     /* Time-input tags: */
     const curTimeList = [];
@@ -29,6 +31,12 @@ export function FormikForms(props) {
             <Col key={index} md={4}>
                 <FormGroup>
                     <Input name={item} type="time" value={values.timeList[index]} onChange={handleChange} />
+                    {!!touched.timeList && !!errors.timeList && touched.timeList[index] && (values.timeList[index] == "") ?
+                        (
+                            <FormText color="red">
+                                {errors.timeList[index]}
+                            </FormText>
+                        ) : null}
                 </FormGroup>
             </Col>
         )
@@ -63,40 +71,55 @@ export function FormikForms(props) {
             <Row form>
                 <Col md={12}>
                     <FormGroup>
-                        <Label>Name </Label>
+                        <Label>Medication name </Label>
                         <Input name="drugName"
                                value={values.drugName}
                                onChange={handleChange} />
                         {touched.drugName && errors.drugName ?
-                            (<div>{errors.drugName}</div>) : null}
+                            (
+                                <FormText color="red">
+                                    {errors.drugName}
+                                </FormText>
+                            ) : null}
                     </FormGroup>
                 </Col>
             </Row>
             <Row form>
                 <Col md={4}>
                     <FormGroup>
-                        <Label>From </Label>
+                        <Label>Date from </Label>
                         <Input name="dateFrom"
                                type="date"
                                onChange={handleChange}
                                value={values.dateFrom}
                         />
-
+                        {touched.dateFrom && errors.dateFrom ?
+                            (
+                                <FormText color="red">
+                                    {errors.dateFrom}
+                                </FormText>
+                            ) : null}
                     </FormGroup>
                 </Col>
                 <Col md={4}>
                      <FormGroup>
-                        <Label>To </Label>
+                        <Label>Date to </Label>
                         <Input name="dateTo"
                                type="date"
                                onChange={handleChange}
                                value={values.dateTo}
                         />
+                         {touched.dateTo && errors.dateTo ?
+                             (
+                                 <FormText color="red">
+                                     {errors.dateTo}
+                                 </FormText>
+                             ) : null}
                     </FormGroup>
                 </Col>
                 <Col md={4}>
                     <FormGroup>
-                        <Label>Dosage </Label>
+                        <Label>Frequency </Label>
                         <Input type="select"
                                name="dosage"
                                onChange={handleChange}
@@ -113,7 +136,17 @@ export function FormikForms(props) {
             </Row>
             <Row form>
                 <Col md={12}>
-                    <Label>Time</Label>
+                    {touched.dateTo && touched.dateFrom && !errors.dateFrom && !errors.dateTo && errors.endDate ?
+                        (
+                            <FormText id="longMessage" color="red">
+                                {errors.endDate}
+                            </FormText>
+                        ) : null}
+                </Col>
+            </Row>
+            <Row form>
+                <Col md={12}>
+                    <Label>Times taken</Label>
                 </Col>
             </Row>
             {layoutTimeListTag}
@@ -127,7 +160,7 @@ export function FormikForms(props) {
                                value={values.notification}
                                />
                         <label className = "notification_checkbox" htmlFor = {(props.index + 1) + "form-checkbox"}> </label>
-                        <Label >Remind me in</Label>
+                        <Label >Remind me:</Label>
                     </FormGroup>
                 </Col>
                 <Col md={4}>
@@ -136,13 +169,12 @@ export function FormikForms(props) {
                            onChange={handleChange}
                            value={values.remindTime}
                            {...statusSelect}>
-                        <option value={0}>Immediately</option>
-                        <option value={5}>5 minutes</option>
-                        <option value={10}>10 minutes</option>
-                        <option value={15}>15 minutes</option>
-                        <option value={30}>half-hour</option>
-                        <option value={60}>1 hour</option>
-                        <option value={120}>2 hour</option>
+                        <option value={0}>at the moment</option>
+                        <option value={5}>in 5 minutes</option>
+                        <option value={10}>in 10 minutes</option>
+                        <option value={15}>in 15 minutes</option>
+                        <option value={30}>in half-hour</option>
+                        <option value={60}>in 1 hour</option>
                     </Input>
                 </Col>
                 <Col md={4}>
@@ -152,7 +184,7 @@ export function FormikForms(props) {
             <Row form>
                 <Col md={12}>
                     <FormGroup>
-                        <Label>Comment</Label>
+                        <Label>Special instructions:</Label>
                         <Input type="textarea"
                                name="description"
                                onChange={handleChange}
@@ -190,6 +222,7 @@ export default withFormik({
     },
     validate: values => {
         const errors = {};
+        errors.timeList = ["", "", "", "", "", ""];
         if (!values.drugName) {
             errors.drugName = 'Required';
         }
@@ -200,16 +233,16 @@ export default withFormik({
             errors.dateTo = 'Required';
         }
         if (values.dateTo < values.dateFrom) {
-            errors.endDate = 'Ending date must be later than starting';
+            errors.endDate = 'Start date should not precede end date';
+        }
+        for (let i = 0; i < values.timeList.length; i++){
+            if (!values.timeList[i]){
+                errors.timeList[i] = 'Required';
+            }
         }
         return errors;
     },
-    handleSubmit: (values, { setSubmitting }) => {
-        setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-        }, 1000);
-    },
+    handleSubmit: () => {},
 })(FormikForms);
 
 // const formik = useFormik({

@@ -9,7 +9,8 @@ export function GenerateButton(props) {
     return (
         <Button id="genButton"
                 type="submit"
-                onClick={props.onClick}>
+                onClick={props.onClick}
+        >
             Generate
         </Button>
     );
