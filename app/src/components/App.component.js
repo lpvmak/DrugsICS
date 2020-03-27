@@ -63,17 +63,18 @@ export function App() {
         for (let button of formButtons){
             button.click();
         }
-        let readyToGenerate = true;
+        let readyToGenerate = false;
         for (let form of formValues.drugs){
             readyToGenerate = validForm(form);
+            if (!readyToGenerate){
+                return;
+            }
         }
-        if (readyToGenerate) {
-            EventPlanGenerator.createNewPlan(formValues);
-            let FileSaver = require('file-saver');
-            const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
-            FileSaver.saveAs(file);
-            //EventPlanGenerator.savePlanToFile('newPlan.ics');
-        }
+        EventPlanGenerator.createNewPlan(formValues);
+        let FileSaver = require('file-saver');
+        const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
+        FileSaver.saveAs(file);
+        //EventPlanGenerator.savePlanToFile('newPlan.ics');
     }
 
     /**
