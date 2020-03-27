@@ -86,10 +86,24 @@ export function App() {
         }))
     }
 
+    function handleDeleteForm(index){
+        setFormValues(formValues => ({
+            drugs: formValues.drugs.splice(index, 1),
+            numOfForms: (formValues.numOfForms -= 1)
+        }))
+    }
+
     /* Render current number of forms: */
     let forms = [];
     for (let i = 0; i < formValues.numOfForms; i++) {
-        forms.push(<Row key={i}><Col><Form onChange={handleFormChange} index={i} /></Col></Row>);
+        forms.push(
+            <Row key={i}>
+                <Col>
+                    <Form onChange={handleFormChange}
+                          onClickDelete={handleDeleteForm}
+                          index={i} />
+                </Col>
+            </Row>);
     }
 
     return (
@@ -105,7 +119,6 @@ export function App() {
                         <h1>Create your own medication regimen</h1>
                     </Col>
                 </Row>
-
                 {forms}
 
                 {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}

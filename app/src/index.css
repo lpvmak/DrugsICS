@@ -78,7 +78,7 @@ input[type="checkbox"]{
     left: -9999px;
 }
 
-.notification_checkbox:before {
+.notificationCheckbox:before {
     content: " ";
     display: inline-block;
     margin-right: 5px;
@@ -95,7 +95,7 @@ input[type="checkbox"]{
     border-radius: 7px;
 }
 
-input[type=checkbox]:checked + .notification_checkbox:before {
+input[type=checkbox]:checked + .notificationCheckbox:before {
     width: 25px;
     height: 25px;
     background-image: url(icons/selected.svg);
@@ -108,4 +108,34 @@ input[type=checkbox]:checked + .notification_checkbox:before {
 #longMessage {
     margin-top: -12px;
     margin-bottom: 7px;
+}
+
+.formHead {
+    display: block;
+}
+
+
+.deleteButton {
+    position: absolute;
+    left: -9999px;
+}
+
+.deleteButtonPlace{
+    float: right;
+}
+
+.deleteButtonPlace:before {
+    content: " ";
+    display: inline-block;
+    margin-right: 9px;
+    margin-top: 6px;
+    margin-bottom: 5px;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    background-image: url(icons/delete.svg);
+    background-color: transparent;
+    background-position: center;
+    vertical-align: middle;
+    border-radius: 7px;
 }

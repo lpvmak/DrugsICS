@@ -7,7 +7,7 @@ import {Form, Col, Row, FormGroup, Label, Input, FormText} from 'reactstrap';
 
 export function FormikForms(props) {
 
-    const { values, handleChange, onChange, touched, errors, handleSubmit} = props;
+    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete} = props;
     React.useEffect(() => {
         if (onChange) {
             onChange(props.index, values);
@@ -30,8 +30,11 @@ export function FormikForms(props) {
         return (
             <Col key={index} md={4}>
                 <FormGroup>
-                    <Input name={item} type="time" value={values.timeList[index]} onChange={handleChange} />
-                    {!!touched.timeList && !!errors.timeList && touched.timeList[index] && (values.timeList[index] == "") ?
+                    <Input name={item}
+                           type="time"
+                           value={values.timeList[index]}
+                           onChange={handleChange} />
+                    {!!touched.timeList && !!errors.timeList && touched.timeList[index] && (values.timeList[index] === "") ?
                         (
                             <FormText color="red">
                                 {errors.timeList[index]}
@@ -62,12 +65,39 @@ export function FormikForms(props) {
         statusSelect = {}
     }
 
+    /* Enable/disable delete form button: */
+    let statusDelete = {};
+    let deleteButtons;
+    if (props.index !== 0){
+        deleteButtons = (
+            <label className = "deleteButtonPlace"
+                   htmlFor = {"delete-button"+ (props.index + 1)}>
+            </label>
+        );
+        statusDelete = {};
+    }else {
+        deleteButtons = null;
+        statusDelete["disabled"] = "disabled";
+    }
+
     return (
         <Form id={"form"+(props.index + 1)}
               className="forms"
               onSubmit={handleSubmit}>
-            <div className = "formHead">
-            </div>
+            <Row>
+                <Col md={12}>
+                    <div className = "formHead">
+                        <button id = {"delete-button"+ (props.index + 1)}
+                                className="deleteButton"
+                                onClick={() => onClickDelete(props.index)}
+                                type="button"
+                                {...statusDelete}
+                        >
+                        </button>
+                        {deleteButtons}
+                    </div>
+                </Col>
+            </Row>
             <Row form>
                 <Col md={12}>
                     <FormGroup>
@@ -155,11 +185,14 @@ export function FormikForms(props) {
                     <FormGroup check>
                         <Input name = "notifications"
                                type="checkbox"
-                               id = {(props.index + 1) + "form-checkbox"}
+                               id = {"notification-checkbox" + (props.index + 1)}
                                onChange={handleChange}
                                value={values.notification}
                                />
-                        <label className = "notification_checkbox" htmlFor = {(props.index + 1) + "form-checkbox"}> </label>
+                        <label className = "notificationCheckbox"
+                               htmlFor = {"notification-checkbox" + (props.index + 1)}
+                        >
+                        </label>
                         <Label >Remind me:</Label>
                     </FormGroup>
                 </Col>
@@ -244,79 +277,6 @@ export default withFormik({
     },
     handleSubmit: () => {},
 })(FormikForms);
-
-// const formik = useFormik({
-//     initialValues: {
-//         drugName: '',
-//         startDate: null,
-//         endDate: null,
-//         freq: ''
-//     },
-//     validate,
-//     onSubmit: values => {
-//         alert(JSON.stringify(values, null, 2));
-//     },
-// });
-// return (
-//     <form onSubmit={formik.handleSubmit}>
-//         <label htmlFor="drugName">Name of drug</label>
-//         <input
-//             id="drugName"
-//             name="drugName"
-//             type="text"
-//             onChange={formik.handleChange}
-//             onBlur={formik.handleBlur}
-//             value={formik.values.drugName}
-//         />
-//         {formik.touched.drugName && formik.errors.drugName ? (
-//             <div>{formik.errors.drugName}</div>
-//         ) : null}
-//
-//         <br></br>
-//         <label htmlFor="startDate">Since</label>
-//         <input
-//             id="startDate"
-//             name="startDate"
-//             type="date"
-//             onChange={formik.handleChange}
-//             onBlur={formik.handleBlur}
-//             value={formik.values.startDate}
-//         />
-//         {formik.touched.startDate && formik.errors.startDate ? (
-//             <div>{formik.errors.startDate}</div>
-//         ) : null}
-//
-//         <label htmlFor="endDate">Till</label>
-//         <input
-//             id="endDate"
-//             name="endDate"
-//             type="date"
-//             onChange={formik.handleChange}
-//             onBlur={formik.handleBlur}
-//             value={formik.values.endDate}
-//         />
-//         {formik.touched.endDate && formik.errors.endDate ? (
-//             <div>{formik.errors.endDate}</div>
-//         ) : null}
-//
-//         <br></br>
-//         <label htmlFor="freq">Take per day</label>
-//         <input
-//             id="freq"
-//             name="freq"
-//             type="text"
-//             onChange={formik.handleChange}
-//             onBlur={formik.handleBlur}
-//             value={formik.values.email}
-//         />
-//         {formik.touched.freq && formik.errors.freq ? (
-//             <div>{formik.errors.freq}</div>
-//         ) : null}
-//         <br></br>
-//         <GenerateButton/>
-//     </form>
-// );
-
 
 Form.propTypes = {
     children: PropTypes.node,
