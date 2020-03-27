@@ -101,7 +101,9 @@ export function App() {
                 <Col>
                     <Form onChange={handleFormChange}
                           onClickDelete={handleDeleteForm}
-                          index={i} />
+                          index={i}
+                          numOfForms={formValues.numOfForms}
+                    />
                 </Col>
             </Row>);
     }

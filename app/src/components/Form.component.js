@@ -7,7 +7,7 @@ import {Form, Col, Row, FormGroup, Label, Input, FormText} from 'reactstrap';
 
 export function FormikForms(props) {
 
-    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete} = props;
+    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms} = props;
     React.useEffect(() => {
         if (onChange) {
             onChange(props.index, values);
@@ -68,7 +68,7 @@ export function FormikForms(props) {
     /* Enable/disable delete form button: */
     let statusDelete = {};
     let deleteButtons;
-    if (props.index !== 0){
+    if (numOfForms !== 1){
         deleteButtons = (
             <label className = "deleteButtonPlace"
                    htmlFor = {"delete-button"+ (props.index + 1)}>
