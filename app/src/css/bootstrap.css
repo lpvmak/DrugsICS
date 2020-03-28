@@ -292,6 +292,16 @@ input[type="month"] {
   -webkit-appearance: listbox;
 }
 
+input::-webkit-datetime-edit-day-field:focus,
+input::-webkit-datetime-edit-month-field:focus,
+input::-webkit-datetime-edit-year-field:focus,
+input::-webkit-datetime-edit-hour-field:focus,
+input::-webkit-datetime-edit-minute-field:focus{
+  background-color: #31CA9E;
+  color: white;
+  outline: none;
+}
+
 textarea {
   overflow: auto;
   resize: vertical;
