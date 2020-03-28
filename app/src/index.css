@@ -68,6 +68,10 @@
     color: #31CA9E;
 }
 
+#headerH1::selection {
+    color: white;
+}
+
 input[type="checkbox"]{
     position: absolute;
     left: -9999px;
