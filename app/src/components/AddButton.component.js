@@ -1,12 +1,17 @@
 import React from "react";
+import { Button } from 'reactstrap';
+
 /**
  * Add button React component
  * @param props - React properties for component
  */
+
+
 export function AddButton(props) {
     return (
-        <button className="addButton" onClick={props.onClick}>
+        <Button id="addButton"
+                onClick={props.onClick}>
             Add more
-        </button>
+        </Button>
     );
 }
