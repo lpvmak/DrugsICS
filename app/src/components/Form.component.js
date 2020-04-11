@@ -1,7 +1,7 @@
 import {withFormik} from "formik";
 import React from "react";
 import PropTypes from 'prop-types';
-import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText} from 'reactstrap';
+import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, Alert} from 'reactstrap';
 
 
 
@@ -54,7 +54,7 @@ export function Form(props) {
                 <Row form>{timeListTag.slice(0,3)}</Row>
                 <Row form>{timeListTag.slice(3,6)}</Row>
             </div>
-         );
+        );
     }
 
     /* Enable/disable select reminder time: */
@@ -85,11 +85,14 @@ export function Form(props) {
         <Row>
             <Col>
                 <FormStrap id={"form"+(keyValue + 1)}
-                      className="forms"
-                      onSubmit={handleSubmit}>
-                    <Row>
-                        <Col md={12}>
-                            <div className = "formHead">
+                           className="forms"
+                           onSubmit={handleSubmit}>
+                    <Row id = "formHead">
+                        <Col id="headColName" md="11">
+                            {values.drugName}
+                        </Col>
+                        <Col md="1">
+                            <div>
                                 <button id = {"delete-button"+ (keyValue + 1)}
                                         className="deleteButton"
                                         onClick={() => onClickDelete(keyValue)}
