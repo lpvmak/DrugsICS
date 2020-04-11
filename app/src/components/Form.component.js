@@ -88,20 +88,18 @@ export function Form(props) {
                            className="forms"
                            onSubmit={handleSubmit}>
                     <Row id = "formHead">
-                        <Col id="headColName" md="11">
+                        <Col id="headColName" md={11}>
                             {values.drugName}
                         </Col>
-                        <Col md="1">
-                            <div>
-                                <button id = {"delete-button"+ (keyValue + 1)}
-                                        className="deleteButton"
-                                        onClick={() => onClickDelete(keyValue)}
-                                        type="button"
-                                        {...statusDelete}
-                                >
-                                </button>
-                                {deleteButtons}
-                            </div>
+                        <Col id="headColButton" md={1}>
+                            <button id = {"delete-button"+ (keyValue + 1)}
+                                    className="deleteButton"
+                                    onClick={() => onClickDelete(keyValue)}
+                                    type="button"
+                                    {...statusDelete}
+                            >
+                            </button>
+                            {deleteButtons}
                         </Col>
                     </Row>
                     <Row form>
