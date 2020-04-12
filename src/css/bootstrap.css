@@ -2502,10 +2502,6 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   text-decoration: none;
 }
 
-.btn:focus, .btn.focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
 
 .btn.disabled, .btn:disabled {
   opacity: 0.65;
@@ -2570,9 +2566,6 @@ fieldset:disabled a.btn {
   border-color: #545b62;
 }
 
-.btn-secondary:focus, .btn-secondary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-}
 
 .btn-secondary.disabled, .btn-secondary:disabled {
   color: #fff;
