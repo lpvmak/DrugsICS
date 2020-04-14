@@ -20,9 +20,12 @@ const ModalWindow = (props) => {
             <Modal isOpen={modal} toggle={toggle}>
                 <Container id="modelContainer">
                     <Row id="modalHead">
-                        <Col md={5}/>
+                        <Col md={11}/>
                         <Col md={1}>
-                            <button>X</button>
+                            <button
+                                    className="deleteButton"
+                                    onClick={toggle}/>
+                            <label className = "deleteButtonPlace"/>
                         </Col>
                     </Row>
                 </Container>
