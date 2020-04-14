@@ -186,3 +186,19 @@ input[type=checkbox]:checked + .notificationCheckbox:before {
     margin-right: 5px;
     margin-top: 4px;
 }
+
+#modalHead{
+    padding-left: 12px;
+    height: 40px;
+    background: #31CA9E;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    margin-bottom: 4%;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#modelContainer{
+    padding-right: 0px;
+    padding-left: 0px;
+}
