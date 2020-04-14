@@ -9,7 +9,7 @@ pnp.js
 coverage
 
 # production
-/app/build
+build
 
 
 # misc
