@@ -193,7 +193,7 @@ input[type=checkbox]:checked + .notificationCheckbox:before {
     background: #31CA9E;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-    margin-bottom: 4%;
+    margin-bottom: 0px;
     margin-right: 0px;
     margin-left: 0px;
 }
@@ -201,4 +201,63 @@ input[type=checkbox]:checked + .notificationCheckbox:before {
 #modelContainer{
     padding-right: 0px;
     padding-left: 0px;
+}
+
+.closeModalPlace{
+    float: right;
+    content: " ";
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: relative;
+    width: 28px;
+    height: 28px;
+    background-image: url(icons/delete.svg);
+    background-color: transparent;
+    background-position: center;
+    vertical-align: middle;
+}
+
+.modal-body{
+    height: 111px;
+    font-family: 'Montserrat', sans-serif;;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 37px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+#deleteButton{
+    width: 228px;
+    height: 50px;
+    font-weight: 900;
+    color: #2A4153;
+    background: #FFFFFF;
+    border: 1px solid rgba(42, 65, 83, 0.5);
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin-bottom: 13%;
+    margin-left: 5%;
+}
+#cancelButton{
+    width: 228px;
+    height: 50px;
+    font-weight: 900;
+    color: #FFFFFF;
+    background: #31CA9E;
+    border: 1px solid #2A4153;
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin-bottom: 13%;
+    margin-right: 5%;
+}
+
+#buttonsModal{
+    display: flex;
+    justify-content: space-around;
 }
