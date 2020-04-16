@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { Container, Row, Col } from 'reactstrap';
+import TextFit from 'react-textfit'
 
 const ModalWindow = (props) => {
     const {
@@ -14,10 +15,11 @@ const ModalWindow = (props) => {
 
     const toggle = () => setModal(!modal);
 
+
     return (
         <div>
             <Button id = {idButton}  className={className} color="danger" onClick={toggle}>{buttonLabel}</Button>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={modal} toggle={toggle} centered={true}>
                 <Container id="modelContainer">
                     <Row id="modalHead">
                         <Col md={11}/>
@@ -32,18 +34,21 @@ const ModalWindow = (props) => {
                     </Row>
                     <Row>
                         <Col md={12}>
-                            <ModalBody>
-                                <div>Do you really want to delete it?</div>
-                            </ModalBody>
+                            <TextFit mode="single"
+                                     forceSingleModeWidth={true}
+                                     id="modalBody">
+                                Do you really want to delete it?
+                            </TextFit>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col md={12}
-                             id="buttonsModal">
+                    <Row id="rowButtonsModal">
+                        <Col id="colDeleteButton" md={6}>
                             <Button id="deleteButton"
                                     onClick={onClick}>
                                 Delete
                             </Button>
+                        </Col>
+                        <Col id="colCancelButton" md={6}>
                             <Button id="cancelButton"
                                     onClick={toggle}>
                                 Cancel

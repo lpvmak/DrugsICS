@@ -188,7 +188,6 @@ input[type=checkbox]:checked + .notificationCheckbox:before {
 }
 
 #modalHead{
-    padding-left: 12px;
     height: 40px;
     background: #31CA9E;
     border-top-left-radius: 7px;
@@ -209,6 +208,7 @@ input[type=checkbox]:checked + .notificationCheckbox:before {
     display: inline-block;
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-right: -5px;
     position: relative;
     width: 28px;
     height: 28px;
@@ -218,46 +218,54 @@ input[type=checkbox]:checked + .notificationCheckbox:before {
     vertical-align: middle;
 }
 
-.modal-body{
-    height: 111px;
-    font-family: 'Montserrat', sans-serif;;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 37px;
-    padding: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 32px;
+#modalBody{
+    padding-top: 10%;
+    padding-bottom: 7%;
+    padding-right: 10%;
+    padding-left: 10%;
 }
 
 #deleteButton{
-    width: 228px;
-    height: 50px;
+    width: 100%;
     font-weight: 900;
     color: #2A4153;
     background: #FFFFFF;
     border: 1px solid rgba(42, 65, 83, 0.5);
     box-sizing: border-box;
     border-radius: 7px;
-    margin-bottom: 13%;
-    margin-left: 5%;
+    padding: 0px;
 }
 #cancelButton{
-    width: 228px;
-    height: 50px;
+    width: 100%;
     font-weight: 900;
     color: #FFFFFF;
     background: #31CA9E;
     border: 1px solid #2A4153;
     box-sizing: border-box;
     border-radius: 7px;
-    margin-bottom: 13%;
-    margin-right: 5%;
+    padding: 0px;
 }
 
-#buttonsModal{
+#rowButtonsModal{
     display: flex;
     justify-content: space-around;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+}
+
+#colDeleteButton{
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+
+#colCancelButton{
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
 }

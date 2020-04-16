@@ -94,13 +94,6 @@ export function Form(props) {
                             {values.drugName}
                         </Col>
                         <Col id="headColButton" md={1}>
-                            {/*<button id = {"delete-button"+ (keyValue + 1)}*/}
-                            {/*        className="deleteButton"*/}
-                            {/*        onClick={() => onClickDelete(keyValue)}*/}
-                            {/*        type="button"*/}
-                            {/*        {...statusDelete}*/}
-                            {/*>*/}
-                            {/*</button>*/}
                             <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
                                          className="deleteButton"
                                          onClick={() => onClickDelete(keyValue)}
