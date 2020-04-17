@@ -13,6 +13,7 @@
 * [ics](https://www.npmjs.com/package/ics)
 * [formik](https://jaredpalmer.com/formik/docs/overview)
 * [FileSaver](https://www.npmjs.com/file-saver)
+* [React Fit text](https://www.npmjs.com/package/react-fittext)
 
 ## Инструкция по установке
 
@@ -26,7 +27,7 @@
 
 0. `npm start` - Запускаем локальный сервер. Откроется окно браузера с запущенным сервисом
 
-### Deploy
+### Деплой
 
 Используя `npm`
 
@@ -79,11 +80,12 @@
 
     git checkout -b features#0
     (do your work on "features#0")
+    gir add .
     git commit -m  "Implemented ... #0"
     git checkout develop
     git merge --no-ff features#0
     git branch -d features#0
-    git push origin develop
+    git push -u origin develop
 
 ## Стиль кодирования
 

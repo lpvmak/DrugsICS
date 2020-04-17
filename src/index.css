@@ -30,22 +30,63 @@
     margin-bottom: 10%;
 }
 
-#addButton:hover, #genButton:hover{
+#addButton:hover, #genButton:hover, #deleteButton:hover, #cancelButton:hover{
     box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.25);
 }
 
-#genButton:focus, #addButton:focus{
+#genButton:focus, #addButton:focus, #deleteButton:focus, #cancelButton:focus{
     outline: none;
 }
 
-#genButton:active , #addButton:active{
+#genButton:active , #addButton:active, #deleteButton:active, #cancelButton:active{
     box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);
 }
 
 
-.forms{
-    background: #FFFFFF;
-    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+html {
+    overflow-y: scroll;
+}
+
+
+/*@media screen and (min-width: 960px) {*/
+/*    html {*/
+/*        margin-left: calc(100vw - 100%);*/
+/*        margin-right: 0;*/
+/*    }*/
+/*}*/
+
+
+
+@media (max-width: 400px) {
+    .col{
+        flex-basis: unset;
+    }
+
+    #genButton, #addButton
+    {
+        margin-top: 3px;
+        margin-bottom: 10px;
+    }
+}
+
+.modal-open {
+    padding-right: 0px !important;
+}
+
+@media (min-width: 401px) {
+    .col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+}
+
+    .forms{
+        background: #FFFFFF;
+        /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
 
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
     border-radius: 7px;
@@ -166,23 +207,103 @@ input[type=checkbox]:checked + .notificationCheckbox:before {
     float: right;
     content: " ";
     display: inline-block;
-    margin-right: 8px;
-    margin-top: 5px;
+    margin-right: 5px;
+    margin-top: 4px;
     margin-bottom: 5px;
     position: relative;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
+    background-image: url(icons/delete.svg);
+    background-color: transparent;
+    background-position: center;
+    vertical-align: middle;
+    border-radius: 7px;
+}
+
+.deleteButtonPlace:hover, .closeModalPlace:hover {
+    background-image: url(icons/delete_active.svg);
+}
+
+
+#modalHead{
+    height: 40px;
+    background: #31CA9E;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#modelContainer{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.closeModalPlace{
+    float: right;
+    content: " ";
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: -5px;
+    position: relative;
+    width: 32px;
+    height: 32px;
     background-image: url(icons/delete.svg);
     background-color: transparent;
     background-position: center;
     vertical-align: middle;
 }
 
-.deleteButtonPlace:hover {
-    background-image: url(icons/delete_active.svg);
-    width: 32px;
-    height: 32px;
+#modalBody{
+    padding-top: 10%;
+    padding-bottom: 7%;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+#deleteButton{
+    width: 100%;
+    font-weight: 900;
+    color: #2A4153;
+    background: #FFFFFF;
+    border: 1px solid rgba(42, 65, 83, 0.5);
+    box-sizing: border-box;
     border-radius: 7px;
-    margin-right: 5px;
-    margin-top: 4px;
+    padding: 0px;
+}
+#cancelButton{
+    width: 100%;
+    font-weight: 900;
+    color: #FFFFFF;
+    background: #31CA9E;
+    border: 1px solid #2A4153;
+    box-sizing: border-box;
+    border-radius: 7px;
+    padding: 0px;
+}
+
+#rowButtonsModal{
+    display: flex;
+    justify-content: space-around;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+}
+
+#colDeleteButton{
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+
+#colCancelButton{
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
 }

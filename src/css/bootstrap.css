@@ -645,14 +645,14 @@ pre code {
   padding-left: 15px;
 }
 
-.col {
-  -ms-flex-preferred-size: 0;
-  flex-basis: 0;
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  max-width: 100%;
-}
+/*.col {*/
+/*  -ms-flex-preferred-size: 0;*/
+/*  flex-basis: 0;*/
+/*  -webkit-box-flex: 1;*/
+/*  -ms-flex-positive: 1;*/
+/*  flex-grow: 1;*/
+/*  max-width: 100%;*/
+/*}*/
 
 .col-auto {
   -webkit-box-flex: 0;
@@ -5474,8 +5474,7 @@ button.close {
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem;
+  border-radius: 7px;
   outline: 0;
 }
 

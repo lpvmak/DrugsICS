@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "MedSched",
+  "name": "MedSched. Create your own medication regimen",
   "icons": [
     {
       "src": "favicon.ico",

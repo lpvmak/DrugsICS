@@ -17,7 +17,6 @@ export function App() {
         numOfForms: 1
     });
 
-    document.title = "MedSched online";
 
     /**
      * Handler for the form onChange

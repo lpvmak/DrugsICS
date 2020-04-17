@@ -1,13 +1,16 @@
 import {withFormik} from "formik";
-import React from "react";
+import ReactDOM from 'react-dom';
+import React, {useRef} from "react";
 import PropTypes from 'prop-types';
 import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, Alert} from 'reactstrap';
+import ModalWindow from "./ModalWindow.component";
 
 
 
 export function Form(props) {
     const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue} = props;
 
+    let nameRef = useRef();
     React.useEffect(() => {
         if (onChange) {
             onChange(keyValue, values);
@@ -80,9 +83,8 @@ export function Form(props) {
         statusDelete["disabled"] = "disabled";
     }
 
-
     return (
-        <Row>
+        <Row ref = {nameRef}>
             <Col>
                 <FormStrap id={"form"+(keyValue + 1)}
                            className="forms"
@@ -92,13 +94,11 @@ export function Form(props) {
                             {values.drugName}
                         </Col>
                         <Col id="headColButton" md={1}>
-                            <button id = {"delete-button"+ (keyValue + 1)}
-                                    className="deleteButton"
-                                    onClick={() => onClickDelete(keyValue)}
-                                    type="button"
-                                    {...statusDelete}
-                            >
-                            </button>
+                            <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
+                                         className="deleteButton"
+                                         onClick={() => onClickDelete(keyValue)}
+                                         buttonLabel="delete"
+                                         />
                             {deleteButtons}
                         </Col>
                     </Row>
