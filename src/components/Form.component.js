@@ -121,7 +121,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Date from </Label>
+                                <Label>Start date </Label>
                                 <Input name="dateFrom"
                                        type="date"
                                        onChange={handleChange}
@@ -137,7 +137,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Date to </Label>
+                                <Label>End date </Label>
                                 <Input name="dateTo"
                                        type="date"
                                        onChange={handleChange}
@@ -206,12 +206,12 @@ export function Form(props) {
                                    onChange={handleChange}
                                    value={values.remindTime}
                                    {...statusSelect}>
-                                <option value={0}>at the moment</option>
-                                <option value={5}>in 5 minutes</option>
-                                <option value={10}>in 10 minutes</option>
-                                <option value={15}>in 15 minutes</option>
-                                <option value={30}>in half-hour</option>
-                                <option value={60}>in 1 hour</option>
+                                <option value={0}>on time</option>
+                                <option value={5}>5 minutes before</option>
+                                <option value={10}>10 minutes before</option>
+                                <option value={15}>15 minutes before</option>
+                                <option value={30}>half-hour before</option>
+                                <option value={60}>one hour before</option>
                             </Input>
                         </Col>
                         <Col md={4}>
@@ -221,7 +221,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>Special instructions:</Label>
+                                <Label>Directions for use:</Label>
                                 <Input type="textarea"
                                        name="description"
                                        onChange={handleChange}
