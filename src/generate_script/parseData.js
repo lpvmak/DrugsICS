@@ -10,6 +10,7 @@ const ADDITIONAL_DATA = 'description';
 const NOTIFY_B = 'notifications';
 const REMIND_BEFORE = 'remindTime';
 
+const RRULE = 'FREQ=DAILY;INTERVAL=1;COUNT='
 const EVENT_LEN_MINS = 60;
 
 
@@ -23,6 +24,10 @@ function parseDrug(drugJson) {
     let drugName = drugJson[DRUG_TITLE];
     let dateFrom = new Date(drugJson[DATE_FROM]);
     let dateTo = new Date(drugJson[DATE_TO]);
+
+    let diffTime = Math.abs(dateFrom - dateTo);
+    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
     let takeTimeList = drugJson[TIME_LIST];
     let notificationNeeded = drugJson[NOTIFY_B];
     let notifyBefore = 0;
@@ -32,50 +37,46 @@ function parseDrug(drugJson) {
     }
 
     let eventList = [];
-    let loop = new Date(dateFrom);
-    // Iterating through the days:
-    while(loop <= dateTo) {
-        // Iterating through take timestamps:
-        for (let takeT of takeTimeList) {
-            let takeTime = takeT.split(':');
+    // Iterating through take timestamps:
+    for (let takeT of takeTimeList) {
+        let takeTime = takeT.split(':');
 
-            let intakeFullDate = new Date(loop);
-            intakeFullDate.setHours(parseInt(takeTime[0]));
-            intakeFullDate.setMinutes(parseInt(takeTime[1]));
-            let endFullDate = new Date(intakeFullDate);
-            endFullDate.setMinutes(parseInt(takeTime[1]) + EVENT_LEN_MINS);
-            
-            let event;
-            if (notificationNeeded) {
-                //Creating an event with notifications
-                let alarms = [];
-                alarms.push({
-                    action: 'audio',
-                    trigger: {minutes: notifyBefore, before:true}
-                });
-                event = {
-                    title: drugName,
-                    start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
-                    end: [endFullDate.getFullYear(), endFullDate.getMonth() + 1, endFullDate.getDate(), endFullDate.getHours(), endFullDate.getMinutes()],
-                    description: drugJson[ADDITIONAL_DATA],
-                    status: 'CONFIRMED',
-                    alarms: alarms
-                };
-            }
-            else {
-                // Creating an event without notifications
-                event = {
-                    title: drugName,
-                    start: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
-                    end: [loop.getFullYear(), loop.getMonth() + 1, loop.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1]) + EVENT_LEN_MINS],
-                    description: drugJson[ADDITIONAL_DATA],
-                    status: 'CONFIRMED'
-                };
-            }
-            eventList.push(event);
+        let intakeFullDate = new Date(dateFrom);
+        intakeFullDate.setHours(parseInt(takeTime[0]));
+        intakeFullDate.setMinutes(parseInt(takeTime[1]));
+        let endFullDate = new Date(intakeFullDate);
+        endFullDate.setMinutes(parseInt(takeTime[1]) + EVENT_LEN_MINS);
+
+        let event;
+        if (notificationNeeded) {
+            //Creating an event with notifications
+            let alarms = [];
+            alarms.push({
+                action: 'audio',
+                trigger: {minutes: notifyBefore, before:true}
+            });
+            event = {
+                title: drugName,
+                start: [dateFrom.getFullYear(), dateFrom.getMonth() + 1, dateFrom.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
+                end: [endFullDate.getFullYear(), endFullDate.getMonth() + 1, endFullDate.getDate(), endFullDate.getHours(), endFullDate.getMinutes()],
+                description: drugJson[ADDITIONAL_DATA],
+                status: 'CONFIRMED',
+                recurrenceRule: RRULE + String(diffDays),
+                alarms: alarms
+            };
         }
-        let newDate = loop.setDate(loop.getDate() + 1);
-        loop = new Date(newDate);
+        else {
+            // Creating an event without notifications
+            event = {
+                title: drugName,
+                start: [dateFrom.getFullYear(), dateFrom.getMonth() + 1, dateFrom.getDate(), parseInt(takeTime[0]), parseInt(takeTime[1])],
+                end: [endFullDate.getFullYear(), endFullDate.getMonth() + 1, endFullDate.getDate(), endFullDate.getHours(), endFullDate.getMinutes()],
+                description: drugJson[ADDITIONAL_DATA],
+                recurrenceRule: RRULE + String(diffDays),
+                status: 'CONFIRMED'
+            };
+        }
+        eventList.push(event);
     }
     return eventList;
 }
