@@ -2,7 +2,7 @@ import {withFormik} from "formik";
 import ReactDOM from 'react-dom';
 import React, {useRef} from "react";
 import PropTypes from 'prop-types';
-import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, Alert} from 'reactstrap';
+import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, CustomInput} from 'reactstrap';
 import ModalWindow from "./ModalWindow.component";
 
 
@@ -154,18 +154,23 @@ export function Form(props) {
                         <Col md={4}>
                             <FormGroup>
                                 <Label>Frequency </Label>
-                                <Input type="select"
-                                       name="dosage"
+                                <Input name="dosage"
                                        onChange={handleChange}
-                                       value={values.dosage}>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                </Input>
+                                       value={values.dosage}
+                                />
                             </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row form>
+                        <Col md = {12}>
+                            <CustomInput type="range"
+                                         id="CustomRange"
+                                         name="dosage"
+                                         onChange={handleChange}
+                                         value={values.dosage}
+                                         min={1}
+                                         max={12}
+                            />
                         </Col>
                     </Row>
                     <Row form>
