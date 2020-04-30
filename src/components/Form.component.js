@@ -73,7 +73,7 @@ export function Form(props) {
     let deleteButtons;
     if (numOfForms !== 1){
         deleteButtons = (
-            <label className = "deleteButtonPlace"
+            <label className = "delete-button__place"
                    htmlFor = {"delete-button"+ (keyValue + 1)}>
             </label>
         );
@@ -87,15 +87,15 @@ export function Form(props) {
         <Row ref = {nameRef}>
             <Col>
                 <FormStrap id={"form"+(keyValue + 1)}
-                           className="forms"
+                           className="med-form"
                            onSubmit={handleSubmit}>
-                    <Row id = "formHead">
-                        <Col id="headColName" md={11}>
+                    <Row id = "med-form__head">
+                        <Col id="med-form__head__name" md={11}>
                             {values.drugName}
                         </Col>
-                        <Col id="headColButton" md={1}>
+                        <Col id="med-form__head__delete-button" md={1}>
                             <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
-                                         className="deleteButton"
+                                         className="delete-button"
                                          onClick={() => onClickDelete(keyValue)}
                                          buttonLabel="delete"
                                          />
@@ -172,7 +172,7 @@ export function Form(props) {
                         <Col md={12}>
                             {touched.dateTo && touched.dateFrom && !errors.dateFrom && !errors.dateTo && errors.endDate ?
                                 (
-                                    <FormText id="longMessage" color="red">
+                                    <FormText id="med-form__err-message--long" color="red">
                                         {errors.endDate}
                                     </FormText>
                                 ) : null}
@@ -193,7 +193,7 @@ export function Form(props) {
                                        onChange={handleChange}
                                        value={values.notification}
                                 />
-                                <label className = "notificationCheckbox"
+                                <label className = "med-form__notification-checkbox"
                                        htmlFor = {"notification-checkbox" + (keyValue + 1)}
                                 >
                                 </label>
@@ -215,7 +215,7 @@ export function Form(props) {
                             </Input>
                         </Col>
                         <Col md={4}>
-                            <button className="formSubmit" type="submit"></button>
+                            <button className="med-form__submit" type="submit"></button>
                         </Col>
                     </Row>
                     <Row form>

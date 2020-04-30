@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+@import 'modal.css';
+@import 'form.css';
+@import 'top.css';
+@import 'bottom-buttons.css';
+@import 'main-container.css';
+
+
+html {
+    overflow-y: scroll;
+}
+
+
+/*@media screen and (min-width: 960px) {*/
+/*    html {*/
+/*        margin-left: calc(100vw - 100%);*/
+/*        margin-right: 0;*/
+/*    }*/
+/*}*/
+
+
+
+@media (min-width: 401px) {
+    .col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+}
+
+
+
+
+

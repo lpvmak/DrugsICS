@@ -1,0 +1,21 @@
+
+.header{
+    width: 100%;
+    height: 110px;
+    background: #FFFFFF;
+    padding-left: 5%;
+    padding-top: 25px;
+    margin-bottom: 10px;
+}
+
+#header__text{
+    /*margin-left: 5%;*/
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    color: #31CA9E;
+}
+
+#header__text::selection {
+    color: white;
+}
