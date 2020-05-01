@@ -76,7 +76,7 @@ export function App() {
      */
     function handleSubmit() {
         /* Click all submit buttons for validaton: */
-        let formButtons = document.getElementsByClassName('formSubmit');
+        let formButtons = document.getElementsByClassName('med-form__submit');
         for (let button of formButtons){
             button.click();
         }
@@ -142,8 +142,8 @@ export function App() {
     return (
         <div>
 
-            <div id="header">
-                <h1 id="headerH1">MedSched</h1>
+            <div className="header">
+                <h1 id="header__text">MedSched</h1>
             </div>
 
             <Container >

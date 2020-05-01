@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+@import "bootstrap.css";
+@import 'modal.css';
+@import 'form.css';
+@import 'top.css';
+@import 'bottom-buttons.css';
+@import 'main-container.css';
+
+html {
+    overflow-y: scroll;
+}
+
+::selection{
+    background: #31CA9E;
+}

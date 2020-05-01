@@ -1,0 +1,60 @@
+#add-button{
+    font-weight: 900;
+    color: #2A4153;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid rgba(42, 65, 83, 0.5);
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin-top: 6%;
+    margin-bottom: 10%;
+}
+
+#gen-button{
+    font-weight: 900;
+    color: #FFFFFF;
+    width: 100%;
+    background: #31CA9E;
+    border: 1px solid #2A4153;
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin-top: 6%;
+    margin-bottom: 10%;
+}
+
+#add-button:hover, #gen-button:hover {
+    box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.25);
+}
+
+#gen-button:focus, #add-button:focus {
+    outline: none;
+}
+
+#gen-button:active , #add-button:active {
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);
+}
+
+
+@media (max-width: 400px) {
+    .col{
+        flex-basis: unset;
+    }
+
+    #gen-button, #add-button
+    {
+        margin-top: 3px;
+        margin-bottom: 10px;
+    }
+}
+
+/*for main buttons in one row when mobile version */
+@media (min-width: 401px) {
+    .col {
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+}

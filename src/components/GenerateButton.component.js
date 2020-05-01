@@ -7,7 +7,7 @@ import { Button } from 'reactstrap';
  */
 export function GenerateButton(props) {
     return (
-        <Button id="genButton"
+        <Button id="gen-button"
                 type="submit"
                 onClick={props.onClick}
         >
