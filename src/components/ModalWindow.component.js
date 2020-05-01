@@ -8,7 +8,8 @@ const ModalWindow = (props) => {
         buttonLabel,
         className,
         idButton,
-        onClick
+        onClick,
+        lang
     } = props;
 
     const [modal, setModal] = useState(false);
@@ -37,7 +38,7 @@ const ModalWindow = (props) => {
                             <TextFit mode="single"
                                      forceSingleModeWidth={true}
                                      id="modal-body">
-                                Do you really want to delete it?
+                                {lang.confirmDelete}
                             </TextFit>
                         </Col>
                     </Row>
@@ -45,13 +46,13 @@ const ModalWindow = (props) => {
                         <Col id="modal-delete" md={6}>
                             <Button id="modal-delete__button"
                                     onClick={onClick}>
-                                Delete
+                                {lang.delete}
                             </Button>
                         </Col>
                         <Col id="modal-cancel" md={6}>
                             <Button id="modal-cancel__button"
                                     onClick={toggle}>
-                                Cancel
+                                {lang.cancel}
                             </Button>
                         </Col>
                     </Row>

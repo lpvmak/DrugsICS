@@ -6,6 +6,12 @@ import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
 import { Container, Row, Col } from 'reactstrap';
 
 
+
+let eng = JSON.parse(JSON.stringify(require('../language/eng.json')));
+let rus = JSON.parse(JSON.stringify(require('../language/rus.json')));
+
+let curLang = rus;
+
 /**
  * Initialisation of main component of React application
  */
@@ -135,21 +141,23 @@ export function App() {
                   key={formValues.drugs[i].id}
                   numOfForms={formValues.numOfForms}
                   values = {formValues.drugs[i]}
+                  lang = {curLang}
             />
         );
     }
+
 
     return (
         <div>
 
             <div className="header">
-                <h1 id="header__text">MedSched</h1>
+                <h1 id="header__text">{curLang.siteName}</h1>
             </div>
 
             <Container >
                 <Row>
                     <Col md={12}>
-                        <h1>Create your own medication regimen</h1>
+                        <h1>{curLang.slogan}</h1>
                     </Col>
                 </Row>
                 {forms}
@@ -157,10 +165,14 @@ export function App() {
                 {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
                 <Row>
                     <Col>
-                        <AddButton onClick = {handleAddMore}/>
+                        <AddButton onClick = {handleAddMore}
+                                   name = {curLang.addMore}
+                        />
                     </Col>
                     <Col>
-                        <GenerateButton onClick = {handleSubmit}/>
+                        <GenerateButton onClick = {handleSubmit}
+                                        name = {curLang.download}
+                        />
                     </Col>
                 </Row>
 

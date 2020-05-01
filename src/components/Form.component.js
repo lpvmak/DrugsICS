@@ -8,7 +8,7 @@ import ModalWindow from "./ModalWindow.component";
 
 
 export function Form(props) {
-    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue} = props;
+    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue, lang} = props;
 
     let nameRef = useRef();
     React.useEffect(() => {
@@ -98,6 +98,7 @@ export function Form(props) {
                                          className="delete-button"
                                          onClick={() => onClickDelete(keyValue)}
                                          buttonLabel="delete"
+                                         lang = {lang}
                                          />
                             {deleteButtons}
                         </Col>
@@ -105,7 +106,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>Medication name </Label>
+                                <Label> {lang.medName}</Label>
                                 <Input name="drugName"
                                        value={values.drugName}
                                        onChange={handleChange} />
@@ -121,7 +122,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Start date </Label>
+                                <Label>{lang.startDate} </Label>
                                 <Input name="dateFrom"
                                        type="date"
                                        onChange={handleChange}
@@ -137,7 +138,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>End date </Label>
+                                <Label>{lang.endDate} </Label>
                                 <Input name="dateTo"
                                        type="date"
                                        onChange={handleChange}
@@ -153,7 +154,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Frequency </Label>
+                                <Label>{lang.freq} </Label>
                                 <Input type="select"
                                        name="dosage"
                                        onChange={handleChange}
@@ -180,7 +181,7 @@ export function Form(props) {
                     </Row>
                     <Row form>
                         <Col md={12}>
-                            <Label>Times taken</Label>
+                            <Label>{lang.timesTaken}</Label>
                         </Col>
                     </Row>
                     {layoutTimeListTag}
@@ -197,7 +198,7 @@ export function Form(props) {
                                        htmlFor = {"notification-checkbox" + (keyValue + 1)}
                                 >
                                 </label>
-                                <Label >Remind me:</Label>
+                                <Label >{lang.remind}</Label>
                             </FormGroup>
                         </Col>
                         <Col md={4}>
@@ -206,12 +207,12 @@ export function Form(props) {
                                    onChange={handleChange}
                                    value={values.remindTime}
                                    {...statusSelect}>
-                                <option value={0}>on time</option>
-                                <option value={5}>5 minutes before</option>
-                                <option value={10}>10 minutes before</option>
-                                <option value={15}>15 minutes before</option>
-                                <option value={30}>half-hour before</option>
-                                <option value={60}>one hour before</option>
+                                <option value={0}>{lang.onTime}</option>
+                                <option value={5}>{lang.minBefore5}</option>
+                                <option value={10}>{lang.minBefore10}</option>
+                                <option value={15}>{lang.minBefore15}</option>
+                                <option value={30}>{lang.minBefore30}</option>
+                                <option value={60}>{lang.minBefore60}</option>
                             </Input>
                         </Col>
                         <Col md={4}>
@@ -221,7 +222,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>Directions for use:</Label>
+                                <Label>{lang.comment}:</Label>
                                 <Input type="textarea"
                                        name="description"
                                        onChange={handleChange}
@@ -259,24 +260,25 @@ export default withFormik({
 
         };
     },
-    validate: values => {
+    validate: (values, prop) => {
         const errors = {};
         errors.timeList = ["", "", "", "", "", ""];
+        let req = prop.lang.required;
         if (!values.drugName) {
-            errors.drugName = 'Required';
+            errors.drugName = req;
         }
         if (!values.dateFrom) {
-            errors.dateFrom = 'Required';
+            errors.dateFrom = req;
         }
         if (!values.dateTo) {
-            errors.dateTo = 'Required';
+            errors.dateTo = req;
         }
         if (values.dateTo < values.dateFrom) {
             errors.endDate = 'Start date should not precede end date';
         }
         for (let i = 0; i < values.timeList.length; i++){
             if (!values.timeList[i]){
-                errors.timeList[i] = 'Required';
+                errors.timeList[i] = req;
             }
         }
         return errors;

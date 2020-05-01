@@ -11,7 +11,7 @@ export function GenerateButton(props) {
                 type="submit"
                 onClick={props.onClick}
         >
-            Generate
+            {props.name}
         </Button>
     );
 }
