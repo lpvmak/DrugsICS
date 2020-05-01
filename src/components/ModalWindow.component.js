@@ -20,36 +20,36 @@ const ModalWindow = (props) => {
         <div>
             <Button id = {idButton}  className={className} color="danger" onClick={toggle}>{buttonLabel}</Button>
             <Modal isOpen={modal} toggle={toggle} centered={true}>
-                <Container id="modelContainer">
-                    <Row id="modalHead">
+                <Container id="modal-container">
+                    <Row id="modal-head">
                         <Col md={11}/>
                         <Col md={1}>
                             <button
-                                    id="closeWindow"
-                                    className="deleteButton"
+                                    id="close-window"
+                                    className="delete-button"
                                     onClick={toggle}/>
-                            <label className = "closeModalPlace"
-                                    htmlFor="closeWindow"/>
+                            <label className = "modal-close__place"
+                                    htmlFor="close-window"/>
                         </Col>
                     </Row>
                     <Row>
                         <Col md={12}>
                             <TextFit mode="single"
                                      forceSingleModeWidth={true}
-                                     id="modalBody">
+                                     id="modal-body">
                                 Do you really want to delete it?
                             </TextFit>
                         </Col>
                     </Row>
-                    <Row id="rowButtonsModal">
-                        <Col id="colDeleteButton" md={6}>
-                            <Button id="deleteButton"
+                    <Row id="modal__buttons">
+                        <Col id="modal-delete" md={6}>
+                            <Button id="modal-delete__button"
                                     onClick={onClick}>
                                 Delete
                             </Button>
                         </Col>
-                        <Col id="colCancelButton" md={6}>
-                            <Button id="cancelButton"
+                        <Col id="modal-cancel" md={6}>
+                            <Button id="modal-cancel__button"
                                     onClick={toggle}>
                                 Cancel
                             </Button>

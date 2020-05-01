@@ -1,0 +1,103 @@
+.modal-open {
+    padding-right: 0px !important;
+}
+
+#modal-head{
+    height: 40px;
+    background: #31CA9E;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#modal-container{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.modal-close__place{
+    float: right;
+    content: " ";
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: -5px;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    background-image: url(../icons/delete.svg);
+    background-color: transparent;
+    background-position: center;
+    vertical-align: middle;
+}
+
+.modal-close__place:hover {
+    background-image: url(../icons/delete_active.svg);
+}
+
+#modal-body{
+    padding-top: 10%;
+    padding-bottom: 7%;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+#modal-delete__button{
+    width: 100%;
+    font-weight: 900;
+    color: #2A4153;
+    background: #FFFFFF;
+    border: 1px solid rgba(42, 65, 83, 0.5);
+    box-sizing: border-box;
+    border-radius: 7px;
+    padding: 0px;
+}
+
+#modal-cancel__button{
+    width: 100%;
+    font-weight: 900;
+    color: #FFFFFF;
+    background: #31CA9E;
+    border: 1px solid #2A4153;
+    box-sizing: border-box;
+    border-radius: 7px;
+    padding: 0px;
+}
+
+#modal__buttons{
+    display: flex;
+    justify-content: space-around;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+}
+
+#modal-delete{
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+
+#modal-cancel{
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+
+#modal-delete__button:active, #modal-cancel__button:active{
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);
+}
+
+#modal-delete__button:focus, #modal-cancel__button:focus{
+    outline: none;
+}
+
+#modal-delete__button:hover, #modal-cancel__button:hover{
+    box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.25);
+}
