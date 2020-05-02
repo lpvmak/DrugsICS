@@ -215,13 +215,6 @@ export function Form(props) {
                                 <Option value = {15} tid="minBefore15"/>
                                 <Option value = {30} tid="minBefore30"/>
                                 <Option value = {60} tid="minBefore60"/>
-
-                                {/*<option value={0}> <Text tid="onTime"/> </option>*/}
-                                {/*<option value={5}><Text tid="minBefore5" /></option>*/}
-                                {/*<option value={10}><Text tid="minBefore10" /></option>*/}
-                                {/*<option value={15}><Text tid="minBefore15" /></option>*/}
-                                {/*<option value={30}><Text tid="minBefore30" /></option>*/}
-                                {/*<option value={60}><Text tid="minBefore60" /></option>*/}
                             </Input>
                         </Col>
                         <Col md={4}>

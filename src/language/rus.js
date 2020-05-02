@@ -1,5 +1,3 @@
-import eng from "./eng";
-
 const rus = {
     siteName: "MedSched",
     slogan: "Создай свой план приёма таблеток!",
