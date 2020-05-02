@@ -1,8 +1,7 @@
 import {withFormik} from "formik";
-import ReactDOM from 'react-dom';
 import React, {useRef} from "react";
 import PropTypes from 'prop-types';
-import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, Alert} from 'reactstrap';
+import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, CustomInput} from 'reactstrap';
 import ModalWindow from "./ModalWindow.component";
 import {Option, Text} from "../containers/Language";
 
@@ -48,17 +47,10 @@ export function Form(props) {
             </Col>
         )
     });
-    let layoutTimeListTag = null;
-    if (values.dosage <= 3){
-        layoutTimeListTag = <Row form>{timeListTag.slice(0,3)}</Row>;
-    }
-    else{
-        layoutTimeListTag = (
-            <div>
-                <Row form>{timeListTag.slice(0,3)}</Row>
-                <Row form>{timeListTag.slice(3,6)}</Row>
-            </div>
-        );
+
+    let layoutTimeListTag = [];
+    for (let i = 0; i < values.dosage; i+=3){
+        layoutTimeListTag.push(<Row form>{timeListTag.slice(i,i+3)}</Row>)
     }
 
     /* Enable/disable select reminder time: */
@@ -78,7 +70,6 @@ export function Form(props) {
                    htmlFor = {"delete-button"+ (keyValue + 1)}>
             </label>
         );
-        statusDelete = {};
     }else {
         deleteButtons = null;
         statusDelete["disabled"] = "disabled";
@@ -156,18 +147,23 @@ export function Form(props) {
                         <Col md={4}>
                             <FormGroup>
                                 <Label><Text tid="freq" /> </Label>
-                                <Input type="select"
-                                       name="dosage"
-                                       onChange={handleChange}
-                                       value={values.dosage}>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                </Input>
+                                <Input name="dosage"
+                                       type="number"
+                                       value={values.dosage}
+                                       disabled
+                                />
                             </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row form>
+                        <Col md = {12}>
+                            <CustomInput type="range"
+                                         name="dosage"
+                                         onChange={handleChange}
+                                         value={values.dosage}
+                                         min={1}
+                                         max={12}
+                            />
                         </Col>
                     </Row>
                     <Row form>
@@ -218,7 +214,7 @@ export function Form(props) {
                             </Input>
                         </Col>
                         <Col md={4}>
-                            <button className="med-form__submit" type="submit"></button>
+                            <button className="med-form__submit" type="submit"/>
                         </Col>
                     </Row>
                     <Row form>
