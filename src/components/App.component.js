@@ -36,7 +36,7 @@ export function App() {
         let newDosage = values.dosage;
         if (newDosage !== formValues.drugs[arrIndex].dosage){
             values.timeList = [];
-            let startHour = 8;
+            let startHour = 0;
             let interval = Math.ceil(24 / newDosage);
             for (let i = 0; i < newDosage; i++, startHour+=interval) {
                 let curHour = startHour % 24;

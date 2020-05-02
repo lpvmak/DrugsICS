@@ -47,17 +47,10 @@ export function Form(props) {
             </Col>
         )
     });
-    let layoutTimeListTag = null;
-    if (values.dosage <= 3){
-        layoutTimeListTag = <Row form>{timeListTag.slice(0,3)}</Row>;
-    }
-    else{
-        layoutTimeListTag = (
-            <div>
-                <Row form>{timeListTag.slice(0,3)}</Row>
-                <Row form>{timeListTag.slice(3,6)}</Row>
-            </div>
-        );
+
+    let layoutTimeListTag = [];
+    for (let i = 0; i < values.dosage; i+=3){
+        layoutTimeListTag.push(<Row form>{timeListTag.slice(i,i+3)}</Row>)
     }
 
     /* Enable/disable select reminder time: */
@@ -155,8 +148,11 @@ export function Form(props) {
                             <FormGroup>
                                 <Label>Frequency </Label>
                                 <Input name="dosage"
-                                       onChange={handleChange}
+                                       type="number"
                                        value={values.dosage}
+                                       min="1"
+                                       max="12"
+                                       disabled
                                 />
                             </FormGroup>
                         </Col>
