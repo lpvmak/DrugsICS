@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import { Container, Row, Col } from 'reactstrap';
 import TextFit from 'react-textfit'
+import {Text} from "../containers/Language";
 
 const ModalWindow = (props) => {
     const {
@@ -9,7 +10,6 @@ const ModalWindow = (props) => {
         className,
         idButton,
         onClick,
-        lang
     } = props;
 
     const [modal, setModal] = useState(false);
@@ -38,7 +38,7 @@ const ModalWindow = (props) => {
                             <TextFit mode="single"
                                      forceSingleModeWidth={true}
                                      id="modal-body">
-                                {lang.confirmDelete}
+                                <Text tid="confirmDelete" />
                             </TextFit>
                         </Col>
                     </Row>
@@ -46,13 +46,13 @@ const ModalWindow = (props) => {
                         <Col id="modal-delete" md={6}>
                             <Button id="modal-delete__button"
                                     onClick={onClick}>
-                                {lang.delete}
+                                <Text tid="delete" />
                             </Button>
                         </Col>
                         <Col id="modal-cancel" md={6}>
                             <Button id="modal-cancel__button"
                                     onClick={toggle}>
-                                {lang.cancel}
+                                <Text tid="cancel" />
                             </Button>
                         </Col>
                     </Row>

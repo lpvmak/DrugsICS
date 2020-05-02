@@ -4,11 +4,12 @@ import React, {useRef} from "react";
 import PropTypes from 'prop-types';
 import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, Alert} from 'reactstrap';
 import ModalWindow from "./ModalWindow.component";
+import {Option, Text} from "../containers/Language";
 
 
 
 export function Form(props) {
-    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue, lang} = props;
+    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue} = props;
 
     let nameRef = useRef();
     React.useEffect(() => {
@@ -98,7 +99,7 @@ export function Form(props) {
                                          className="delete-button"
                                          onClick={() => onClickDelete(keyValue)}
                                          buttonLabel="delete"
-                                         lang = {lang}
+                                         // lang = {lang}
                                          />
                             {deleteButtons}
                         </Col>
@@ -106,7 +107,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label> {lang.medName}</Label>
+                                <Label> <Text tid="medName" /></Label>
                                 <Input name="drugName"
                                        value={values.drugName}
                                        onChange={handleChange} />
@@ -122,7 +123,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>{lang.startDate} </Label>
+                                <Label><Text tid="startDate" /></Label>
                                 <Input name="dateFrom"
                                        type="date"
                                        onChange={handleChange}
@@ -138,7 +139,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>{lang.endDate} </Label>
+                                <Label><Text tid="endDate" /></Label>
                                 <Input name="dateTo"
                                        type="date"
                                        onChange={handleChange}
@@ -154,7 +155,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>{lang.freq} </Label>
+                                <Label><Text tid="freq" /> </Label>
                                 <Input type="select"
                                        name="dosage"
                                        onChange={handleChange}
@@ -181,7 +182,7 @@ export function Form(props) {
                     </Row>
                     <Row form>
                         <Col md={12}>
-                            <Label>{lang.timesTaken}</Label>
+                            <Label><Text tid="timesTaken" /></Label>
                         </Col>
                     </Row>
                     {layoutTimeListTag}
@@ -198,7 +199,7 @@ export function Form(props) {
                                        htmlFor = {"notification-checkbox" + (keyValue + 1)}
                                 >
                                 </label>
-                                <Label >{lang.remind}</Label>
+                                <Label ><Text tid="remind"/></Label>
                             </FormGroup>
                         </Col>
                         <Col md={4}>
@@ -207,12 +208,20 @@ export function Form(props) {
                                    onChange={handleChange}
                                    value={values.remindTime}
                                    {...statusSelect}>
-                                <option value={0}>{lang.onTime}</option>
-                                <option value={5}>{lang.minBefore5}</option>
-                                <option value={10}>{lang.minBefore10}</option>
-                                <option value={15}>{lang.minBefore15}</option>
-                                <option value={30}>{lang.minBefore30}</option>
-                                <option value={60}>{lang.minBefore60}</option>
+                                {}
+                                <Option value = {0} tid="onTime"/>
+                                <Option value = {5} tid="minBefore5"/>
+                                <Option value = {10} tid="minBefore10"/>
+                                <Option value = {15} tid="minBefore15"/>
+                                <Option value = {30} tid="minBefore30"/>
+                                <Option value = {60} tid="minBefore60"/>
+
+                                {/*<option value={0}> <Text tid="onTime"/> </option>*/}
+                                {/*<option value={5}><Text tid="minBefore5" /></option>*/}
+                                {/*<option value={10}><Text tid="minBefore10" /></option>*/}
+                                {/*<option value={15}><Text tid="minBefore15" /></option>*/}
+                                {/*<option value={30}><Text tid="minBefore30" /></option>*/}
+                                {/*<option value={60}><Text tid="minBefore60" /></option>*/}
                             </Input>
                         </Col>
                         <Col md={4}>
@@ -222,7 +231,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>{lang.comment}:</Label>
+                                <Label><Text tid="comment" />:</Label>
                                 <Input type="textarea"
                                        name="description"
                                        onChange={handleChange}
@@ -263,7 +272,7 @@ export default withFormik({
     validate: (values, prop) => {
         const errors = {};
         errors.timeList = ["", "", "", "", "", ""];
-        let req = prop.lang.required;
+        let req = <Text tid="required" />;
         if (!values.drugName) {
             errors.drugName = req;
         }
@@ -272,9 +281,6 @@ export default withFormik({
         }
         if (!values.dateTo) {
             errors.dateTo = req;
-        }
-        if (values.dateTo < values.dateFrom) {
-            errors.endDate = 'Start date should not precede end date';
         }
         for (let i = 0; i < values.timeList.length; i++){
             if (!values.timeList[i]){
