@@ -161,10 +161,11 @@ export function App() {
         <LanguageProvider>
 
             <div className="header">
-
+                <LanguageSelector id="header__lang-selector"/>
                 <h1 id="header__text"><Text tid="siteName" /></h1>
-                <LanguageSelector />
             </div>
+
+
 
             <Container >
                 <Row>

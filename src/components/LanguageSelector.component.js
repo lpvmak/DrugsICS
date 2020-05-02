@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-
+import React, { useContext, useState }from 'react';
 import { languageOptions } from '../language/lang';
 
 import { LanguageContext } from '../containers/Language';
+import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from "reactstrap";
 
-export default function LanguageSelector() {
+export default function LanguageSelector(props) {
     const languageContext = useContext(LanguageContext);
 
     const handleLanguageChange = (event) => {
@@ -13,19 +13,35 @@ export default function LanguageSelector() {
         languageContext.setLanguage(selectedLanguage);
     };
 
+    const [dropdownOpen, setOpen] = useState(false);
+    const toggle = () => setOpen(!dropdownOpen);
+
+
     return (
-        <select
-            onChange={handleLanguageChange}
-            value={languageContext.language.id}
+
+        <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}
+                        id={props.id}
+                        value={languageContext.language.id}
+                        onChange={handleLanguageChange}
+                        direction="left"
         >
+            <DropdownToggle caret>
+                {/*{languageContext.language.id}*/}
+                <img src={languageContext.language.img} alt="hjg"/>
+            </DropdownToggle>
+
+            <DropdownMenu>
             {languageOptions.map(item => (
-                <option
-                    key={item.id}
-                    value={item.id}
-                >
+                <DropdownItem  key={item.id}
+                               value={item.id}
+                               onClick={handleLanguageChange}>
+                    <img src={item.img} alt="hjg"/>
                     {item.text}
-                </option>
-            ))}
-        </select>
+                </DropdownItem>
+                    ))}
+            </DropdownMenu>
+
+        </ButtonDropdown>
+
     );
 };
