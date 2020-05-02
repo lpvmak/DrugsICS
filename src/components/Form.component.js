@@ -4,6 +4,7 @@ import React, {useRef} from "react";
 import PropTypes from 'prop-types';
 import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, CustomInput} from 'reactstrap';
 import ModalWindow from "./ModalWindow.component";
+import {Option, Text} from "../containers/Language";
 
 
 
@@ -70,7 +71,6 @@ export function Form(props) {
                    htmlFor = {"delete-button"+ (keyValue + 1)}>
             </label>
         );
-        statusDelete = {};
     }else {
         deleteButtons = null;
         statusDelete["disabled"] = "disabled";
@@ -91,6 +91,7 @@ export function Form(props) {
                                          className="delete-button"
                                          onClick={() => onClickDelete(keyValue)}
                                          buttonLabel="delete"
+                                         // lang = {lang}
                                          />
                             {deleteButtons}
                         </Col>
@@ -98,7 +99,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>Medication name </Label>
+                                <Label> <Text tid="medName" /></Label>
                                 <Input name="drugName"
                                        value={values.drugName}
                                        onChange={handleChange} />
@@ -114,7 +115,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Start date </Label>
+                                <Label><Text tid="startDate" /></Label>
                                 <Input name="dateFrom"
                                        type="date"
                                        onChange={handleChange}
@@ -130,7 +131,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>End date </Label>
+                                <Label><Text tid="endDate" /></Label>
                                 <Input name="dateTo"
                                        type="date"
                                        onChange={handleChange}
@@ -146,7 +147,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Frequency </Label>
+                                <Label><Text tid="freq" /> </Label>
                                 <Input name="dosage"
                                        type="number"
                                        value={values.dosage}
@@ -181,7 +182,7 @@ export function Form(props) {
                     </Row>
                     <Row form>
                         <Col md={12}>
-                            <Label>Times taken</Label>
+                            <Label><Text tid="timesTaken" /></Label>
                         </Col>
                     </Row>
                     {layoutTimeListTag}
@@ -198,7 +199,7 @@ export function Form(props) {
                                        htmlFor = {"notification-checkbox" + (keyValue + 1)}
                                 >
                                 </label>
-                                <Label >Remind me:</Label>
+                                <Label ><Text tid="remind"/></Label>
                             </FormGroup>
                         </Col>
                         <Col md={4}>
@@ -207,22 +208,23 @@ export function Form(props) {
                                    onChange={handleChange}
                                    value={values.remindTime}
                                    {...statusSelect}>
-                                <option value={0}>on time</option>
-                                <option value={5}>5 minutes before</option>
-                                <option value={10}>10 minutes before</option>
-                                <option value={15}>15 minutes before</option>
-                                <option value={30}>half-hour before</option>
-                                <option value={60}>one hour before</option>
+                                {}
+                                <Option value = {0} tid="onTime"/>
+                                <Option value = {5} tid="minBefore5"/>
+                                <Option value = {10} tid="minBefore10"/>
+                                <Option value = {15} tid="minBefore15"/>
+                                <Option value = {30} tid="minBefore30"/>
+                                <Option value = {60} tid="minBefore60"/>
                             </Input>
                         </Col>
                         <Col md={4}>
-                            <button className="med-form__submit" type="submit"></button>
+                            <button className="med-form__submit" type="submit"/>
                         </Col>
                     </Row>
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>Directions for use:</Label>
+                                <Label><Text tid="comment" />:</Label>
                                 <Input type="textarea"
                                        name="description"
                                        onChange={handleChange}
@@ -260,24 +262,22 @@ export default withFormik({
 
         };
     },
-    validate: values => {
+    validate: (values, prop) => {
         const errors = {};
         errors.timeList = ["", "", "", "", "", ""];
+        let req = <Text tid="required" />;
         if (!values.drugName) {
-            errors.drugName = 'Required';
+            errors.drugName = req;
         }
         if (!values.dateFrom) {
-            errors.dateFrom = 'Required';
+            errors.dateFrom = req;
         }
         if (!values.dateTo) {
-            errors.dateTo = 'Required';
-        }
-        if (values.dateTo < values.dateFrom) {
-            errors.endDate = 'Start date should not precede end date';
+            errors.dateTo = req;
         }
         for (let i = 0; i < values.timeList.length; i++){
             if (!values.timeList[i]){
-                errors.timeList[i] = 'Required';
+                errors.timeList[i] = req;
             }
         }
         return errors;
