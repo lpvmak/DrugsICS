@@ -11,7 +11,7 @@ export function AddButton(props) {
     return (
         <Button id="add-button"
                 onClick={props.onClick}>
-            Add more
+            {props.name}
         </Button>
     );
 }

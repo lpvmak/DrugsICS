@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from 'reactstrap';
 
 /**
- * Add button React component
+ * Generate button React component
  * @param props - React properties for component
  */
 export function GenerateButton(props) {
@@ -11,7 +11,7 @@ export function GenerateButton(props) {
                 type="submit"
                 onClick={props.onClick}
         >
-            Generate
+            {props.name}
         </Button>
     );
 }
