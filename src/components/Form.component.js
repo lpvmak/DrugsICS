@@ -1,5 +1,4 @@
 import {withFormik} from "formik";
-import ReactDOM from 'react-dom';
 import React, {useRef} from "react";
 import PropTypes from 'prop-types';
 import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, CustomInput} from 'reactstrap';
@@ -151,8 +150,6 @@ export function Form(props) {
                                 <Input name="dosage"
                                        type="number"
                                        value={values.dosage}
-                                       min="1"
-                                       max="12"
                                        disabled
                                 />
                             </FormGroup>
@@ -161,7 +158,6 @@ export function Form(props) {
                     <Row form>
                         <Col md = {12}>
                             <CustomInput type="range"
-                                         id="CustomRange"
                                          name="dosage"
                                          onChange={handleChange}
                                          value={values.dosage}

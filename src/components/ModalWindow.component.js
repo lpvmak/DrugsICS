@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal} from 'reactstrap';
 import { Container, Row, Col } from 'reactstrap';
 import TextFit from 'react-textfit'
 import {Text} from "../containers/Language";

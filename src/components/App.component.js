@@ -18,7 +18,8 @@ export function App() {
         drugs: [{
             id: Date.now(),
         }],
-        numOfForms: 1
+        numOfForms: 1,
+        timeSet: new Map()
     });
 
 
@@ -36,17 +37,26 @@ export function App() {
             }
         }
 
+
         /* Prediction time set: */
         let newDosage = values.dosage;
+
         if (newDosage !== appState.drugs[arrIndex].dosage){
-            values.timeList = [];
-            let startHour = 0;
-            let interval = Math.ceil(24 / newDosage);
-            for (let i = 0; i < newDosage; i++, startHour+=interval) {
-                let curHour = startHour % 24;
-                values.timeList.push((curHour < 10 ? "0" + curHour : curHour) + ":" + "00");
+            if (appState.timeSet.has(newDosage)){
+                values.timeList = appState.timeSet.get(newDosage);
+            }else{
+                values.timeList = [];
+                let startHour = 0;
+                let interval = Math.ceil(24 / newDosage);
+                for (let i = 0; i < newDosage; i++, startHour+=interval) {
+                    let curHour = startHour % 24;
+                    values.timeList.push((curHour < 10 ? "0" + curHour : curHour) + ":" + "00");
+                }
             }
         }
+
+        /* Save time set */
+        appState.timeSet.set(values.dosage, values.timeList);
 
         /* Change values in state: */
         drugs[arrIndex] = {
@@ -55,7 +65,8 @@ export function App() {
         };
         setAppState({
             drugs: drugs,
-            numOfForms: appState.numOfForms
+            numOfForms: appState.numOfForms,
+            timeSet: appState.timeSet
         });
     }
 
@@ -104,7 +115,8 @@ export function App() {
     function handleAddMore(){
         setAppState(appState => ({
             drugs: [...appState.drugs, {id: Date.now()}],
-            numOfForms: (appState.numOfForms += 1)
+            numOfForms: (appState.numOfForms += 1),
+            timeSet: appState.timeSet
         }))
     }
 
@@ -125,7 +137,8 @@ export function App() {
         form.splice(arrIndex, 1);
         setAppState(appState => ({
             drugs: form,
-            numOfForms: (appState.numOfForms -= 1)
+            numOfForms: (appState.numOfForms -= 1),
+            timeSet: appState.timeSet
         }));
     }
 
