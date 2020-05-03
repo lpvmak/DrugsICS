@@ -26,3 +26,17 @@
     font-family: 'Montserrat', sans-serif;
     width: auto;
 }
+
+#header__cur-lang-flag{
+    margin-bottom: 3px;
+}
+/**/
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.flex-container *:first-child{
+    margin-right: 7px;
+}

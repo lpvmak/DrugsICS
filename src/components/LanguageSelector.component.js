@@ -8,7 +8,7 @@ export default function LanguageSelector(props) {
     const languageContext = useContext(LanguageContext);
 
     const handleLanguageChange = (event) => {
-        const selectedLanguage = languageOptions.find(item => item.id === event.target.value);
+        const selectedLanguage = languageOptions.find(item => item.id === event.target.id);
         // set selected language by calling context method
         languageContext.setLanguage(selectedLanguage);
     };
@@ -18,30 +18,39 @@ export default function LanguageSelector(props) {
 
 
     return (
-
+        <div id={props.id}>
         <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}
-                        id={props.id}
+
                         value={languageContext.language.id}
                         onChange={handleLanguageChange}
                         direction="left"
         >
-            <DropdownToggle caret>
-                {/*{languageContext.language.id}*/}
-                <img src={languageContext.language.img} alt="hjg"/>
+            <DropdownToggle caret >
+                    <img id = "header__cur-lang-flag" src={languageContext.language.img} width="32px"/>
             </DropdownToggle>
 
             <DropdownMenu>
             {languageOptions.map(item => (
                 <DropdownItem  key={item.id}
                                value={item.id}
-                               onClick={handleLanguageChange}>
-                    <img src={item.img} alt="hjg"/>
-                    {item.text}
+                               id={item.id}
+                               onClick={handleLanguageChange}
+                               >
+                    <div class="flex-container"
+                         key={item.id}
+                         value={item.id}
+                         id={item.id}
+                    >
+                        <img id={item.id} src={item.img} width="32px" />
+                        {item.text}
+                    </div>
+
+
                 </DropdownItem>
                     ))}
             </DropdownMenu>
 
         </ButtonDropdown>
-
+        </div>
     );
 };

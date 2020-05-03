@@ -2651,7 +2651,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   /*padding: 0.375rem 0.75rem;*/
   font-size: 1.6rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
+  border-radius: 7px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -2712,34 +2712,39 @@ fieldset:disabled a.btn {
 }
 
 .btn-secondary {
-  color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  color: #31CA9E;
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+  border-radius: 7px;
 }
 
 .btn-secondary:hover {
-  color: #fff;
-  background-color: #5a6268;
-  border-color: #545b62;
+  color: #31CA9E;
+  background-color: #FFFFFF;
+  border: 1px solid #ced4da;
+  border-radius: 7px;
 }
 
 
 .btn-secondary.disabled, .btn-secondary:disabled {
-  color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  color: #31CA9E;
+  background-color: #FFFFFF;
+  border: 1px solid #ced4da;
+  border-radius: 7px;
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-secondary.dropdown-toggle {
-  color: #fff;
-  background-color: #545b62;
-  border-color: #4e555b;
+  color: #31CA9E;
+  background-color: #FFFFFF;
+  border: 1px solid #ced4da;
+  border-radius: 7px;
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-secondary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+  box-shadow: none;
+  outline: none;
 }
 
 .btn-success {
@@ -3332,7 +3337,7 @@ tbody.collapse.show {
   display: none;
   float: left;
   min-width: 10rem;
-  padding: 0.5rem 0;
+  padding: 0.3rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #212529;
@@ -3340,8 +3345,8 @@ tbody.collapse.show {
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  border-radius: 7px;
 }
 
 .dropup .dropdown-menu {
@@ -3437,9 +3442,9 @@ tbody.collapse.show {
 }
 
 .dropdown-item {
-  display: block;
+  display: inline-block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.25rem 1.3rem;
   clear: both;
   font-weight: 400;
   color: #212529;
