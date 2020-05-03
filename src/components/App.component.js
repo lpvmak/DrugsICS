@@ -165,13 +165,12 @@ export function App() {
     return (
         <LanguageProvider>
 
-            <div className="header">
+                <div className="header">
+                    <LanguageSelector id="header__lang-selector"/>
+                    <h1 id="header__text"><Text tid="siteName" /></h1>
+                </div>
 
-                <h1 id="header__text"><Text tid="siteName" /></h1>
-                <LanguageSelector />
-            </div>
-
-            <Container >
+            <Container>
                 <Row>
                     <Col md={12}>
                         <h1> <Text tid="slogan" /></h1>
