@@ -39,3 +39,4 @@ input[type="time"]::-webkit-clear-button {
 input[type="time"]::-webkit-clear-button:hover {
     background-image: url(../icons/clear_input_hover.svg);
 }
+

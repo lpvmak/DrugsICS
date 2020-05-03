@@ -9,8 +9,8 @@ export const dictionaryList = {
 export const languageOptions = [
     { id: 'eng',
         text: 'English',
-        img: "https://image.flaticon.com/icons/svg/197/197374.svg"},
+        img: "eng.svg"},
     { id: 'rus',
         text: 'Русский',
-        img: "https://image.flaticon.com/icons/svg/197/197408.svg" }
+        img: "rus.svg" }
 ];
