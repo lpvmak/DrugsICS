@@ -37,11 +37,16 @@ export function App() {
             }
         }
 
+        let startDate = new Date(values.dateFrom);
+        let endDate = new Date(values.dateTo);
+        if (startDate > endDate){
+            values.dateTo = values.dateFrom;
+        }
 
         /* Prediction time set: */
         let newDosage = values.dosage;
 
-        if (newDosage !== appState.drugs[arrIndex].dosage){
+        if (newDosage !== drugs[arrIndex].dosage){
             if (appState.timeSet.has(newDosage)){
                 values.timeList = appState.timeSet.get(newDosage);
             }else{
@@ -61,7 +66,7 @@ export function App() {
         /* Change values in state: */
         drugs[arrIndex] = {
             ...values,
-            id: appState.drugs[arrIndex].id,
+            id: drugs[arrIndex].id,
         };
         setAppState({
             drugs: drugs,

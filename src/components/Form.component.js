@@ -135,6 +135,7 @@ export function Form(props) {
                                        type="date"
                                        onChange={handleChange}
                                        value={values.dateTo}
+                                       min={values.dateFrom}
                                 />
                                 {touched.dateTo && errors.dateTo ?
                                     (
