@@ -5,8 +5,6 @@ import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, CustomIn
 import ModalWindow from "./ModalWindow.component";
 import {Option, Text} from "../containers/Language";
 
-
-
 export function Form(props) {
     const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue} = props;
 
