@@ -10,13 +10,12 @@ const ModalWindow = (props) => {
         className,
         idButton,
         onClick,
+        name
     } = props;
 
     const [modal, setModal] = useState(false);
 
-    const toggle = () => setModal(!modal);
-
-
+   const toggle  = () => setModal(!modal);
     return (
         <div>
             <Button id = {idButton}  className={className} color="danger" onClick={toggle}>{buttonLabel}</Button>
@@ -38,7 +37,7 @@ const ModalWindow = (props) => {
                             <TextFit mode="single"
                                      forceSingleModeWidth={true}
                                      id="modal-body">
-                                <Text tid="confirmDelete" />
+                                <Text tid="confirmDelete" /> {name}?
                             </TextFit>
                         </Col>
                     </Row>

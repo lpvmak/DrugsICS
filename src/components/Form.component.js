@@ -68,11 +68,33 @@ export function Form(props) {
                    htmlFor = {"delete-button"+ (keyValue + 1)}>
             </label>
         );
+
     }else {
         deleteButtons = null;
         statusDelete["disabled"] = "disabled";
     }
-
+    let deleteOption = {};
+    /*Choose type of delete button*/
+    if(values.drugName === ''){
+        deleteOption = (
+            <button id = {"delete-button"+ (keyValue + 1)}
+                    className="delete-button"
+                    onClick={() => onClickDelete(keyValue)}
+                    type="button"
+            >
+            </button>
+        );
+    }
+    else {
+        deleteOption = (
+            <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
+                         className="delete-button"
+                         onClick={() => onClickDelete(keyValue)}
+                         buttonLabel="delete"
+                         name = {values.drugName}
+            />
+        );
+    }
     return (
         <Row ref = {nameRef}>
             <Col>
@@ -84,12 +106,7 @@ export function Form(props) {
                             {values.drugName}
                         </Col>
                         <Col id="med-form__head__delete-button" md={1}>
-                            <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
-                                         className="delete-button"
-                                         onClick={() => onClickDelete(keyValue)}
-                                         buttonLabel="delete"
-                                         // lang = {lang}
-                                         />
+                            {deleteOption}
                             {deleteButtons}
                         </Col>
                     </Row>
