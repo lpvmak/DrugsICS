@@ -7,6 +7,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { LanguageProvider } from '../containers/Language';
 import { Text } from '../containers/Language';
 import LanguageSelector from './LanguageSelector.component';
+import Example from './SavingAlert'
 
 
 
@@ -111,7 +112,9 @@ export function App() {
         let FileSaver = require('file-saver');
         const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
         FileSaver.saveAs(file);
+        var ex = new Example();
         //EventPlanGenerator.savePlanToFile('newPlan.ics');
+        ex.render();
     }
 
     /**
