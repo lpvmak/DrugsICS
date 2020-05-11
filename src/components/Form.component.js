@@ -1,11 +1,9 @@
 import {withFormik} from "formik";
-import ReactDOM from 'react-dom';
 import React, {useRef} from "react";
 import PropTypes from 'prop-types';
-import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, Alert} from 'reactstrap';
+import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, CustomInput} from 'reactstrap';
 import ModalWindow from "./ModalWindow.component";
-
-
+import {Option, Text} from "../containers/Language";
 
 export function Form(props) {
     const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue} = props;
@@ -47,17 +45,10 @@ export function Form(props) {
             </Col>
         )
     });
-    let layoutTimeListTag = null;
-    if (values.dosage <= 3){
-        layoutTimeListTag = <Row form>{timeListTag.slice(0,3)}</Row>;
-    }
-    else{
-        layoutTimeListTag = (
-            <div>
-                <Row form>{timeListTag.slice(0,3)}</Row>
-                <Row form>{timeListTag.slice(3,6)}</Row>
-            </div>
-        );
+
+    let layoutTimeListTag = [];
+    for (let i = 0; i < values.dosage; i+=3){
+        layoutTimeListTag.push(<Row form>{timeListTag.slice(i,i+3)}</Row>)
     }
 
     /* Enable/disable select reminder time: */
@@ -73,39 +64,56 @@ export function Form(props) {
     let deleteButtons;
     if (numOfForms !== 1){
         deleteButtons = (
-            <label className = "deleteButtonPlace"
+            <label className = "delete-button__place"
                    htmlFor = {"delete-button"+ (keyValue + 1)}>
             </label>
         );
-        statusDelete = {};
+
     }else {
         deleteButtons = null;
         statusDelete["disabled"] = "disabled";
     }
-
+    let deleteOption = {};
+    /*Choose type of delete button*/
+    if(values.drugName === ''){
+        deleteOption = (
+            <button id = {"delete-button"+ (keyValue + 1)}
+                    className="delete-button"
+                    onClick={() => onClickDelete(keyValue)}
+                    type="button"
+            >
+            </button>
+        );
+    }
+    else {
+        deleteOption = (
+            <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
+                         className="delete-button"
+                         onClick={() => onClickDelete(keyValue)}
+                         buttonLabel="delete"
+                         name = {values.drugName}
+            />
+        );
+    }
     return (
         <Row ref = {nameRef}>
             <Col>
                 <FormStrap id={"form"+(keyValue + 1)}
-                           className="forms"
+                           className="med-form"
                            onSubmit={handleSubmit}>
-                    <Row id = "formHead">
-                        <Col id="headColName" md={11}>
+                    <Row id = "med-form__head">
+                        <Col id="med-form__head__name" md={11}>
                             {values.drugName}
                         </Col>
-                        <Col id="headColButton" md={1}>
-                            <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
-                                         className="deleteButton"
-                                         onClick={() => onClickDelete(keyValue)}
-                                         buttonLabel="delete"
-                                         />
+                        <Col id="med-form__head__delete-button" md={1}>
+                            {deleteOption}
                             {deleteButtons}
                         </Col>
                     </Row>
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>Medication name </Label>
+                                <Label> <Text tid="medName" /></Label>
                                 <Input name="drugName"
                                        value={values.drugName}
                                        onChange={handleChange} />
@@ -121,7 +129,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Date from </Label>
+                                <Label><Text tid="startDate" /></Label>
                                 <Input name="dateFrom"
                                        type="date"
                                        onChange={handleChange}
@@ -137,11 +145,12 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Date to </Label>
+                                <Label><Text tid="endDate" /></Label>
                                 <Input name="dateTo"
                                        type="date"
                                        onChange={handleChange}
                                        value={values.dateTo}
+                                       min={values.dateFrom}
                                 />
                                 {touched.dateTo && errors.dateTo ?
                                     (
@@ -153,26 +162,31 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label>Frequency </Label>
-                                <Input type="select"
-                                       name="dosage"
-                                       onChange={handleChange}
-                                       value={values.dosage}>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                </Input>
+                                <Label><Text tid="freq" /> </Label>
+                                <Input name="dosage"
+                                       type="number"
+                                       value={values.dosage}
+                                       disabled
+                                />
                             </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row form>
+                        <Col md = {12}>
+                            <CustomInput type="range"
+                                         name="dosage"
+                                         onChange={handleChange}
+                                         value={values.dosage}
+                                         min={1}
+                                         max={12}
+                            />
                         </Col>
                     </Row>
                     <Row form>
                         <Col md={12}>
                             {touched.dateTo && touched.dateFrom && !errors.dateFrom && !errors.dateTo && errors.endDate ?
                                 (
-                                    <FormText id="longMessage" color="red">
+                                    <FormText id="med-form__err-message--long" color="red">
                                         {errors.endDate}
                                     </FormText>
                                 ) : null}
@@ -180,7 +194,7 @@ export function Form(props) {
                     </Row>
                     <Row form>
                         <Col md={12}>
-                            <Label>Times taken</Label>
+                            <Label><Text tid="timesTaken" /></Label>
                         </Col>
                     </Row>
                     {layoutTimeListTag}
@@ -193,11 +207,11 @@ export function Form(props) {
                                        onChange={handleChange}
                                        value={values.notification}
                                 />
-                                <label className = "notificationCheckbox"
+                                <label className = "med-form__notification-checkbox"
                                        htmlFor = {"notification-checkbox" + (keyValue + 1)}
                                 >
                                 </label>
-                                <Label >Remind me:</Label>
+                                <Label ><Text tid="remind"/></Label>
                             </FormGroup>
                         </Col>
                         <Col md={4}>
@@ -206,22 +220,23 @@ export function Form(props) {
                                    onChange={handleChange}
                                    value={values.remindTime}
                                    {...statusSelect}>
-                                <option value={0}>at the moment</option>
-                                <option value={5}>in 5 minutes</option>
-                                <option value={10}>in 10 minutes</option>
-                                <option value={15}>in 15 minutes</option>
-                                <option value={30}>in half-hour</option>
-                                <option value={60}>in 1 hour</option>
+                                {}
+                                <Option value = {0} tid="onTime"/>
+                                <Option value = {5} tid="minBefore5"/>
+                                <Option value = {10} tid="minBefore10"/>
+                                <Option value = {15} tid="minBefore15"/>
+                                <Option value = {30} tid="minBefore30"/>
+                                <Option value = {60} tid="minBefore60"/>
                             </Input>
                         </Col>
                         <Col md={4}>
-                            <button className="formSubmit" type="submit"></button>
+                            <button className="med-form__submit" type="submit"/>
                         </Col>
                     </Row>
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label>Special instructions:</Label>
+                                <Label><Text tid="comment" />:</Label>
                                 <Input type="textarea"
                                        name="description"
                                        onChange={handleChange}
@@ -259,24 +274,22 @@ export default withFormik({
 
         };
     },
-    validate: values => {
+    validate: (values, prop) => {
         const errors = {};
         errors.timeList = ["", "", "", "", "", ""];
+        let req = <Text tid="required" />;
         if (!values.drugName) {
-            errors.drugName = 'Required';
+            errors.drugName = req;
         }
         if (!values.dateFrom) {
-            errors.dateFrom = 'Required';
+            errors.dateFrom = req;
         }
         if (!values.dateTo) {
-            errors.dateTo = 'Required';
-        }
-        if (values.dateTo < values.dateFrom) {
-            errors.endDate = 'Start date should not precede end date';
+            errors.dateTo = req;
         }
         for (let i = 0; i < values.timeList.length; i++){
             if (!values.timeList[i]){
-                errors.timeList[i] = 'Required';
+                errors.timeList[i] = req;
             }
         }
         return errors;

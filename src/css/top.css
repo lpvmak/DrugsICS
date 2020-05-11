@@ -1,0 +1,42 @@
+.header{
+    width: 100%;
+    height: 110px;
+    background: #FFFFFF;
+    padding-left: 5%;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+#header__text{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    padding-top: 15px;
+    color: #31CA9E;
+}
+
+#header__text::selection {
+    color: white;
+}
+
+#header__lang-selector{
+    float: right;
+    margin-right: 10px;
+    border-radius: 7px;
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+}
+
+#header__cur-lang-flag{
+    margin-bottom: 3px;
+}
+/**/
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.flex-container *:first-child{
+    margin-right: 7px;
+}

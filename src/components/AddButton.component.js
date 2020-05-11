@@ -9,9 +9,9 @@ import { Button } from 'reactstrap';
 
 export function AddButton(props) {
     return (
-        <Button id="addButton"
+        <Button id="add-button"
                 onClick={props.onClick}>
-            Add more
+            {props.name}
         </Button>
     );
 }

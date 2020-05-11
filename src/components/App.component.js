@@ -4,17 +4,22 @@ import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
 import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
 import { Container, Row, Col } from 'reactstrap';
+import { LanguageProvider } from '../containers/Language';
+import { Text } from '../containers/Language';
+import LanguageSelector from './LanguageSelector.component';
+
 
 
 /**
  * Initialisation of main component of React application
  */
 export function App() {
-    const [formValues, setFormValues] = React.useState({
+    const [appState, setAppState] = React.useState({
         drugs: [{
             id: Date.now(),
         }],
-        numOfForms: 1
+        numOfForms: 1,
+        timeSet: new Map()
     });
 
 
@@ -22,36 +27,51 @@ export function App() {
      * Handler for the form onChange
      */
     function handleFormChange(index, values) {
-        let drugs = formValues.drugs.slice();
+        let drugs = appState.drugs.slice();
 
         /* Get id in array: */
         let arrIndex = 0;
-        for (arrIndex; arrIndex < formValues.numOfForms; arrIndex++){
-            if (formValues.drugs[arrIndex].id === index){
+        for (arrIndex; arrIndex < appState.numOfForms; arrIndex++){
+            if (appState.drugs[arrIndex].id === index){
                 break;
             }
         }
 
+        let startDate = new Date(values.dateFrom);
+        let endDate = new Date(values.dateTo);
+        if (startDate > endDate){
+            values.dateTo = values.dateFrom;
+        }
+
         /* Prediction time set: */
         let newDosage = values.dosage;
-        if (newDosage !== formValues.drugs[arrIndex].dosage){
-            values.timeList = [];
-            let startHour = 8;
-            let interval = Math.ceil(24 / newDosage);
-            for (let i = 0; i < newDosage; i++, startHour+=interval) {
-                let curHour = startHour % 24;
-                values.timeList.push((curHour < 10 ? "0" + curHour : curHour) + ":" + "00");
+
+        if (newDosage !== drugs[arrIndex].dosage){
+            if (appState.timeSet.has(newDosage)){
+                values.timeList = appState.timeSet.get(newDosage);
+            }else{
+                values.timeList = [];
+                let startHour = 0;
+                let interval = Math.ceil(24 / newDosage);
+                for (let i = 0; i < newDosage; i++, startHour+=interval) {
+                    let curHour = startHour % 24;
+                    values.timeList.push((curHour < 10 ? "0" + curHour : curHour) + ":" + "00");
+                }
             }
         }
+
+        /* Save time set */
+        appState.timeSet.set(values.dosage, values.timeList);
 
         /* Change values in state: */
         drugs[arrIndex] = {
             ...values,
-            id: formValues.drugs[arrIndex].id,
+            id: drugs[arrIndex].id,
         };
-        setFormValues({
+        setAppState({
             drugs: drugs,
-            numOfForms: formValues.numOfForms
+            numOfForms: appState.numOfForms,
+            timeSet: appState.timeSet
         });
     }
 
@@ -76,18 +96,18 @@ export function App() {
      */
     function handleSubmit() {
         /* Click all submit buttons for validaton: */
-        let formButtons = document.getElementsByClassName('formSubmit');
+        let formButtons = document.getElementsByClassName('med-form__submit');
         for (let button of formButtons){
             button.click();
         }
         let readyToGenerate = false;
-        for (let form of formValues.drugs){
+        for (let form of appState.drugs){
             readyToGenerate = validForm(form);
             if (!readyToGenerate){
                 return;
             }
         }
-        EventPlanGenerator.createNewPlan(formValues);
+        EventPlanGenerator.createNewPlan(appState);
         let FileSaver = require('file-saver');
         const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
         FileSaver.saveAs(file);
@@ -98,9 +118,10 @@ export function App() {
      * Handler for the addition button
      */
     function handleAddMore(){
-        setFormValues(formValues => ({
-            drugs: [...formValues.drugs, {id: Date.now()}],
-            numOfForms: (formValues.numOfForms += 1)
+        setAppState(appState => ({
+            drugs: [...appState.drugs, {id: Date.now()}],
+            numOfForms: (appState.numOfForms += 1),
+            timeSet: appState.timeSet
         }))
     }
 
@@ -108,63 +129,71 @@ export function App() {
      * Handler for the delete button
      */
     function handleDeleteForm(index){
-        let form = formValues.drugs;
+        let form = appState.drugs;
 
         /* Get id in array: */
         let arrIndex = 0;
-        for (arrIndex; arrIndex < formValues.numOfForms; arrIndex++){
-            if (formValues.drugs[arrIndex].id === index){
+        for (arrIndex; arrIndex < appState.numOfForms; arrIndex++){
+            if (appState.drugs[arrIndex].id === index){
                 break;
             }
         }
         /* Delete form in state: */
         form.splice(arrIndex, 1);
-        setFormValues(formValues => ({
+        setAppState(appState => ({
             drugs: form,
-            numOfForms: (formValues.numOfForms -= 1)
+            numOfForms: (appState.numOfForms -= 1),
+            timeSet: appState.timeSet
         }));
     }
 
     /* Render current number of forms: */
     let forms = [];
-    for (let i = 0; i < formValues.numOfForms; i++) {
+    for (let i = 0; i < appState.numOfForms; i++) {
         forms.push(
             <Form onChange={handleFormChange}
                   onClickDelete={handleDeleteForm}
-                  keyValue={formValues.drugs[i].id}
-                  key={formValues.drugs[i].id}
-                  numOfForms={formValues.numOfForms}
-                  values = {formValues.drugs[i]}
+                  keyValue={appState.drugs[i].id}
+                  key={appState.drugs[i].id}
+                  numOfForms={appState.numOfForms}
+                  values = {appState.drugs[i]}
             />
         );
     }
 
+
     return (
-        <div>
+        <LanguageProvider>
 
-            <div id="header">
-                <h1 id="headerH1">MedSched</h1>
-            </div>
+                <div className="header">
+                    <LanguageSelector id="header__lang-selector"/>
+                    <h1 id="header__text"><Text tid="siteName" /></h1>
+                </div>
 
-            <Container >
+            <Container>
                 <Row>
                     <Col md={12}>
-                        <h1>Create your own medication regimen</h1>
+                        <h1> <Text tid="slogan" /></h1>
                     </Col>
                 </Row>
+
                 {forms}
 
-                {/*<pre>{JSON.stringify(formValues, null, 2)}</pre>*/}
+                {/*<pre>{JSON.stringify(appState, null, 2)}</pre>*/}
                 <Row>
                     <Col>
-                        <AddButton onClick = {handleAddMore}/>
+                        <AddButton onClick = {handleAddMore}
+                                   name = <Text tid="addMore" />
+                        />
                     </Col>
                     <Col>
-                        <GenerateButton onClick = {handleSubmit}/>
+                        <GenerateButton onClick = {handleSubmit}
+                                        name = <Text tid="download" />
+                        />
                     </Col>
                 </Row>
 
             </Container>
-        </div>
+        </LanguageProvider>
     );
 }
