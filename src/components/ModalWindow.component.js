@@ -34,11 +34,11 @@ const ModalWindow = (props) => {
                     </Row>
                     <Row>
                         <Col md={12}>
-                            <TextFit mode="single"
-                                     forceSingleModeWidth={true}
-                                     id="modal-body">
-                                <Text tid="confirmDelete" /> {name}?
-                            </TextFit>
+                                <TextFit mode="single"
+                                         forceSingleModeWidth={true}
+                                         id="modal-body">
+                                    <Text tid="confirmDelete" /> {name.length > 10 ? name.substring(0, 10) + ".." : name}?
+                                </TextFit>
                         </Col>
                     </Row>
                     <Row id="modal__buttons">
