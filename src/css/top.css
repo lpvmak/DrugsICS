@@ -31,7 +31,16 @@
     margin-bottom: 3px;
 }
 /**/
-
+/*#header__text-rus{*/
+/*    font-size: 5vw;*/
+/*}*/
+.slogan__text{
+    font-size: 5vw;
+    min-width: 500px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0;
+}
 .flex-container {
     display: flex;
     align-items: center;

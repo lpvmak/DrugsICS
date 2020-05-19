@@ -49,7 +49,8 @@
     font-weight: 900;
     color: #2A4153;
     background: #FFFFFF;
-    border: 1px solid rgba(42, 65, 83, 0.5);
+    border: 1px solid rgba(42, 65, 83, 0.2);
+    /*box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);*/
     box-sizing: border-box;
     border-radius: 7px;
     padding: 0px;
@@ -60,7 +61,8 @@
     font-weight: 900;
     color: #FFFFFF;
     background: #31CA9E;
-    border: 1px solid #2A4153;
+    border: 1px solid #31CA9E;
+    /*box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);*/
     box-sizing: border-box;
     border-radius: 7px;
     padding: 0px;
@@ -91,7 +93,7 @@
 }
 
 #modal-delete__button:active, #modal-cancel__button:active{
-    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }
 
 #modal-delete__button:focus, #modal-cancel__button:focus{
@@ -99,5 +101,5 @@
 }
 
 #modal-delete__button:hover, #modal-cancel__button:hover{
-    box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }

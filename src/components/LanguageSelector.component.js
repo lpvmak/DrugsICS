@@ -11,6 +11,7 @@ export default function LanguageSelector(props) {
         const selectedLanguage = languageOptions.find(item => item.id === event.target.id);
         // set selected language by calling context method
         languageContext.setLanguage(selectedLanguage);
+        props.onChange(selectedLanguage.id)
     };
 
     const [dropdownOpen, setOpen] = useState(false);
