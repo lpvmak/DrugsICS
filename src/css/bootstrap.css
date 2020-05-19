@@ -377,7 +377,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-  font-size: 2.9rem;
+  font-size: 2.6rem;
 }
 
 h2, .h2 {
@@ -599,9 +599,9 @@ pre code {
   .container {
     max-width: 750px;
   }
-  h1, .h1 {
-    font-size: 2.38rem;
-  }
+  /*h1, .h1 {*/
+  /*  font-size: 2.38rem;*/
+  /*}*/
   #header__text-rus {
     font-size: 2.28rem;
   }
@@ -614,9 +614,9 @@ pre code {
   .container {
     max-width: 750px;
   }
-  h1 {
-    font-size: 2.38rem;
-  }
+  /*h1 {*/
+  /*  font-size: 2.38rem;*/
+  /*}*/
   #header__text-rus {
     font-size: 2.28rem;
   }
