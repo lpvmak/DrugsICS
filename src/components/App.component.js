@@ -20,7 +20,7 @@ export function App() {
         }],
         numOfForms: 1,
         timeSet: new Map(),
-        lang: 'rus'
+        lang: 'eng'
     });
 
 
@@ -194,23 +194,11 @@ export function App() {
                     <Col md={12}>
 
                         <h1 id={'header__text-' + appState.lang}><Text tid="slogan" /></h1>
-                        {/*<h1 >*/}
-                        {/*<Textfit*/}
-                        {/*    mode="multi"*/}
-                        {/*    forceSingleModeWidth={false}*/}
-                        {/*// min={41}*/}
-                        {/*>*/}
-                        {/*    <Text tid="slogan"/>*/}
-
-                        {/*</Textfit>*/}
-                        {/*</h1>*/}
-                        {/*<h1 > <Text tid="slogan" /></h1>*/}
                     </Col>
                 </Row>
 
                 {forms}
 
-                {/*<pre>{JSON.stringify(appState, null, 2)}</pre>*/}
                 <Row>
                     <Col>
                         <AddButton onClick = {handleAddMore}
