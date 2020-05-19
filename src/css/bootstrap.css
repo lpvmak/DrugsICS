@@ -583,6 +583,9 @@ pre code {
   h1, .h1 {
     font-size: 2.38rem;
   }
+  .med-form__slider {
+    display: block !important;
+  }
 }
 
 @media (min-width: 992px) {

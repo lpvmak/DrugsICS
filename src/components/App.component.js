@@ -37,14 +37,14 @@ export function App() {
             }
         }
 
-        let startDate = new Date(values.dateFrom);
-        let endDate = new Date(values.dateTo);
-        if (startDate > endDate){
-            values.dateTo = values.dateFrom;
-        }
-
         /* Prediction time set: */
         let newDosage = values.dosage;
+        if (newDosage > 12){
+            newDosage = 12;
+        }
+        else if (newDosage < 1){
+            newDosage = 1;
+        }
 
         if (newDosage !== drugs[arrIndex].dosage){
             if (appState.timeSet.has(newDosage)){
