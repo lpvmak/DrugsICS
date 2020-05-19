@@ -19,7 +19,8 @@ const eng = {
     cancel: "Cancel",
     delete: "Delete",
     confirmDelete: "Do you really want to delete",
-    required: "Required"
+    required: "Required",
+    dateError: "The end date must be greater or equal to the start date"
 };
 
 export default eng;

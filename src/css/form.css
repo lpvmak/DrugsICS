@@ -37,6 +37,11 @@
     padding-right: 5px;
 }
 
+
+.med-form__slider {
+    display: none;
+}
+
 /*for custom checkboxes*/
 input[type="checkbox"]{
     position: absolute;

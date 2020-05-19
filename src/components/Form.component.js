@@ -6,7 +6,7 @@ import ModalWindow from "./ModalWindow.component";
 import {Option, Text} from "../containers/Language";
 
 export function Form(props) {
-    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue} = props;
+    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue, validateForm} = props;
 
     let nameRef = useRef();
     React.useEffect(() => {
@@ -15,14 +15,50 @@ export function Form(props) {
         }
     }, [values]);
 
+    function handleEndDateInput(){
+        if (values.dateFrom > values.dateTo){
+            document.getElementById('end-date-input'+ (keyValue + 1)).min = values.dateTo;
+        }
+    }
+
+    function handleDateStartInput(){
+        let startDate = new Date(values.dateFrom);
+        let endDate = new Date(values.dateTo);
+        if (startDate > endDate){
+            values.dateTo = values.dateFrom;
+        }
+        onChange(keyValue, values);
+        errors.date = '';
+    }
+
+
+    function handleFreqInput(){
+        if (values.dosage < 1){
+            values.dosage = 1;
+        }
+        else if (values.dosage > 12){
+            values.dosage = 12;
+        }
+        onChange(keyValue, values);
+    }
+
     /* Initialize touching values: */
     for (let i = 0; !!touched.timeList && i < values.timeList.length; i++){
         touched.timeList[i] = true;
     }
 
+    let countTimeInputTags = values.dosage;
+
+    if (countTimeInputTags > 12){
+        countTimeInputTags = 12;
+    }
+    else if (countTimeInputTags < 1){
+        countTimeInputTags = 1;
+    }
+
     /* Time-input tags: */
     const curTimeList = [];
-    for (let i = 0; i < values.dosage; i++) {
+    for (let i = 0; i < countTimeInputTags; i++) {
         curTimeList.push("timeList[" + i + "]");
     }
 
@@ -47,7 +83,7 @@ export function Form(props) {
     });
 
     let layoutTimeListTag = [];
-    for (let i = 0; i < values.dosage; i+=3){
+    for (let i = 0; i < countTimeInputTags; i+=3){
         layoutTimeListTag.push(<Row form>{timeListTag.slice(i,i+3)}</Row>)
     }
 
@@ -95,6 +131,7 @@ export function Form(props) {
             />
         );
     }
+
     return (
         <Row ref = {nameRef}>
             <Col>
@@ -133,14 +170,9 @@ export function Form(props) {
                                 <Input name="dateFrom"
                                        type="date"
                                        onChange={handleChange}
+                                       onBlur={handleDateStartInput}
                                        value={values.dateFrom}
                                 />
-                                {touched.dateFrom && errors.dateFrom ?
-                                    (
-                                        <FormText color="red">
-                                            {errors.dateFrom}
-                                        </FormText>
-                                    ) : null}
                             </FormGroup>
                         </Col>
                         <Col md={4}>
@@ -148,16 +180,12 @@ export function Form(props) {
                                 <Label><Text tid="endDate" /></Label>
                                 <Input name="dateTo"
                                        type="date"
+                                       id={'end-date-input'+ (keyValue + 1)}
                                        onChange={handleChange}
+                                       onBlur={handleEndDateInput}
                                        value={values.dateTo}
                                        min={values.dateFrom}
                                 />
-                                {touched.dateTo && errors.dateTo ?
-                                    (
-                                        <FormText color="red">
-                                            {errors.dateTo}
-                                        </FormText>
-                                    ) : null}
                             </FormGroup>
                         </Col>
                         <Col md={4}>
@@ -166,30 +194,32 @@ export function Form(props) {
                                 <Input name="dosage"
                                        type="number"
                                        value={values.dosage}
-                                       disabled
+                                       onChange={handleChange}
+                                       onBlur={handleFreqInput}
                                 />
                             </FormGroup>
                         </Col>
                     </Row>
                     <Row form>
+                        <Col md={12}>
+                            {(touched.dateFrom || touched.dateTo) && errors.date ?
+                                (
+                                    <FormText id="med-form__err-message--long" color="red">
+                                        {errors.date}
+                                    </FormText>
+                                ) : null}
+                        </Col>
+                    </Row>
+                    <Row form>
                         <Col md = {12}>
                             <CustomInput type="range"
+                                         className="med-form__slider"
                                          name="dosage"
                                          onChange={handleChange}
                                          value={values.dosage}
                                          min={1}
                                          max={12}
                             />
-                        </Col>
-                    </Row>
-                    <Row form>
-                        <Col md={12}>
-                            {touched.dateTo && touched.dateFrom && !errors.dateFrom && !errors.dateTo && errors.endDate ?
-                                (
-                                    <FormText id="med-form__err-message--long" color="red">
-                                        {errors.endDate}
-                                    </FormText>
-                                ) : null}
                         </Col>
                     </Row>
                     <Row form>
@@ -276,16 +306,14 @@ export default withFormik({
     },
     validate: (values, prop) => {
         const errors = {};
-        errors.timeList = ["", "", "", "", "", ""];
+        errors.timeList = ["", "", "", "", "", "", "", "", "", "", "", ""];
         let req = <Text tid="required" />;
+
+        if (values.dateFrom > values.dateTo){
+            errors.date = <Text tid="dateError" />;
+        }
         if (!values.drugName) {
             errors.drugName = req;
-        }
-        if (!values.dateFrom) {
-            errors.dateFrom = req;
-        }
-        if (!values.dateTo) {
-            errors.dateTo = req;
         }
         for (let i = 0; i < values.timeList.length; i++){
             if (!values.timeList[i]){

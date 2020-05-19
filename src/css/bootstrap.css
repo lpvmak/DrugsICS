@@ -608,6 +608,9 @@ pre code {
   #header__text-eng {
     font-size: 2.399rem;
   }
+  .med-form__slider {
+    display: block !important;
+  }
 }
 
 @media (min-width: 992px) {
