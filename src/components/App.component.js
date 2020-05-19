@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { LanguageProvider } from '../containers/Language';
 import { Text } from '../containers/Language';
 import LanguageSelector from './LanguageSelector.component';
-
+import { Textfit } from 'react-textfit';
 
 
 /**
@@ -19,7 +19,8 @@ export function App() {
             id: Date.now(),
         }],
         numOfForms: 1,
-        timeSet: new Map()
+        timeSet: new Map(),
+        lang: 'rus'
     });
 
 
@@ -71,7 +72,8 @@ export function App() {
         setAppState({
             drugs: drugs,
             numOfForms: appState.numOfForms,
-            timeSet: appState.timeSet
+            timeSet: appState.timeSet,
+            lang: appState.lang
         });
     }
 
@@ -121,7 +123,8 @@ export function App() {
         setAppState(appState => ({
             drugs: [...appState.drugs, {id: Date.now()}],
             numOfForms: (appState.numOfForms += 1),
-            timeSet: appState.timeSet
+            timeSet: appState.timeSet,
+            lang: appState.lang
         }))
     }
 
@@ -143,9 +146,23 @@ export function App() {
         setAppState(appState => ({
             drugs: form,
             numOfForms: (appState.numOfForms -= 1),
-            timeSet: appState.timeSet
+            timeSet: appState.timeSet,
+            lang: appState.lang
         }));
     }
+
+    /**
+     * Handler for the language selector
+     */
+    function handleChangeLang(newLang){
+        setAppState(appState => ({
+            drugs: appState.drugs,
+            numOfForms: appState.numOfForms,
+            timeSet: appState.timeSet,
+            lang: newLang
+        }));
+    }
+
 
     /* Render current number of forms: */
     let forms = [];
@@ -166,14 +183,28 @@ export function App() {
         <LanguageProvider>
 
                 <div className="header">
-                    <LanguageSelector id="header__lang-selector"/>
+                    <LanguageSelector id="header__lang-selector"
+                                      onChange={handleChangeLang}
+                    />
                     <h1 id="header__text"><Text tid="siteName" /></h1>
                 </div>
 
             <Container>
                 <Row>
                     <Col md={12}>
-                        <h1> <Text tid="slogan" /></h1>
+
+                        <h1 id={'header__text-' + appState.lang}><Text tid="slogan" /></h1>
+                        {/*<h1 >*/}
+                        {/*<Textfit*/}
+                        {/*    mode="multi"*/}
+                        {/*    forceSingleModeWidth={false}*/}
+                        {/*// min={41}*/}
+                        {/*>*/}
+                        {/*    <Text tid="slogan"/>*/}
+
+                        {/*</Textfit>*/}
+                        {/*</h1>*/}
+                        {/*<h1 > <Text tid="slogan" /></h1>*/}
                     </Col>
                 </Row>
 

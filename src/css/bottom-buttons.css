@@ -3,11 +3,13 @@
     color: #2A4153;
     width: 100%;
     background: #FFFFFF;
-    border: 1px solid rgba(42, 65, 83, 0.5);
+    border: 1px solid #FFFFFF;
+    /*border: 1px solid rgba(42, 65, 83, 0.5);*/
     box-sizing: border-box;
     border-radius: 7px;
     margin-top: 6%;
     margin-bottom: 10%;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }
 
 #gen-button{
@@ -15,11 +17,12 @@
     color: #FFFFFF;
     width: 100%;
     background: #31CA9E;
-    border: 1px solid #2A4153;
+    border: 1px solid #31CA9E;
     box-sizing: border-box;
     border-radius: 7px;
     margin-top: 6%;
     margin-bottom: 10%;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }
 
 #add-button:hover, #gen-button:hover {
@@ -31,7 +34,8 @@
 }
 
 #gen-button:active , #add-button:active {
-    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);
+    outline: none;
+    /*box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);*/
 }
 
 
