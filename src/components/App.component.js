@@ -3,12 +3,11 @@ import Form from "./Form.component";
 import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
 import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
-import { Container, Row, Col } from 'reactstrap';
+import {Button, Popover, PopoverHeader, PopoverBody, Container, Row, Col } from 'reactstrap';
 import { LanguageProvider } from '../containers/Language';
 import { Text } from '../containers/Language';
 import LanguageSelector from './LanguageSelector.component';
-import { Textfit } from 'react-textfit';
-
+import About from './About.component';
 
 /**
  * Initialisation of main component of React application
@@ -183,10 +182,13 @@ export function App() {
         <LanguageProvider>
 
                 <div className="header">
-                    <LanguageSelector id="header__lang-selector"
-                                      onChange={handleChangeLang}
-                    />
                     <h1 id="header__text"><Text tid="siteName" /></h1>
+                    <div id="header__button">
+                        <LanguageSelector
+                            onChange={handleChangeLang}
+                        />
+                        <About text={<Text tid="about" />}/>
+                    </div>
                 </div>
 
             <Container>

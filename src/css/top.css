@@ -2,9 +2,21 @@
     width: 100%;
     height: 110px;
     background: #FFFFFF;
-    padding-left: 5%;
-    padding-top: 10px;
-    margin-bottom: 10px;
+    padding-left: 2%;
+    padding-right: 1%;
+    /*padding-top: 10px;*/
+    /*margin-bottom: 10px;*/
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header__button{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 #header__text{
@@ -30,10 +42,11 @@
 #header__cur-lang-flag{
     margin-bottom: 3px;
 }
-/**/
-/*#header__text-rus{*/
-/*    font-size: 5vw;*/
-/*}*/
+
+#PopoverLegacy:focus{
+    outline: none;
+}
+
 .slogan__text{
     font-size: 5vw;
     min-width: 500px;

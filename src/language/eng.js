@@ -20,7 +20,10 @@ const eng = {
     delete: "Delete",
     confirmDelete: "Do you really want to delete",
     required: "Required",
-    dateError: "The end date must be greater or equal to the start date"
-};
+    dateError: "The end date must be greater or equal to the start date",
+    about: "MedSched service allows you to generate importable medication plans easily. Add the desired number of medications," +
+        " fill in the data, and click ‘download’ button. Open the downloaded file with your favorite calendar app. " +
+        "Unfortunately, in Google Calendar reminders are not added automatically." +
+        " Default reminders may be set for all imported events in the calendar settings."};
 
 export default eng;
