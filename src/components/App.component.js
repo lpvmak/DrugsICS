@@ -7,9 +7,8 @@ import { Container, Row, Col } from 'reactstrap';
 import { LanguageProvider } from '../containers/Language';
 import { Text } from '../containers/Language';
 import LanguageSelector from './LanguageSelector.component';
-import Example from './SavingAlert'
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 /**
  * Initialisation of main component of React application
@@ -112,9 +111,7 @@ export function App() {
         let FileSaver = require('file-saver');
         const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
         FileSaver.saveAs(file);
-        var ex = new Example();
-        //EventPlanGenerator.savePlanToFile('newPlan.ics');
-        ex.render();
+        toast.success('File is download');
     }
 
     /**
@@ -168,10 +165,10 @@ export function App() {
     return (
         <LanguageProvider>
 
-                <div className="header">
-                    <LanguageSelector id="header__lang-selector"/>
-                    <h1 id="header__text"><Text tid="siteName" /></h1>
-                </div>
+            <div className="header">
+                <LanguageSelector id="header__lang-selector"/>
+                <h1 id="header__text"><Text tid="siteName" /></h1>
+            </div>
 
             <Container>
                 <Row>
@@ -195,8 +192,20 @@ export function App() {
                         />
                     </Col>
                 </Row>
-
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable={false}
+                    pauseOnHover={false}
+                />
             </Container>
+
         </LanguageProvider>
+
     );
 }
