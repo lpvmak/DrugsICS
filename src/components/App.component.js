@@ -3,13 +3,13 @@ import Form from "./Form.component";
 import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
 import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
-import {Container, Row, Col } from 'reactstrap';
-import { LanguageProvider } from '../containers/Language';
-import { Text } from '../containers/Language';
+import {Col, Container, Row} from 'reactstrap';
+import {LanguageProvider, Text} from '../containers/Language';
 import LanguageSelector from './LanguageSelector.component';
 import About from './About.component';
-import { ToastContainer, toast } from 'react-toastify';
+import {Flip, toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+
 /**
  * Initialisation of main component of React application
  */
@@ -113,7 +113,11 @@ export function App() {
         let FileSaver = require('file-saver');
         const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
         FileSaver.saveAs(file);
-        toast.success('File is download');
+        if (appState.lang === 'eng') {
+            toast('Downloaded successfully');
+        }else {
+            toast('Успешно загружено');
+        }
     }
 
     /**
@@ -217,13 +221,12 @@ export function App() {
                 <ToastContainer
                     position="bottom-right"
                     autoClose={2000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
+                    hideProgressBar={true}
+                    newestOnTop={true}
                     pauseOnFocusLoss={false}
-                    draggable={false}
                     pauseOnHover={false}
+                    transition={Flip}
+                    closeButton={false}
                 />
             </Container>
 

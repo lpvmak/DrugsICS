@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, UncontrolledPopover, PopoverHeader, PopoverBody } from 'reactstrap';
+import {Button, PopoverBody, UncontrolledPopover} from 'reactstrap';
 
 const About = (props) => {
     const {
@@ -8,7 +8,7 @@ const About = (props) => {
     return (
         <div>
             <Button id="PopoverLegacy" type="button">
-                <img id = "header__cur-lang-flag" src="question.svg" width="30px" height="30px"/>
+                <img id="header__cur-lang-flag" src="question.svg" width="30px" height="30px"/>
             </Button>
             <UncontrolledPopover trigger="legacy" placement="bottom" target="PopoverLegacy">
                 <PopoverBody>

@@ -7,7 +7,7 @@
     padding-bottom: 5%;
 }
 
-#med-form__head{
+#med-form__head {
     padding-left: 12px;
     height: 40px;
     background: #31CA9E;
@@ -18,7 +18,7 @@
     margin-left: 0px;
 }
 
-#med-form__head__name{
+#med-form__head__name {
     padding: 2px 0px;
     line-height: 40px;
     overflow: hidden;
@@ -31,7 +31,7 @@
 }
 
 
-#med-form__head__delete-button{
+#med-form__head__delete-button {
     width: 13%;
     padding-left: 0px;
     padding-right: 5px;
@@ -43,13 +43,13 @@
 }
 
 /*for custom checkboxes*/
-input[type="checkbox"]{
+input[type="checkbox"] {
     position: absolute;
     left: -9999px;
 }
 
 /*for validation check*/
-.med-form__submit{
+.med-form__submit {
     position: absolute;
     left: -9999px;
 }
@@ -93,7 +93,7 @@ input[type=checkbox]:checked + .med-form__notification-checkbox:before {
     left: -9999px;
 }
 
-.delete-button__place{
+.delete-button__place {
     float: right;
     content: " ";
     display: inline-block;
