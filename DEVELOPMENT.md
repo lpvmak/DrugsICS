@@ -13,7 +13,8 @@
 * [ics](https://www.npmjs.com/package/ics)
 * [formik](https://jaredpalmer.com/formik/docs/overview)
 * [FileSaver](https://www.npmjs.com/file-saver)
-* [React Fit text](https://www.npmjs.com/package/react-fittext)
+* [react-textfit](https://www.npmjs.com/package/react-textfit/v/0.1.8)
+* [React-Toastify](https://www.npmjs.com/package/react-toastify)
 
 ## Инструкция по установке
 
