@@ -3,6 +3,7 @@
 @import "bootstrap.css";
 @import 'modal.css';
 @import 'form.css';
+@import 'toast.css';
 @import 'top.css';
 @import 'bottom-buttons.css';
 @import 'main-container.css';
@@ -11,7 +12,7 @@ html {
     overflow-y: scroll;
 }
 
-::selection{
+::selection {
     background: #31CA9E;
 }
 
@@ -20,12 +21,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #ced4da;;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator:hover{
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
     color: #31CA9E;
     background: none;
 }
 
-input[type="date"]::-webkit-clear-button, ::-webkit-inner-spin-button  {
+input[type="date"]::-webkit-clear-button, ::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
@@ -36,6 +37,7 @@ input[type="time"]::-webkit-clear-button {
     background-size: 13px, 13px;
     background-image: url(../icons/clear_input.svg);
 }
+
 input[type="time"]::-webkit-clear-button:hover {
     background-image: url(../icons/clear_input_hover.svg);
 }

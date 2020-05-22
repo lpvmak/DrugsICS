@@ -3,11 +3,12 @@ import Form from "./Form.component";
 import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
 import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
-import {Button, Popover, PopoverHeader, PopoverBody, Container, Row, Col } from 'reactstrap';
-import { LanguageProvider } from '../containers/Language';
-import { Text } from '../containers/Language';
+import {Col, Container, Row} from 'reactstrap';
+import {LanguageProvider, Text} from '../containers/Language';
 import LanguageSelector from './LanguageSelector.component';
 import About from './About.component';
+import {Flip, toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 /**
  * Initialisation of main component of React application
@@ -112,7 +113,11 @@ export function App() {
         let FileSaver = require('file-saver');
         const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
         FileSaver.saveAs(file);
-        //EventPlanGenerator.savePlanToFile('newPlan.ics');
+        if (appState.lang === 'eng') {
+            toast('Downloaded successfully');
+        }else {
+            toast('Успешно загружено');
+        }
     }
 
     /**
@@ -181,15 +186,15 @@ export function App() {
     return (
         <LanguageProvider>
 
-                <div className="header">
-                    <h1 id="header__text"><Text tid="siteName" /></h1>
-                    <div id="header__button">
-                        <LanguageSelector
-                            onChange={handleChangeLang}
-                        />
-                        <About text={<Text tid="about" />}/>
-                    </div>
+            <div className="header">
+                <h1 id="header__text"><Text tid="siteName" /></h1>
+                <div id="header__button">
+                    <LanguageSelector
+                        onChange={handleChangeLang}
+                    />
+                    <About text={<Text tid="about" />}/>
                 </div>
+            </div>
 
             <Container>
                 <Row>
@@ -213,8 +218,19 @@ export function App() {
                         />
                     </Col>
                 </Row>
-
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={2000}
+                    hideProgressBar={true}
+                    newestOnTop={true}
+                    pauseOnFocusLoss={false}
+                    pauseOnHover={false}
+                    transition={Flip}
+                    closeButton={false}
+                />
             </Container>
+
         </LanguageProvider>
+
     );
 }

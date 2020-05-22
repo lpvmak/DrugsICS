@@ -583,25 +583,10 @@ pre code {
 }
 
 
-@media (max-width: 576px) {
-  .container {
-    max-width: 560px;
-  }
-  #header__text-rus {
-    font-size: 2.28rem;
-  }
-  #header__text-eng {
-    font-size: 2.399rem;
-  }
-}
-
 @media (min-width: 768px) {
   .container {
     max-width: 750px;
   }
-  /*h1, .h1 {*/
-  /*  font-size: 2.38rem;*/
-  /*}*/
   #header__text-rus {
     font-size: 2.28rem;
   }
@@ -617,9 +602,6 @@ pre code {
   .container {
     max-width: 750px;
   }
-  /*h1 {*/
-  /*  font-size: 2.38rem;*/
-  /*}*/
   #header__text-rus {
     font-size: 2.28rem;
   }

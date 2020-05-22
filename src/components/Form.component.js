@@ -1,12 +1,12 @@
 import {withFormik} from "formik";
 import React, {useRef} from "react";
 import PropTypes from 'prop-types';
-import {Form as FormStrap, Col, Row, FormGroup, Label, Input, FormText, CustomInput} from 'reactstrap';
+import {Col, CustomInput, Form as FormStrap, FormGroup, FormText, Input, Label, Row} from 'reactstrap';
 import ModalWindow from "./ModalWindow.component";
 import {Option, Text} from "../containers/Language";
 
 export function Form(props) {
-    const { values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue, validateForm} = props;
+    const {values, handleChange, onChange, touched, errors, handleSubmit, onClickDelete, numOfForms, keyValue, validateForm} = props;
 
     let nameRef = useRef();
     React.useEffect(() => {
@@ -15,16 +15,16 @@ export function Form(props) {
         }
     }, [values]);
 
-    function handleEndDateInput(){
-        if (values.dateFrom > values.dateTo){
-            document.getElementById('end-date-input'+ (keyValue + 1)).min = values.dateTo;
+    function handleEndDateInput() {
+        if (values.dateFrom > values.dateTo) {
+            document.getElementById('end-date-input' + (keyValue + 1)).min = values.dateTo;
         }
     }
 
-    function handleDateStartInput(){
+    function handleDateStartInput() {
         let startDate = new Date(values.dateFrom);
         let endDate = new Date(values.dateTo);
-        if (startDate > endDate){
+        if (startDate > endDate) {
             values.dateTo = values.dateFrom;
         }
         onChange(keyValue, values);
@@ -32,27 +32,25 @@ export function Form(props) {
     }
 
 
-    function handleFreqInput(){
-        if (values.dosage < 1){
+    function handleFreqInput() {
+        if (values.dosage < 1) {
             values.dosage = 1;
-        }
-        else if (values.dosage > 12){
+        } else if (values.dosage > 12) {
             values.dosage = 12;
         }
         onChange(keyValue, values);
     }
 
     /* Initialize touching values: */
-    for (let i = 0; !!touched.timeList && i < values.timeList.length; i++){
+    for (let i = 0; !!touched.timeList && i < values.timeList.length; i++) {
         touched.timeList[i] = true;
     }
 
     let countTimeInputTags = values.dosage;
 
-    if (countTimeInputTags > 12){
+    if (countTimeInputTags > 12) {
         countTimeInputTags = 12;
-    }
-    else if (countTimeInputTags < 1){
+    } else if (countTimeInputTags < 1) {
         countTimeInputTags = 1;
     }
 
@@ -70,7 +68,7 @@ export function Form(props) {
                     <Input name={item}
                            type="time"
                            value={values.timeList[index]}
-                           onChange={handleChange} />
+                           onChange={handleChange}/>
                     {!!touched.timeList && !!errors.timeList && touched.timeList[index] && (values.timeList[index] === "") ?
                         (
                             <FormText color="red">
@@ -83,62 +81,61 @@ export function Form(props) {
     });
 
     let layoutTimeListTag = [];
-    for (let i = 0; i < countTimeInputTags; i+=3){
-        layoutTimeListTag.push(<Row form>{timeListTag.slice(i,i+3)}</Row>)
+    for (let i = 0; i < countTimeInputTags; i += 3) {
+        layoutTimeListTag.push(<Row form>{timeListTag.slice(i, i + 3)}</Row>)
     }
 
     /* Enable/disable select reminder time: */
     let statusSelect = {};
-    if (!values.notifications){
+    if (!values.notifications) {
         statusSelect["disabled"] = "disabled";
-    }else{
+    } else {
         statusSelect = {}
     }
 
     /* Enable/disable delete form button: */
     let statusDelete = {};
     let deleteButtons;
-    if (numOfForms !== 1){
+    if (numOfForms !== 1) {
         deleteButtons = (
-            <label className = "delete-button__place"
-                   htmlFor = {"delete-button"+ (keyValue + 1)}>
+            <label className="delete-button__place"
+                   htmlFor={"delete-button" + (keyValue + 1)}>
             </label>
         );
 
-    }else {
+    } else {
         deleteButtons = null;
         statusDelete["disabled"] = "disabled";
     }
     let deleteOption = {};
     /*Choose type of delete button*/
-    if(values.drugName === ''){
+    if (values.drugName === '') {
         deleteOption = (
-            <button id = {"delete-button"+ (keyValue + 1)}
+            <button id={"delete-button" + (keyValue + 1)}
                     className="delete-button"
                     onClick={() => onClickDelete(keyValue)}
                     type="button"
             >
             </button>
         );
-    }
-    else {
+    } else {
         deleteOption = (
-            <ModalWindow idButton = {"delete-button"+ (keyValue + 1)}
+            <ModalWindow idButton={"delete-button" + (keyValue + 1)}
                          className="delete-button"
                          onClick={() => onClickDelete(keyValue)}
                          buttonLabel="delete"
-                         name = {values.drugName}
+                         name={values.drugName}
             />
         );
     }
 
     return (
-        <Row ref = {nameRef}>
+        <Row ref={nameRef}>
             <Col>
-                <FormStrap id={"form"+(keyValue + 1)}
+                <FormStrap id={"form" + (keyValue + 1)}
                            className="med-form"
                            onSubmit={handleSubmit}>
-                    <Row id = "med-form__head">
+                    <Row id="med-form__head">
                         <Col id="med-form__head__name" md={11}>
                             {values.drugName}
                         </Col>
@@ -150,10 +147,10 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label> <Text tid="medName" /></Label>
+                                <Label> <Text tid="medName"/></Label>
                                 <Input name="drugName"
                                        value={values.drugName}
-                                       onChange={handleChange} />
+                                       onChange={handleChange}/>
                                 {touched.drugName && errors.drugName ?
                                     (
                                         <FormText color="red">
@@ -166,7 +163,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={4}>
                             <FormGroup>
-                                <Label><Text tid="startDate" /></Label>
+                                <Label><Text tid="startDate"/></Label>
                                 <Input name="dateFrom"
                                        type="date"
                                        onChange={handleChange}
@@ -177,10 +174,10 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label><Text tid="endDate" /></Label>
+                                <Label><Text tid="endDate"/></Label>
                                 <Input name="dateTo"
                                        type="date"
-                                       id={'end-date-input'+ (keyValue + 1)}
+                                       id={'end-date-input' + (keyValue + 1)}
                                        onChange={handleChange}
                                        onBlur={handleEndDateInput}
                                        value={values.dateTo}
@@ -190,7 +187,7 @@ export function Form(props) {
                         </Col>
                         <Col md={4}>
                             <FormGroup>
-                                <Label><Text tid="freq" /> </Label>
+                                <Label><Text tid="freq"/> </Label>
                                 <Input name="dosage"
                                        type="number"
                                        value={values.dosage}
@@ -211,7 +208,7 @@ export function Form(props) {
                         </Col>
                     </Row>
                     <Row form>
-                        <Col md = {12}>
+                        <Col md={12}>
                             <CustomInput type="range"
                                          className="med-form__slider"
                                          name="dosage"
@@ -224,24 +221,24 @@ export function Form(props) {
                     </Row>
                     <Row form>
                         <Col md={12}>
-                            <Label><Text tid="timesTaken" /></Label>
+                            <Label><Text tid="timesTaken"/></Label>
                         </Col>
                     </Row>
                     {layoutTimeListTag}
                     <Row form>
                         <Col md={4}>
                             <FormGroup check>
-                                <Input name = "notifications"
+                                <Input name="notifications"
                                        type="checkbox"
-                                       id = {"notification-checkbox" + (keyValue + 1)}
+                                       id={"notification-checkbox" + (keyValue + 1)}
                                        onChange={handleChange}
                                        value={values.notification}
                                 />
-                                <label className = "med-form__notification-checkbox"
-                                       htmlFor = {"notification-checkbox" + (keyValue + 1)}
+                                <label className="med-form__notification-checkbox"
+                                       htmlFor={"notification-checkbox" + (keyValue + 1)}
                                 >
                                 </label>
-                                <Label ><Text tid="remind"/></Label>
+                                <Label><Text tid="remind"/></Label>
                             </FormGroup>
                         </Col>
                         <Col md={4}>
@@ -251,12 +248,12 @@ export function Form(props) {
                                    value={values.remindTime}
                                    {...statusSelect}>
                                 {}
-                                <Option value = {0} tid="onTime"/>
-                                <Option value = {5} tid="minBefore5"/>
-                                <Option value = {10} tid="minBefore10"/>
-                                <Option value = {15} tid="minBefore15"/>
-                                <Option value = {30} tid="minBefore30"/>
-                                <Option value = {60} tid="minBefore60"/>
+                                <Option value={0} tid="onTime"/>
+                                <Option value={5} tid="minBefore5"/>
+                                <Option value={10} tid="minBefore10"/>
+                                <Option value={15} tid="minBefore15"/>
+                                <Option value={30} tid="minBefore30"/>
+                                <Option value={60} tid="minBefore60"/>
                             </Input>
                         </Col>
                         <Col md={4}>
@@ -266,7 +263,7 @@ export function Form(props) {
                     <Row form>
                         <Col md={12}>
                             <FormGroup>
-                                <Label><Text tid="comment" />:</Label>
+                                <Label><Text tid="comment"/>:</Label>
                                 <Input type="textarea"
                                        name="description"
                                        onChange={handleChange}
@@ -287,10 +284,10 @@ export function Form(props) {
 export default withFormik({
     mapPropsToValues: () => {
         /* Setting initial date: */
-        let startDate = new Date().toISOString().substring(0,10);
+        let startDate = new Date().toISOString().substring(0, 10);
         let endDate = new Date();
         endDate.setDate(endDate.getDate() + 5);
-        endDate = endDate.toISOString().substring(0,10);
+        endDate = endDate.toISOString().substring(0, 10);
 
         return {
             drugName: "",
@@ -307,22 +304,23 @@ export default withFormik({
     validate: (values, prop) => {
         const errors = {};
         errors.timeList = ["", "", "", "", "", "", "", "", "", "", "", ""];
-        let req = <Text tid="required" />;
+        let req = <Text tid="required"/>;
 
-        if (values.dateFrom > values.dateTo){
-            errors.date = <Text tid="dateError" />;
+        if (values.dateFrom > values.dateTo) {
+            errors.date = <Text tid="dateError"/>;
         }
         if (!values.drugName) {
             errors.drugName = req;
         }
-        for (let i = 0; i < values.timeList.length; i++){
-            if (!values.timeList[i]){
+        for (let i = 0; i < values.timeList.length; i++) {
+            if (!values.timeList[i]) {
                 errors.timeList[i] = req;
             }
         }
         return errors;
     },
-    handleSubmit: () => {},
+    handleSubmit: () => {
+    },
 })(Form);
 
 Form.propTypes = {
