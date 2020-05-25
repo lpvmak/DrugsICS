@@ -3,12 +3,12 @@ import Form from "./Form.component";
 import {GenerateButton} from "./GenerateButton.component";
 import {AddButton} from "./AddButton.component";
 import {EventPlanGenerator} from "../generate_script/EventPlanGenerator";
-import { Container, Row, Col } from 'reactstrap';
-import { LanguageProvider } from '../containers/Language';
-import { Text } from '../containers/Language';
+import {Col, Container, Row} from 'reactstrap';
+import {LanguageProvider, Text} from '../containers/Language';
 import LanguageSelector from './LanguageSelector.component';
-
-
+import About from './About.component';
+import {Flip, toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 /**
  * Initialisation of main component of React application
@@ -19,7 +19,8 @@ export function App() {
             id: Date.now(),
         }],
         numOfForms: 1,
-        timeSet: new Map()
+        timeSet: new Map(),
+        lang: 'eng'
     });
 
 
@@ -37,14 +38,14 @@ export function App() {
             }
         }
 
-        let startDate = new Date(values.dateFrom);
-        let endDate = new Date(values.dateTo);
-        if (startDate > endDate){
-            values.dateTo = values.dateFrom;
-        }
-
         /* Prediction time set: */
         let newDosage = values.dosage;
+        if (newDosage > 12){
+            newDosage = 12;
+        }
+        else if (newDosage < 1){
+            newDosage = 1;
+        }
 
         if (newDosage !== drugs[arrIndex].dosage){
             if (appState.timeSet.has(newDosage)){
@@ -71,7 +72,8 @@ export function App() {
         setAppState({
             drugs: drugs,
             numOfForms: appState.numOfForms,
-            timeSet: appState.timeSet
+            timeSet: appState.timeSet,
+            lang: appState.lang
         });
     }
 
@@ -111,7 +113,11 @@ export function App() {
         let FileSaver = require('file-saver');
         const file = new File([EventPlanGenerator.eventList], "MedSched.ics", {type: "Application/octet-stream;charset=utf-8"});
         FileSaver.saveAs(file);
-        //EventPlanGenerator.savePlanToFile('newPlan.ics');
+        if (appState.lang === 'eng') {
+            toast('Downloaded successfully');
+        }else {
+            toast('Успешно загружено');
+        }
     }
 
     /**
@@ -121,7 +127,8 @@ export function App() {
         setAppState(appState => ({
             drugs: [...appState.drugs, {id: Date.now()}],
             numOfForms: (appState.numOfForms += 1),
-            timeSet: appState.timeSet
+            timeSet: appState.timeSet,
+            lang: appState.lang
         }))
     }
 
@@ -143,9 +150,23 @@ export function App() {
         setAppState(appState => ({
             drugs: form,
             numOfForms: (appState.numOfForms -= 1),
-            timeSet: appState.timeSet
+            timeSet: appState.timeSet,
+            lang: appState.lang
         }));
     }
+
+    /**
+     * Handler for the language selector
+     */
+    function handleChangeLang(newLang){
+        setAppState(appState => ({
+            drugs: appState.drugs,
+            numOfForms: appState.numOfForms,
+            timeSet: appState.timeSet,
+            lang: newLang
+        }));
+    }
+
 
     /* Render current number of forms: */
     let forms = [];
@@ -165,21 +186,26 @@ export function App() {
     return (
         <LanguageProvider>
 
-                <div className="header">
-                    <LanguageSelector id="header__lang-selector"/>
-                    <h1 id="header__text"><Text tid="siteName" /></h1>
+            <div className="header">
+                <h1 id="header__text"><Text tid="siteName" /></h1>
+                <div id="header__button">
+                    <LanguageSelector
+                        onChange={handleChangeLang}
+                    />
+                    <About text={<Text tid="about" />}/>
                 </div>
+            </div>
 
             <Container>
                 <Row>
                     <Col md={12}>
-                        <h1> <Text tid="slogan" /></h1>
+
+                        <h1 id={'header__text-' + appState.lang}><Text tid="slogan" /></h1>
                     </Col>
                 </Row>
 
                 {forms}
 
-                {/*<pre>{JSON.stringify(appState, null, 2)}</pre>*/}
                 <Row>
                     <Col>
                         <AddButton onClick = {handleAddMore}
@@ -192,8 +218,19 @@ export function App() {
                         />
                     </Col>
                 </Row>
-
+                <ToastContainer
+                    position="bottom-right"
+                    autoClose={2000}
+                    hideProgressBar={true}
+                    newestOnTop={true}
+                    pauseOnFocusLoss={false}
+                    pauseOnHover={false}
+                    transition={Flip}
+                    closeButton={false}
+                />
             </Container>
+
         </LanguageProvider>
+
     );
 }

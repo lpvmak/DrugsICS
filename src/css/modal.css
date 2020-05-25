@@ -2,7 +2,7 @@
     padding-right: 0px !important;
 }
 
-#modal-head{
+#modal-head {
     height: 40px;
     background: #31CA9E;
     border-top-left-radius: 7px;
@@ -12,12 +12,12 @@
     margin-left: 0px;
 }
 
-#modal-container{
+#modal-container {
     padding-right: 0px;
     padding-left: 0px;
 }
 
-.modal-close__place{
+.modal-close__place {
     float: right;
     content: " ";
     display: inline-block;
@@ -37,36 +37,38 @@
     background-image: url(../icons/delete_active.svg);
 }
 
-#modal-body{
+#modal-body {
     padding-top: 10%;
     padding-bottom: 7%;
-    padding-right: 10%;
-    padding-left: 10%;
+    padding-right: 5%;
+    padding-left: 5%;
 }
 
-#modal-delete__button{
+#modal-delete__button {
     width: 100%;
     font-weight: 900;
     color: #2A4153;
     background: #FFFFFF;
-    border: 1px solid rgba(42, 65, 83, 0.5);
+    border: 1px solid rgba(42, 65, 83, 0.2);
+    /*box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);*/
     box-sizing: border-box;
     border-radius: 7px;
     padding: 0px;
 }
 
-#modal-cancel__button{
+#modal-cancel__button {
     width: 100%;
     font-weight: 900;
     color: #FFFFFF;
     background: #31CA9E;
-    border: 1px solid #2A4153;
+    border: 1px solid #31CA9E;
+    /*box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);*/
     box-sizing: border-box;
     border-radius: 7px;
     padding: 0px;
 }
 
-#modal__buttons{
+#modal__buttons {
     display: flex;
     justify-content: space-around;
     padding-left: 10%;
@@ -74,7 +76,7 @@
     padding-bottom: 10%;
 }
 
-#modal-delete{
+#modal-delete {
     margin-bottom: 0px;
     margin-right: 0px;
     padding-left: 15px;
@@ -82,7 +84,7 @@
     width: 50%;
 }
 
-#modal-cancel{
+#modal-cancel {
     margin-bottom: 0px;
     margin-right: 0px;
     padding-left: 15px;
@@ -90,14 +92,14 @@
     width: 50%;
 }
 
-#modal-delete__button:active, #modal-cancel__button:active{
-    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);
+#modal-delete__button:active, #modal-cancel__button:active {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }
 
-#modal-delete__button:focus, #modal-cancel__button:focus{
+#modal-delete__button:focus, #modal-cancel__button:focus {
     outline: none;
 }
 
-#modal-delete__button:hover, #modal-cancel__button:hover{
-    box-shadow: 4px 7px 7px rgba(0, 0, 0, 0.25);
+#modal-delete__button:hover, #modal-cancel__button:hover {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }

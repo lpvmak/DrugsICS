@@ -1,25 +1,28 @@
-#add-button{
+#add-button {
     font-weight: 900;
     color: #2A4153;
     width: 100%;
     background: #FFFFFF;
-    border: 1px solid rgba(42, 65, 83, 0.5);
+    border: 1px solid #FFFFFF;
+    /*border: 1px solid rgba(42, 65, 83, 0.5);*/
     box-sizing: border-box;
     border-radius: 7px;
     margin-top: 6%;
     margin-bottom: 10%;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }
 
-#gen-button{
+#gen-button {
     font-weight: 900;
     color: #FFFFFF;
     width: 100%;
     background: #31CA9E;
-    border: 1px solid #2A4153;
+    border: 1px solid #31CA9E;
     box-sizing: border-box;
     border-radius: 7px;
     margin-top: 6%;
     margin-bottom: 10%;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.20);
 }
 
 #add-button:hover, #gen-button:hover {
@@ -30,18 +33,18 @@
     outline: none;
 }
 
-#gen-button:active , #add-button:active {
-    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);
+#gen-button:active, #add-button:active {
+    outline: none;
+    /*box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.50);*/
 }
 
 
 @media (max-width: 400px) {
-    .col{
+    .col {
         flex-basis: unset;
     }
 
-    #gen-button, #add-button
-    {
+    #gen-button, #add-button {
         margin-top: 3px;
         margin-bottom: 10px;
     }
